@@ -1,0 +1,66 @@
+{extend name="layout/layout"}
+{block name='style'}
+<link href="/fds/css/reg.css" rel="stylesheet" />
+<link href="/fds/css/dragcode.css" rel="stylesheet" />
+{/block}
+{block name="script"}
+<script type="text/javascript" src="/fds/js/dragCode.js"></script>
+{/block}
+{block name="body"}
+   <div class="reg_header clearfix">
+		<div class="w-1200">
+			<div class="po"><a href="/">返回首页</a><span class="bor"></span><a href="/help/">帮助</a></div>
+			<div class="logo"><a href="/" title=""><img src="../UploadFile/index/2017/7-19/201707190949409773675.png" alt=""></a></div>
+			<div class="sub-logo">会员注册</div>
+		</div>
+	</div>
+	<div class="w-1200 site_reg">
+		<div class="reg_ndoe">
+			<div class="bd">
+				<ul class="tab clearfix" id="tab_reg">
+					<div class="item current" data-id="0"><span class="tit">昵称注册</span></div>
+					<div class="item" data-id="2"><span class="tit">手机号注册</span></div>
+					<div class="item" data-id="1"><span class="tit">邮箱注册</span></div> 
+				</ul>
+				<form name="form1" id="form1" method="post" action="" onsubmit="return checkregister2();">
+				<input name="telmust" id="telmust" value="*" type="hidden">
+				<input name="ismember" id="ismember" value="2" type="hidden">
+				<ul class="form_node">
+					<li class="clearfix"><span class="a">我要注册：</span><span class="b sel_radio_form" data-name="styleid">
+						<span class="display0"><input name="styleid" value="1" checked="" type="radio"><input name="styleid" value="2" type="radio"></span>
+						<span class="gx_radio current" data-val="1">个人会员</span>
+						<span class="gx_radio" data-val="2">企业(商家)会员</span>
+					</span></li>
+					<li class="clearfix"><span class="a" id="loginNamechr">手机号码：</span><span class="b"><input class="ipt" id="chremail" name="chremail" onblur="test_email2();" placeholder="设置手机号码作为您的登录名" type="text"></span><span class="c" id="chkemail"></span></li>
+					
+					<li class="clearfix" id="i_code2" style=""><span class="a">验证码：</span><span class="d"><input class="ipt duan" name="regcode" id="regcode" placeholder="请输入正确的验证码" onblur="rcheckregcode();" type="text"><input name="codeid" id="codeid" value="" type="hidden"></span><span class="d state_1" id="requestYZM_node"><a href="#" class="btn_1">获取验证码</a><a href="javascript:void(0);" class="btn_2"><span id="daojishi">60</span>秒后重新发送</a></span><span class="c" id="chkregcode"></span></li>
+					<li class="clearfix" style="display:none;" id="i_tips"><span class="a">&nbsp;</span><span class="b text">输入您的<span id="i_tips_inner"></span>上收到的验证码，输入正确后，即可成功注册成为会员。如果60s未收到，请点击重新获取。</span></li>
+					<li class="clearfix" id="i_nichen" style=""><span class="a">昵称：</span><span class="b"><input class="ipt" id="chrnichen" name="chrnichen" onblur="test_email3();" placeholder="昵称(限制3-15字符)" type="text"></span><span class="c" id="chknichen"></span></li>
+					<li class="clearfix"><span class="a">密码：</span><span class="b posi"><input class="ipt" name="chrpwd" id="chrpwd" onblur="checkpwd();" maxlength="30" onkeyup="pwStrength(this.value)" placeholder="密码长度6~16，字母区分大小写" type="password"><span id="safety" class="safety_1">安全程度：<s class="s"></s></span></span><span class="c" id="chkpwd"></span></li>
+					<li class="clearfix"><span class="a">确认密码：</span><span class="b"><input class="ipt" name="chrpwd_1" onblur="rcheckpwd();" placeholder="重新输入一次密码" type="password"></span><span class="c" id="rchkpwd"></span></li>
+					
+					<li class="clearfix" id="qqregister" style="display:none;"><span class="a">QQ号码：</span><span class="b"><input name="qqmust" id="qqmust" value="&nbsp;&nbsp;" type="hidden"><input class="ipt" name="chrqq" id="chrqq" onblur="test_qq11();" onkeyup="value=value.replace(/\D+/g,'')" placeholder="将作为网络联系的重要方式" type="text"></span><span class="c" id="chkqq"></span></li>
+					
+					<li class="clearfix"><span class="a">&nbsp;</span><span class="b"><input id="allok" value="1" type="hidden"><button type="submit" class="submit" id="reg_submit">立即注册</button></span></li>
+					<li class="clearfix"><span class="a">&nbsp;</span><span class="b sel_check_form" data-name="xieyi">
+					<span class="display0"><input name="xieyi" value="1" checked="" type="checkbox"></span>
+					<span class="gx_check current" data-val="1" style="margin-right:0;">同意</span><a href="javascript:void(0);" onclick="getxieyi('1','会员注册协议');" class="link">《会员注册协议》</a>
+					</span></li>
+				</ul>
+				</form>
+				<div class="have_login">
+					<p class="txt">已经注册了？点击 <a href="login.html" class="link">登录</a> 或者使用下面合作账号直接登录：</p>
+					<a href="qq.aspx?from=/member%2fuserindex.aspx" class="login_qq" style="display:">QQ登录</a><a href="/member/qq.aspx?action=weixin&amp;from=/member%2fuserindex.aspx" class="login_weixin display1">微信登录</a>
+					<p class="tit">说明：</p>
+					<p class="txt2">1.、您可以通过注册昵称、邮箱或者手机号来登录；</p>
+					<p class="txt2">2.、如果忘记密码，请 找回密码 或者拨打我们的客服热线<br>　　<span class="yellow">0830-3107853，15808497305</span> 咨询帮助；
+				</p></div>
+			</div>
+			<div class="reg_tip" id="have_login" style="display:none;">
+				<div class="pic"><img src="/template/pc/main/default/images/temp_08091512519636.gif" alt=""></div>
+				<div class="txt">请稍等，系统正在处理注册中...</div>
+			</div>
+		</div>
+		
+	</div>
+{/block}
