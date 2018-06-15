@@ -1,14 +1,17 @@
 <?php
 namespace app\index\controller;
-
+use think\Request;
+use think\captcha\Captcha;
 class Login extends Common
 {
 	public function index(){
-		if(!session('validate')){
+		/*if(!session('validate')){
 
 		}else{
-			$this->redirect('user/set');
-		}
+			//$this->redirect('user/set');
+		}*/
+       
+		return $this->fetch();
 	}
 
 	public function reg(){
@@ -21,5 +24,8 @@ class Login extends Common
 			$this->redirect('use/set');
 		}
 		
+	}
+	public function login(){
+		return $this->fetch();
 	}
 }

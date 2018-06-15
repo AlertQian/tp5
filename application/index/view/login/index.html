@@ -1,1 +1,54 @@
-savsdv
+<!DOCTYPE html>
+<html>
+<head>
+	<title>移动端</title>
+  <meta name="keywords" content="关键字"/>
+  <meta name="description" content="描述"/>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <link rel="stylesheet" type="text/css" href="/static/layui/css/layui.css">
+  <link href="/wap/main/css/mb-base.css" rel="stylesheet" type="text/css">
+  <link href="/wap/main/css/mb-common.css" rel="stylesheet" rev="stylesheet" />
+  <link href="/wap/main/css/member-mb.css" rel="stylesheet" type="text/css">
+	<script src="/fds/js/jquery-1.10.2.min.js"></script>
+  <style type="text/css">
+  .nofixed { padding-top:0;}
+  body { background-color:#fff!important;}
+  </style>
+</head>
+<body class="nofixed">
+<div class="header alpha" style="position:absolute;">
+  <div class="back"><a href="javascript:void(0);" onClick="return window.history.go(-1);">返回</a></div>
+  <div class="type" id="nav_ico">导航</div>
+  <div class="nav_APP" id="nav_APP"><ul class="clearfix">
+  <li><a href="https://www.mh163k.com/">首页<s class="s" style="background-image:url(../UploadFile/index/2017/5-26/201705260909230968494.png);"></s></a></li>
+  
+  <li><a href="https://www.mh163k.com/k/">外卖<s class="s" style="background-image:url(../UploadFile/index/2017/5-25/201705251751129176595.png);"></s></a></li>
+  
+  </ul><span class="arrow-up"></span></div>
+</div>
+<div class="slogan"><img src="/wap/main/images/login_slogan.png" width="100%" alt="" /></div>
+<form id="formRegStep1Main" name="formRegStep1Main" method="post" onSubmit="return checkinput(this);">
+<div class="login">
+  <ul>
+    <li class="item2 userName"><input type="text" id="logname" name="logname" autocomplete="off" placeholder="昵称/手机/邮箱" maxlength="32" /></li>
+    <li class="item2 pw"><input type="password" name="originalLogpasswd" id="originalLogpasswd" autocomplete="off" placeholder="密码" maxlength="32" /><a href="/find.aspx" style="display:block; position:absolute; right:12px; top:9px; font-size:12px;">忘记?</a></li>
+  </ul>
+</div> 
+<button type="submit" class="dl" id="form_submit_disabled">登 录</button>
+<div class="loadding" id="loadding"><img src="https://www.mh163k.com/template/wap/main/default/images/loadding.gif"></div>
+</form>
+<div class="login_nav" style="padding-bottom:20px;">
+  <div class="title"><span>快捷登录/注册</span></div>
+  <ul>
+    <li class="qq" style="display:;"><a href="{:url('wap/qq')}">QQ登录</a></li>
+    <li class="wx display1"><a href="{:url('wap/weixin')}">微信登录</a></li>
+    <li class="reg"><a href="{:url('login/login')}">注册账号</a></li>
+  </ul>
+</div>
+
+</body>
+</html>
+
+</body>
+</html>
