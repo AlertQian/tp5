@@ -38,7 +38,7 @@ window['ipageTitleTxt'] = '用户注册';
 </div>
 <div class="login_inner" id="login_inner"></div>
 <div class="o_main">
-<form name="form1" id="form1" method="post" action="" onSubmit="return checkregister();">
+<form name="form1" id="form1" method="post" action="">
 			<input type="hidden" name="telmust" id="telmust" value="1">
 			<input type="hidden" name="ismember" id="ismember" value="2">
 			<input type="hidden" id="allok" value="1">
@@ -87,7 +87,7 @@ window['ipageTitleTxt'] = '用户注册';
 	<ul>
 		<li class="qq" style="display:;"><a href="https://www.mh163k.com/member/qq.aspx?from=https%3a%2f%2fwww.mh163k.com%2f">QQ登录</a></li>
 		<li class="wx display1"><a href="https://www.mh163k.com/member/qq.aspx?action=weixin&from=https%3a%2f%2fwww.mh163k.com%2f">微信登录</a></li>
-		<li class="reg"><a href="login.html?from=https%3a%2f%2fwww.mh163k.com%2f">账号登录</a></li>
+		<li class="reg"><a href="{:url('login/index')}">账号登录</a></li>
 	</ul>
 </div>
 	<div class="foot_link" id="foot_link">
@@ -122,6 +122,20 @@ $('#showpwd').click(function(){
 		$('#chrpwd').attr({'type':'text'});
 		if_eye_show = true;
 	}
+});
+$('.reg_btn').click(function(e){
+	e.preventDefault();
+});
+$('#sel_styleid .item').click(function(){
+    var val=$(this).data('val');
+    $(this).siblings().removeClass('current');
+    $(this).addClass('current');
+});
+$('#requestYZM_node').click(function(e){
+	e.preventDefault();
+	$.post('email',function(data){
+		console.log(data);
+	});
 });
 })
 </script>
