@@ -31,7 +31,7 @@ function send_mail($toemail, $name, $subject = '', $body = '', $attachment = nul
     $mail->Port = 465;                  // SMTP服务器的端口号
     $mail->Username = "1679026896@qq.com";    // SMTP服务器用户名
     $mail->Password = "lrycjmyojvovfbbe";     // SMTP服务器密码
-    $mail->SetFrom('1679026896@qq.com', '全球吹牛逼人事部');
+    $mail->SetFrom('1679026896@qq.com', '人事部');
     $replyEmail = '';                   //留空则为发件人EMAIL
     $replyName = '';                    //回复名称（留空则为发件人名称）
     $mail->AddReplyTo($replyEmail, $replyName);
