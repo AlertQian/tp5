@@ -80,7 +80,7 @@ $(document).ready(function(){
 		   ,chrpwd  =$("#chrpwd").val()
 		   ,token   =$("input[name=__token__]").val()
 		   ,chrpwd1 =$("#chrpwd1").val();
-		if(chrphone.length == 0){
+		if(chrphone.length == 0 || !isPoneAvailable(chrphone)){
 			setmsg('#chkphone',phone_none_error);
 			return false;
 		}
