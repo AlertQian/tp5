@@ -23,12 +23,12 @@
 					<div class="item" data-id="1"><span class="tit">邮箱注册</span></div> 
 				</ul> -->
 				<form name="form1" id="form1" method="post" action="">
-                {:token()}
+                <input type="hidden" name="__token__" value="{$Request.token}" />
 				<ul class="form_node">
 					<li class="clearfix"><span class="a">我要注册：</span><span class="b sel_radio_form" data-name="styleid">
-						<span class="display0"><input name="styleid" value="1" checked="" type="radio"><input name="styleid" value="2" type="radio"></span>
 						<span class="gx_radio current" data-val="1">个人会员</span>
 						<span class="gx_radio" data-val="2">企业(商家)会员</span>
+						<input type="hidden" name="typeid" value="1">
 					</span></li>
 					<li class="clearfix"><span class="a" id="loginNamechr">手机号码：</span><span class="b"><input class="ipt" id="chrphone" name="chrphone"
 					 placeholder="设置手机号码作为您的登录名" type="text"></span><span class="c" id="chkphone"></span></li>

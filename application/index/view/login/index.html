@@ -1,1 +1,57 @@
-savsdv
+{extend name="layout/layout"}
+{block name='style'}
+<link href="/fds/css/reg.css" rel="stylesheet" />
+<link href="/fds/css/dragcode.css" rel="stylesheet" />
+{/block}
+{block name="script"}
+<script type="text/javascript" src="/fds/js/reg.js?124"></script>
+{/block}
+{block name="body"}
+   <div class="reg_header clearfix">
+		<div class="w-1200">
+			<div class="po"><a href="/">返回首页</a><span class="bor"></span><a href="/help/">帮助</a></div>
+			<div class="logo"><a href="/" title=""><img src="../UploadFile/index/2017/7-19/201707190949409773675.png" alt=""></a></div>
+			<div class="sub-logo">会员注册</div>
+		</div>
+	</div>
+	<div class="login_content">
+		<div class="w-1200 site_reg">
+			<div class="login_node">
+				<div class="bd isweixinsaoma1" id="tab_01">
+					<div class="tab_saoma tab-hd">
+						<ul class="clearfix">
+							<li class="l_01 selected">账号密码登陆<s class="s"></s></li>
+							<li class="l_02">微信扫码登陆<s class="s"></s></li>
+						</ul>
+					</div>
+					<div class="tab-cont" style="display: block;">
+					<form id="formRegStep1Main" name="formRegStep1Main">
+							<ul class="form_node">
+								<li class="clearfix"><span class="a">登录名：</span><span class="b"><input type="text" class="ipt" id="logname" name="logname" placeholder="昵称/手机/邮箱" required style="color: #aaa;"></span></li>
+								<li class="clearfix"><span class="a">密码：</span><span class="b posi"><input type="password" class="ipt" name="passwd" id="passwd" required placeholder="登录密码"></span>{:token()}</li>
+								<li class="login_t clearfix">
+									<span class="a">&nbsp;</span>
+									<span class="b">
+										<span class="right">
+											<a href="{:url('login/reg')}">免费注册</a> | <a href="../find.aspx">忘记密码？</a>
+										</span>
+										<span class="left sel_check_form" data-name="remember_password">
+											<span class="display0"><input type="checkbox" name="remember_password" value="true" checked=""></span>
+											<span class="gx_check current" data-val="true">自动登录</span>
+										</span>
+									</span>
+								</li>
+								<li><button type="submit" name="dologin" class="submit2">立即登录</button></li>
+							</ul>
+						</form>
+						<div class="other_login">
+							<p class="tit">使用合作网站账号登录：</p>
+							<a href="" class="login_qq" style="display:">QQ登录</a><a href="" class="login_weixin display1">微信登录</a>
+						</div>
+					</div>
+				</div>
+				<div class="float_bg"></div>
+			</div>
+		</div>
+	</div>
+{/block}

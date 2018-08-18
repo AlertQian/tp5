@@ -2,6 +2,7 @@
 namespace app\wap\controller;
 use think\Request;
 use think\captcha\Captcha;
+use app\index\model\User;
 class Login extends Common
 {
 	public function index(){
@@ -17,11 +18,48 @@ class Login extends Common
 	public function reg(){
 		if(!session('validate')){
 			if(request()->isPost()){
-				
+				$validate = validate('Reg');
+				$ip=request()->ip();
+				$data=input('post.');
+				$user=new User();
+				$phone=$user::where('phone',$data['chrphone'])->find();
+				if(!$phone){
+					$nickname=$user::where('nickname',$data['nickname'])->find();
+					if(!$nickname){
+						if(!$validate->check($data)){
+							$msg=$validate->getError();
+							return $this->error($msg);
+						}
+						$pwd=md5($data['chrpwd']);
+						$pwd_hash=substr(md5($data['chrphone']), 8, 16);
+						$info=[
+							'nickname' =>$data['nickname'],
+							'phone'    =>$data['chrphone'],
+							'password' =>$pwd,
+							'type'     =>$data['typeid'],
+							'pwd_hash' =>$pwd_hash,
+							'regtime'  =>time(),
+							'regip'    =>$ip,
+							'logintime'=>time(),
+							'logip'    =>$ip
+						];
+						$ret=$user->save($info);
+						if($ret){
+							session('validate',$pwd_hash);
+							return $this->success('注册成功');
+						}else{
+							return $this->error('注册失败');
+						}
+					}else{
+						return $this->error('该昵称已存在');
+					}
+				}else{
+					return $this->error('电话号码已经注册');
+				}
 			}
 			return $this->fetch();
 		}else{
-			$this->redirect('use/set');
+			$this->redirect('user/set');
 		}
 		
 	}

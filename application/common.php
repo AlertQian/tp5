@@ -51,3 +51,21 @@ function send_mail($toemail, $name, $subject = '', $body = '', $attachment = nul
     }
     //return $mail->Send() ? true : $mail->ErrorInfo;
 }
+//验证手机号
+function check_phone($str){
+    $search = '/^0?1[3|4|5|6|7|8][0-9]\d{8}$/';
+    if ( preg_match( $search, $str ) ) {
+        return true;
+    } else {
+        return false;
+    }
+}
+//验证邮箱
+function check_email($email){
+    $pattern="/([a-z0-9]*[-_.]?[a-z0-9]+)*@([a-z0-9]*[-_]?[a-z0-9]+)+[.][a-z]{2,3}([.][a-z]{2})?/i";
+    if(preg_match($pattern,$email)){
+        return true;
+    }else{
+        return false;
+    }
+}

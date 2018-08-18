@@ -11,8 +11,8 @@
 <link href="/fds/css/head.css" type="text/css" rel="stylesheet" />
 {block name="style"}{/block}
 <script src="/fds/js/jquery-1.11.3.min.js"></script>
-<!-- <script src="/fds/js/common.js"></script> -->
 <script src="/fds/js/head.js"></script>
+<script src="/static/layer/layer.js"></script>
 {block name="script"}{/block}
 </head>
 <body>
@@ -38,129 +38,5 @@
 		<li class="gotop" id="top"><a href="#" class="iconB">返回顶部</a></li>
 	</ul>
 </div>
-<script type="text/javascript" src="https://www.mh163k.com/template/pc/main/default/js/purl.js"></script>
-<script type="text/javascript">
-(function($){
-	$('#myzhuye').click(function(e){
-		if($('#isLogin').val() === '0'){
-			MSGwindowShow('jiaoyou','1','您还没有登录哦！',window['SiteUrl']+'member/login.html?from=https://www.mh163k.com/jiaoyou/connections.aspx%3faction%3dmain','');
-			e.preventDefault();
-			return false;
-		}
-	});
-	$.fn.jiaoyouFilter = function(){
-		var timer = null,t_list = $(this);
-		return $(this).each(function(){
-			$(this).mouseover(function(){
-				t_list.removeClass('open');
-				clearTimeout(timer);
-				var t = $(this);
-				t.addClass('open');
-			}).mouseout(function(){
-				var t = $(this);
-				timer =	setTimeout(function(){t.removeClass('open');},100);
-			}).on('click','a',function(e){
-				e.preventDefault();
-				var target = $(this).parent().parent().parent();
-				target.removeClass('open').find('.select_cur').html($(this).html());
-				$('#'+target.attr('data-name')).val($(this).attr('data-val'));
-			});
-			var t = $(this),
-				data = $('#'+t.attr('data-name')),
-				targets = t.find('.inner'),
-				select_cur = t.find('.select_cur'),
-				txt = '';
-			select_cur.html(data.find('option:selected').html());
-			data.find('option').each(function(i,item){
-				txt += '<li><a href="#" data-val="'+$(item).attr('value')+'">'+$(item).html()+'</a></li>';
-			});
-			targets.html(txt);
-		});
-	}
-	$.fn.orderbyList = function(){
-		var current_host = window.location;
-		var url_obj = $.url(current_host).param();
-		var selector = 'orderby_';
-		if(!url_obj['orderby'] || url_obj['orderby'] === ''){
-			$('#'+selector).addClass('cur');
-		}else{
-			$('#'+selector+url_obj['orderby']).addClass('cur');
-		}
-		var list = $(this).find('a'),
-			form_filter = $('#form_filter'),
-			orderby = $('#orderby');
-		
-		list.click(function(e){
-			e.preventDefault();
-			orderby.val($(this).attr('data-orderby'));
-		});
-	}
-	$('#orderbyList').orderbyList();
-	$('#jiaoyou_filter').find('.select').jiaoyouFilter();
-	$('#jiaoyou_index_list').find('.img').hover(function(){
-		$(this).toggleClass('hover');
-	});
-	$('#fixed_menu').rmenuShow2016();
-})(jQuery);
-
-$.fn.serializeJson=function(){
-	var serializeObj={};
-	var array=this.serializeArray();
-	var str=this.serialize();
-	$(array).each(function(){
-		if(serializeObj[this.name]){
-			if($.isArray(serializeObj[this.name])){
-				serializeObj[this.name].push(this.value);
-			}else{
-				serializeObj[this.name]=[serializeObj[this.name],this.value];
-			}
-		}else{
-			serializeObj[this.name]=this.value;    
-		}
-	});
-	return serializeObj;
-};
-var keyvalues = {
-	"p":'1',
-	"isjson":'1',
-	"pagezise":'21'
-};
-function checkMyForm(){
-	var param = $("#form_filter").serializeJson();
-	keyvalues = $.extend(keyvalues,param);
-	getPagingGlobal({});
-	return false;
-}
-function getPagingGlobal(obj){
-	keyvalues = $.extend({'p':'1'},keyvalues,obj);
-	var url ='index.aspx?jsoncallback=?';
-	$.getJSON(url,keyvalues,function(data){
-		if(data[0].islogin === '1'){
-			$('#connections_list').html(data[0].MSG).show();
-			$('#pageNavigation').html(data[0].PageSplit).show();
-			$('#orderbyList').find('li').removeClass('cur');
-			$('#orderby_'+keyvalues['orderby']).addClass('cur');
-		}
-	}).error(function(){});
-	return false;
-}
-function getMyzhuyeUrl(){
-	var url = 'https://www.mh163k.com/jiaoyou/connectionsapi.ashx?action=getusernum&userid='+$('#LoginUserInfo').val()+'&jsoncallback=?';
-	$.getJSON(url,function(d){
-		if(d[0].islogin === '1'){
-			if(d[0]['MSG']['Myisopen'] !== 1 || d[0]['MSG']['Mystate'] !== 1){
-				$('#myzhuye').attr('href','https://www.mh163k.com/jiaoyou/connections.aspx?action=main');
-			}else{
-				$('#myzhuye').attr('href','https://www.mh163k.com/jiaoyou/jiaoyou_'+$('#LoginUserInfo').val()+'.html');
-			}
-		}else{
-			MSGwindowShow('jiaoyou','0',d[0].error,'','')
-		}
-	});
-}
-if($('#LoginUserInfo').val() !== ''){
-	getMyzhuyeUrl();
-}
-</script>
 </body>
 </html>
