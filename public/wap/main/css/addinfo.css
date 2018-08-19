@@ -1,0 +1,55 @@
+.header{height: 45px;position: fixed;width: 100%;top: 0;left: 0;z-index: 99;text-align: center;line-height: 45px;}
+  .header .back{color: #fff;padding-left: 10px;position: absolute;left: 0;}
+  .back span{position: relative;top:0px;left: -3px;}
+  .tagname{font-size: 18px;}
+  .ico-style{font-size: 25px;color: #fff}
+  .my{position: absolute;width: 40px;height: 45px;display: block;}
+  .login-ico{right: 40px;}
+  .nav-ico{right: 0px;}
+  .flrt{float: right;padding-right: 10px;}
+  .wrapper{margin-top: 45px;}
+  .ly-input{
+    height: 16px;
+    padding: 0 10px;
+    line-height: 38px;
+    height: 38px;
+    border: 0;
+    font-size: 16px;
+    width: 90%;
+    vertical-align: top;
+    outline: 0;
+    color: #666;
+  }
+  .layui-form-item{
+    border-bottom: 1px solid #eee;
+  }
+  .ly-form-label{
+    float: left;
+    display: block;
+    padding: 9px 15px;
+    width: 80px;
+    font-weight: 400;
+    line-height: 20px;
+    text-align: center;
+  }
+  .layui-input{border:none;color: #666;}
+  .ly-textarea{
+    height: 50px;
+    width: 90%;
+    line-height: 20px;
+    padding: 9px 10px;
+    resize: none;
+    border: 0 none;
+    font-size: 16px;
+    color: #666;
+  }
+  .ly-textarea:focus{
+    outline:none;
+  }
+  .quote{
+    background-color: #fff3f3;
+    color: #f27d7d;
+  }
+  .layui-form-radioed > i,.layui-form-radioed > i:hover,.layui-form-radio > i:hover{
+    color: #ff78a2;
+  }
