@@ -15,4 +15,7 @@ class User extends Common
 	public function addinfo(){
 		return $this->fetch();
 	}
+	public function real(){
+		return $this->fetch();
+	}
 }

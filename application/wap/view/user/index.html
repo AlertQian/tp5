@@ -6,105 +6,32 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
   <title>开始使用Layui</title>
-  <link rel="stylesheet" href="/static/layui/css/layui.css">
-  <link rel="stylesheet" href="/wap/main/css/addinfo.css">
+  <link href="/wap/main/css/mb-base.css" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="/wap/main/css/member-index-mb.css">
+  <link rel="stylesheet" href="/wap/main/css/mb-common.css">
 </head>
-<style type="text/css">
-.member_head .user_head .face,.member_head .user_head .s,.member_head .ico_edit,.member_head .styleid,.amount_info .pay .s,.amount_info .pay .ico,.order_count .s,.order_count li i,.memberNav li:before,.memberNav li:after,.memberNav2 li .s,.pc_shangjia,.member_head .userName .renzheng:before,.amount_addjiaoyou .s,.amount_addjiaoyou .ico,.member_head .real:before,.member_head .real .s {background: url(/wap/main/images/member_2017_sp.png) no-repeat; background-size: 102px auto;}
-
-.member_head{position:relative;height:100px;padding:20px 0 0 85px;color:#ffffff;}
-.member_head_2 {background:url("/wap/main/images/jiaoyou_member_banner.jpg") no-repeat center 0;background-size:cover;color:#404040;}
-.member_head .user_head{position:absolute;top:50%;overflow:hidden;margin-top:-32px;left:10px;}
-.member_head .user_head .s { display:block; position:absolute; right:0; bottom:0; width:13px; height:13px;}
-.member_head .user_head .face { display:block; width:58px; height:58px; background-position:-1px -21px; padding:3px;}
-.member_head .user_head .face1,.member_head .user_head .face2 { background-position:-1px -85px;}
-.member_head .user_head img{border-radius:56px; width:56px; height:56px; vertical-align:top;}
-.member_head .userName{font-size:20px;margin:10px 0 4px;}
-.member_head .userName .renzheng { display:inline-block; vertical-align:middle; margin-left:10px; font-size:14px; color:#4ab300;}
-.member_head .userName .renzheng:before { display:inline-block; content:' '; vertical-align:middle; margin-right:5px; width:12px; height:14px; background-position:-107px -151px; background-size:120px auto;}
-
-.member_head a{color:#ffffff;}
-.member_head_2 a { color:#999;}
-.member_head .s_bor,.member_head .txt { display:inline-block; vertical-align:middle; font-size:14px;}
-.member_head .s_bor { width:1px; height:10px; background-color:#fff; margin:0 10px;}
-.member_head_2 .s_bor { background-color:#aaa;}
-.member_head_2 .user_head .face { background:none;}
-.member_head .ico_edit { display:block; position:absolute; right:10px; top:10px; width:20px; height:20px; text-indent:-999em; overflow:hidden; background-position:-84px 2px;}
-.member_head .styleid { display:block; position:absolute; right:0; bottom:10px; background-color:#4d5055; background-position:-78px -74px; color:#fec743; padding:0 10px 0 28px; border-top-left-radius:20px; border-bottom-left-radius:20px; font-size:12px;}
-.member_head .styleid1,.member_head .styleid2 { background-position:-78px -98px; color:#bbb;}
-
-.member_head .real { display:none; position:absolute; right:10px; top:50%; padding-right:15px; margin-top:-12px; height:24px; line-height:24px; color:#666;}
-.member_head .real:before { display:inline-block; vertical-align:middle; width:21px; height:16px; overflow:hidden; content:' '; background-position:-23px -1086px; margin-right:6px;}
-
-.member_head .real_0_0,.member_head .real_1_1 { display:block;}
-.member_head .real_1_1 { color:#f93;}
-.member_head .real_1_1:before { background-position:1px -1087px;}
-
-.member_head .real .s { position:absolute; top:5px; right:0; display:inline-block; vertical-align:middle; width:8px; height:14px; overflow:hidden; background-position:-59px -1px;}
-
-.bg-white{background: #fff;}
-.amount-addinfo{
-	position: relative;
-}
-.amount-addinfo em {
-    color: #f19ecc;
-    font-style: normal;
-    font-weight: normal;
-}
-.amount-addinfo i{
-	position: absolute;
-    top: 15px;
-    right: 7px;
-}
-.memberNav { margin-top:10px; padding:0 10px; background:#fff;}
-.memberNav li{ border-bottom:1px solid #f4f4f4;height:46px;line-height:46px;margin-bottom:0px;font-size:16px;position:relative;padding:0 24px 0 32px;}
-.memberNav li:last-child { border-bottom:0 none;}
-.memberNav li:before{ position:absolute; left:0; top:10px; width:22px;height:25px;background-position:3px -347px;background-size:120px auto;}
-.memberNav li .count{font-size:12px;color:#fff;background-color:#f74c31;border-radius:50px;min-width:7px;line-height:15px;padding:0px 4px;text-align:center; float:right; text-decoration:none; margin-top:16px;}
-.memberNav li:after,.new_active .title a:after,.nearby_business .title a:after,.gongying dt:after,.fangchan dt:after,.zhaopin dt:after{background-position:-59px -1px;width:8px;height:14px;margin:14px 5px 0 0;}
-.memberNav li a{display:block;color:#333333;}
-.memberNav .job .a2 { margin-left:15px;} 
-.memberNav li.info:before{background-position:-26px -347px;}
-.memberNav li.house:before{background-position:-56px -348px;}
-.memberNav li.huanye:before{background-position:-83px -348px;}
-.memberNav li.job:before{background-position:2px -377px;}
-.memberNav li.resume:before{background-position:-25px -377px;}
-.memberNav li.arc:before{background-position:-55px -377px;}
-.memberNav li.tie:before{background-position:-83px -377px;}
-.memberNav li.active:before{background-position:3px -409px;}
-.memberNav li.exc:before{background-position:-24px -407px;}
-.memberNav li.tou:before{background-position:-55px -405px;}
-.memberNav li.jiaoyou:before{background-position:-55px -1185px;}
-.memberNav li.hongbao:before{background-position:-82px -406px;}
-.memberNav li.hongniang:before{background-position:1px -1571px;}
-.memberNav li.address:before{background-position:-55px -871px; background-size:80px auto;}
-
-.memberNav li.jy_ico_01:before { background-position:3px -347px;}
-.memberNav li.jy_ico_02:before { background-position:-25px -1154px;} 
-.memberNav li.jy_ico_03:before { background-position:-56px -1155px;} 
-.memberNav li.jy_ico_04:before { background-position:-83px -1155px;}
-.memberNav li.jy_ico_05:before { background-position:3px -1185px;}
-.memberNav li.jy_ico_06:before { background-position:-25px -1185px;}
-.memberNav li.jy_ico_07:before { background-position:-56px -1185px;}
-.memberNav li.jy_ico_08:before { background-position:-83px -1185px;}
-.memberNav li.jy_ico_09:before { background-position:3px -1216px;}
-.memberNav li.jy_ico_10:before { background-position:-25px -1214px;}
-.memberNav li.jy_ico_11:before { background-position:-56px -1214px;}
-.memberNav li.jy_ico_12:before { background-position:-83px -1214px;}
-.memberNav li.jy_ico_13:before { background-position:3px -1242px;}
-.memberNav li.jy_ico_14:before { background-position:-83px -1243px;}
-.memberNav li.jy_ico_15:before { background-position:1px -1571px;}
-</style>
 <body>
-	<div class="layui-bg-green header">
-	  <a href="" class="back"><i class="layui-icon layui-icon-left ico-style"></i></a>
-	  <span class="tagname">用户中心</span>
-	  <div class="layui-inline flrt">
-	  <a href="" class="my login-ico"><i class="layui-icon layui-icon-username ico-style"></i></a>
-	  <a href="" class="my nav-ico"><i class="layui-icon layui-icon-shrink-right ico-style"></i></a>
-	  </div>
-	  <div class="layui-clear"></div>
-	</div>
+	<div class="header">
+	<a href="https://www.mh163k.com/" id="header_back" class="back" onclick="">返回</a>
+	<div class="search" id="search_ico" onclick="showNewPage('搜索',searchHtml,newPageSearch);" style="display:none;">搜索</div>
+	<a href="https://www.mh163k.com/member/" class="my ico_ok" id="login_ico">我的</a>
+	<div class="type" id="nav_ico">导航</div>
+	<span id="ipageTitle" style="">交友</span>
+	<div class="nav_APP" id="nav_APP"><ul class="clearfix" id="nav_APP_data2">
+	
+	<li><a href="https://www.mh163k.com/">首页<s class="s" style="background-image:url(../UploadFile/index/2017/5-26/201705260909230968494.png);"></s></a></li>
+	
+	
+	<li><a href="https://www.mh163k.com/house/">房产<s class="s" style="background-image:url(../UploadFile/index/2017/5-25/201705251752116927044.png);"></s></a></li>
+	
+	<li><a href="https://www.mh163k.com/jiaoyou/">征婚<s class="s" style="background-image:url(../UploadFile/index/2017/5-25/201705251752208846919.png);"></s></a></li>
+	
+	<li><a href="/gift/">积分<s class="s" style="background-image:url(../UploadFile/index/2017/5-25/201705251753447776716.png);"></s></a></li>
+	
+	
+	</ul><span class="arrow-up"></span></div>
+</div>
+	
 	<div class="wrapper" style="background: #eee">
 		<div class="member_head member_head_2">
 		  <div class="user_head"><a href="https://www.mh163k.com/member/modify.aspx?action=tou" class="face"><img src="/wap/main/images/jiaoyou_face_nofind.jpg" alt="" width="96" height="96"></a><s class="s"></s></div>
@@ -112,22 +39,21 @@
 		  <a href="" class="txt">修改资料</a><s class="s_bor"></s><a href="" class="txt">修改密码</a>
 		  <a href="javascript:void(0);" class="real real_0_0">未认证<s class="s"></s></a>
 		 </div>
-		<div class="amount-addinfo">
-			<blockquote class="layui-elem-quote bg-white" style="margin: 10px 0px;">您还未加入交友哦！<em>现在加入</em>！</blockquote>
-			<i class="layui-icon layui-icon-right"></i>   
-		</div>
+		<div class="amount_addjiaoyou">
+		  <a href="?action=add"><s class="ico"></s><span class="txt">您还未加入交友哦！<em>现在加入</em>！</span></a><s class="s"></s>
+		 </div>
 		<div id="memberNav">
-		  <ul class="memberNav">
-		   <li class="jy_ico_01"><a href="connections.aspx?action=main">基本信息</a></li>
-		   <li class="jy_ico_02"><a href="connections.aspx?action=editdetail">完善资料</a></li>
-		   <li class="jy_ico_03"><a href="connections.aspx?action=yaojiu">交友要求</a></li>
-		   <li class="jy_ico_04"><a href="connections.aspx?action=imglist">我的相册</a></li>
-		   <li class="jy_ico_05"><a href="connections.aspx?action=real">实名认证</a></li>
-		   <li class="jy_ico_06"><a href="connections.aspx?action=commend">我要推荐</a></li>
-		   <li class="jy_ico_07"><a href="connections.aspx?action=selectfriend">智能匹配</a></li>
-		   <li class="jy_ico_15"><a href="connections.aspx?action=hongniang">红娘牵线</a></li>
+		   <ul class="memberNav">
+		   <li class="jy_ico_01"><a href="{:url('user/addinfo')}">基本信息</a></li>
+		   <li class="jy_ico_02"><a href="{:url('user/detail')}">完善资料</a></li>
+		   <li class="jy_ico_03"><a href="{:url('user/yaoqiu')}">交友要求</a></li>
+		   <li class="jy_ico_04"><a href="{:url('user/imglist')}">我的相册</a></li>
+		   <li class="jy_ico_05"><a href="{:url('user/real')}">实名认证</a></li>
+		   <li class="jy_ico_06"><a href="{:url('user/commend')}">我要推荐</a></li>
+		   <li class="jy_ico_07"><a href="{:url('user/slctfriend')}">智能匹配</a></li>
+		   <li class="jy_ico_15"><a href="{:url('user/hongniang')}">红娘牵线</a></li>
 		   </ul>
-		    <ul class="memberNav">
+		   <!-- <ul class="memberNav">
 		   <li class="jy_ico_08"><a href="connections.aspx?action=selectbrowselist&amp;type=0">我看过谁</a></li>
 		   <li class="jy_ico_09"><a href="connections.aspx?action=selectkeeplist&amp;type=0">我的收藏</a></li>
 		   <li class="jy_ico_10"><a href="connections.aspx?action=selectbuylist&amp;type=0">我联系过</a></li>
@@ -135,8 +61,18 @@
 		   <li class="jy_ico_12"><a href="connections.aspx?action=selectkeeplist&amp;type=1">谁收藏我</a></li>
 		   <li class="jy_ico_13"><a href="connections.aspx?action=selectbuylist&amp;type=1">谁联系我</a></li>
 		   <li class="jy_ico_14"><a href="connections.aspx?action=flowerlist&amp;type=1">收到鲜花</a></li>
-		  </ul>
+		   		  </ul> -->
 		  </div>
+		  <div class="member_exit">
+		  	<button type="button" class="exit">安全退出</button>
+		  </div>
+		  <div class="foot_link" id="foot_link">
+			<ul class="link">
+			<li><a href="">首页</a></li>
+			<li><a href="{:url('user/service')}">留言</a></li>
+			</ul>
+			Copyright @ 2003-2018 51jy.com
+		</div>
     </div>		
 </body>
 </html>
