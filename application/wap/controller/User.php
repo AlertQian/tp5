@@ -13,6 +13,14 @@ class User extends Common
 		echo "hellow user set";
 	}
 	public function addinfo(){
+
+		$yeararr= yearArr();
+		$starr= statureArr();
+		$townarr= townArr();
+
+		$this->assign('yeararr',$yeararr);
+		$this->assign('starr',$starr);
+		$this->assign('townarr',$townarr);
 		return $this->fetch();
 	}
 	public function real(){

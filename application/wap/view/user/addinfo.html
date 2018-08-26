@@ -11,10 +11,12 @@
 </head>
 <body>
 <!-- 你的HTML代码 --> 
+<script src="/fds/js/jquery-1.11.3.min.js"></script>
 <script src="/static/layui/layui.js"></script>
+<script src="/public/js/jquery.cityselect.js"></script>
 <div class="layui-main" style="width: 100%;">
-<div class="layui-bg-green header">
-  <a href="" class="back"><i class="layui-icon layui-icon-left ico-style"></i></a>
+<div class="header">
+  <a href="javascript:history.back(-1)" class="back"><i class="layui-icon layui-icon-left ico-style"></i></a>
   <span class="tagname">开通我的交友</span>
   <div class="layui-inline flrt">
   <a href="" class="my login-ico"><i class="layui-icon layui-icon-username ico-style"></i></a>
@@ -35,7 +37,7 @@
             <div class="layui-form-item">
               <label class="ly-form-label">姓名</label>
               <div class="layui-input-inline">
-                <input type="text" name="title" required  lay-verify="required" placeholder="必填" autocomplete="off" class="ly-input">
+                <input type="text" name="realname" required  lay-verify="required" placeholder="必填" autocomplete="off" class="ly-input">
               </div>
             </div>
             <div class="layui-form-item">
@@ -48,76 +50,98 @@
             <div class="layui-form-item">
               <label class="ly-form-label">年龄</label>
               <div class="layui-input-inline">
-               <select name="modules" lay-verify="required" lay-search="">
+               <select name="age" lay-verify="required" lay-search="">
                 <option value="">未填写</option>
-                <option value="1">layer</option>
-                <option value="2">form</option>
-                <option value="3">layim</option>
-                <option value="4">element</option>
+                {volist name="yeararr" id="vo"}
+                  {$vo}
+                {/volist}
               </select>
               </div>
             </div>
             <div class="layui-form-item">
               <label class="ly-form-label">身高</label>
               <div class="layui-input-inline">
-               <select name="modules" lay-verify="required" lay-search="">
+               <select name="stature" lay-verify="required" lay-search="">
                 <option value="">未填写</option>
-                <option value="1">layer</option>
-                <option value="2">form</option>
-                <option value="3">layim</option>
-                <option value="4">element</option>
+                {volist name="starr" id="vo"}
+                  {$vo}
+                {/volist}
               </select>
               </div>
             </div>
-            <div class="layui-form-item">
+            <!-- <div class="layui-form-item">
               <label class="ly-form-label">感情</label>
               <div class="layui-input-inline">
-               <select name="modules" lay-verify="required" lay-search="">
+              <select name="emotion" lay-verify="required" lay-search="">
                 <option value="">未填写</option>
-                <option value="1">layer</option>
-                <option value="2">form</option>
-                <option value="3">layim</option>
-                <option value="4">element</option>
+                <option value="1">单身</option>
+                <option value="2">离异</option>
               </select>
               </div>
-            </div>
+            </div> -->
             <div class="layui-form-item">
-              <label class="ly-form-label">籍贯</label>
+              <label class="ly-form-label">地区</label>
               <div class="layui-input-inline">
-                <input type="text" name="title" required  lay-verify="required" placeholder="户籍所在地" autocomplete="off" class="ly-input">
+                <select name="county">
+                  <option value="">请选择县</option>
+                  <option value="南城县" selected="">南城县</option>
+                </select>
               </div>
+              <div class="layui-input-inline">
+                <select name="town">
+                  <option value="">请选择镇</option>
+                  {volist name="townarr" id="vo"}
+                    {$vo}
+                  {/volist}
+                </select>
+              </div>
+              <div class="layui-input-inline">
+                <input type="text" name="dtarea" placeholder="详细地址" class="ly-input">
+              </div>  
             </div>
             <div class="layui-form-item">
               <label class="ly-form-label">签名</label>
               <div class="layui-input-inline">
-                <textarea name="" required lay-verify="required" placeholder="仅限50字" class="ly-textarea"></textarea>
+                <textarea name="signature" required lay-verify="required" placeholder="仅限50字" class="ly-textarea"></textarea>
               </div>
             </div>
             <div class="layui-form-item">
               <label class="ly-form-label">内心独白</label>
               <div class="layui-input-inline">
-                <textarea name="" required lay-verify="required" placeholder="仅限300字" class="ly-textarea" style="height: 100px;"></textarea>
+                <textarea name="content" required lay-verify="required" placeholder="仅限300字" class="ly-textarea" style="height: 100px;"></textarea>
               </div>
             </div>
             <blockquote class="layui-elem-quote quote">以下信息将作为您的征婚交友联系方式</blockquote>
             <div class="layui-form-item">
               <label class="ly-form-label">交友方式</label>
               <div class="layui-input-block">
-                <input name="jy" value="公开交友" title="公开交友" checked="" type="radio">
-                <input name="jy" value="委托红娘" title="委托红娘" type="radio">
+                <input name="jytype" value="1" title="公开交友" checked="" type="radio">
+                <input name="jytype" value="2" title="委托红娘" type="radio">
                 <div class="layui-form-mid layui-word-aux">1.公开交友：其他会员需向网站支付相应的积分即可获得您的联系资料</div>
                 <div class="layui-form-mid layui-word-aux" style="padding-top: 0px!important;">2.委托红娘：向所有人隐藏联系资料，其他会员只能通过红娘牵线服务取得您的同意后方可获得联系方式</div>
               </div>
             </div>
             <div class="layui-form-item">
+              <label class="ly-form-label">Q Q</label>
+              <div class="layui-input-inline">
+                <input type="text" name="qq"  lay-verify="" placeholder="未填写" autocomplete="off" class="ly-input">
+              </div>
+            </div>
+            <div class="layui-form-item">
+              <label class="ly-form-label">微信</label>
+              <div class="layui-input-inline">
+                <input type="text" name="wechat" lay-verify="" placeholder="未填写" autocomplete="off" class="ly-input">
+              </div>
+            </div>
+            <div class="layui-form-item">
               <label class="ly-form-label">手机</label>
               <div class="layui-input-inline">
-                <input type="text" name="title" required  lay-verify="required" placeholder="必填" autocomplete="off" class="ly-input">
+                <input type="text" name="phone" required  lay-verify="required" placeholder="必填" autocomplete="off" class="ly-input">
               </div>
             </div>
             <div style="text-align: center;">
               <div class="layui-form-mid layui-word-aux" style="float: none;">点击"提交"就表示我已同意<a href="" style="color: #4fbe3e">网上征婚交友服务协议</a></div>
-              <button class="layui-btn" lay-submit="" lay-filter="" style="background-color: #ff78a2;width: 60%;border-radius: 50px;">立即提交</button>
+              <button class="layui-btn" lay-submit lay-filter="addinfo" style="background-color: #ff78a2;width: 60%;border-radius: 50px;">立即提交</button>
             </div>
         </form>
       </div>
@@ -316,6 +340,14 @@
 layui.use(['element','form'], function(){
   var element = layui.element
      ,form    = layui.form;
+     form.on('submit(addinfo)',function(data){
+      loading = layer.load(2, {
+        shade: [0.2,'#000']
+      });
+      var param = data.field;
+      console.log(param);
+      return false;
+     })
             
 });
 </script>

@@ -69,3 +69,27 @@ function check_email($email){
         return false;
     }
 }
+//年龄数组
+function yearArr(){
+    $years = range(date("Y", strtotime("now - 10 years")),date("Y", strtotime("now - 60 years"))); 
+    foreach($years as $year){
+      $yeararr[]= '<option value="'.$year.'">'.$year.'</option>'; 
+    }
+    return $yeararr;
+}
+//身高数组
+function statureArr(){
+    $stature=range(150,200);
+    foreach ($stature as $value) {
+        $starr[]= '<option value="'.$value.'">'.$value.'</option>';
+    }
+    return $starr;
+}
+//镇区
+function townArr(){
+    $arr=array('建昌镇','沙洲镇','株良镇','上唐镇','里塔镇','洪门镇','龙湖镇','新丰街镇','万坊镇','徐家乡','天井源乡','浔溪乡');
+    foreach ($arr as $value) {
+        $townarr[]= '<option value="'.$value.'">'.$value.'</option>';
+    }
+    return $townarr;
+}

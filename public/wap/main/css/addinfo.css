@@ -1,4 +1,4 @@
-.header{height: 45px;position: fixed;width: 100%;top: 0;left: 0;z-index: 99;text-align: center;line-height: 45px;}
+.header{height: 45px;position: fixed;width: 100%;top: 0;left: 0;z-index: 99;text-align: center;line-height: 45px;background: #5cc55c;color:#fff;}
   .header .back{color: #fff;padding-left: 10px;position: absolute;left: 0;}
   .back span{position: relative;top:0px;left: -3px;}
   .tagname{font-size: 18px;}
