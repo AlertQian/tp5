@@ -1,5 +1,6 @@
 <?php
 namespace app\wap\controller;
+use app\index\model\UserInfo;
 /**
  * 
  */
@@ -14,6 +15,22 @@ class User extends Common
 	}
 	public function addinfo(){
 
+        if(request()->isPost()){
+        	$userinfo=new UserInfo;
+        	$data=input('post.');
+        	$place=$data['county'].$data['town'].$data['dtarea'];
+        	$data['place']=$place;
+        	$data['addtime']=time();
+        	$data['signature']=remove_xss($data['signature']);
+        	$data['content']=remove_xss($data['content']);
+        	$this->check_form('UserInfo',$data);
+        	$ret=$userinfo->add($data);
+        	if($ret){
+        		$this->success('已提交');
+        	}else{
+        		$this->error('提交失败');
+        	}
+        }
 		$yeararr= yearArr();
 		$starr= statureArr();
 		$townarr= townArr();
