@@ -34,10 +34,15 @@ class User extends Common
 		$yeararr= yearArr();
 		$starr= statureArr();
 		$townarr= townArr();
-
+		$eduarr= eduArr();
+		$wagesarr= wagesArr();
+		$signarr= signArr();
 		$this->assign('yeararr',$yeararr);
 		$this->assign('starr',$starr);
 		$this->assign('townarr',$townarr);
+		$this->assign('eduarr',$eduarr);
+		$this->assign('wagesarr',$wagesarr);
+		$this->assign('signarr',$signarr);
 		return $this->fetch();
 	}
 	public function real(){

@@ -35,6 +35,13 @@
 	    <div class="layui-tab-item layui-show">
         <form class="layui-form" action="">
             {:token()}
+            <div class="layui-form-item" style="border-bottom: none;">
+              <label class="ly-form-label">头像</label>
+              <div class="upload-img">
+              <button type="button" class="layui-btn layui-btn-primary" id="image"><i class="layui-icon"></i>上传图片</button><input class="layui-upload-file" name="file" type="file">
+              <input name="userzm" value="" class="layui-input" type="hidden">
+              </div>
+            </div>
             <div class="layui-form-item">
               <label class="ly-form-label">姓名</label>
               <div class="layui-input-inline">
@@ -151,28 +158,26 @@
             <div class="layui-form-item">
               <label class="ly-form-label">学历</label>
               <div class="layui-input-inline">
-               <select name="modules" lay-verify="required" lay-search="">
+               <select name="edu" lay-verify="required" lay-search="">
                 <option value="">未填写</option>
-                <option value="1">layer</option>
-                <option value="2">form</option>
-                <option value="3">layim</option>
-                <option value="4">element</option>
+                {volist name="eduarr" id="vo"}
+                  {$vo}
+                {/volist}
               </select>
               </div>
             </div>
             <div class="layui-form-item">
               <label class="ly-form-label">月薪</label>
               <div class="layui-input-inline">
-               <select name="modules" lay-verify="required" lay-search="">
+               <select name="wages" lay-verify="required" lay-search="">
                 <option value="">未填写</option>
-                <option value="1">layer</option>
-                <option value="2">form</option>
-                <option value="3">layim</option>
-                <option value="4">element</option>
+                {volist name="wagesarr" id="vo"}
+                  {$vo}
+                {/volist}
               </select>
               </div>
             </div>
-            <div class="layui-form-item">
+            <!-- <div class="layui-form-item">
               <label class="ly-form-label">住房</label>
               <div class="layui-input-inline">
                <select name="modules" lay-verify="required" lay-search="">
@@ -195,28 +200,15 @@
                 <option value="4">element</option>
               </select>
               </div>
-            </div>
+            </div> -->
             <div class="layui-form-item">
               <label class="ly-form-label">星座</label>
               <div class="layui-input-inline">
                <select name="modules" lay-verify="required" lay-search="">
                 <option value="">未填写</option>
-                <option value="1">layer</option>
-                <option value="2">form</option>
-                <option value="3">layim</option>
-                <option value="4">element</option>
-              </select>
-              </div>
-            </div>
-            <div class="layui-form-item">
-              <label class="ly-form-label">血型</label>
-              <div class="layui-input-inline">
-               <select name="modules" lay-verify="required" lay-search="">
-                <option value="">未填写</option>
-                <option value="1">layer</option>
-                <option value="2">form</option>
-                <option value="3">layim</option>
-                <option value="4">element</option>
+                {volist name="signarr" id="vo"}
+                  {$vo}
+                {/volist}
               </select>
               </div>
             </div>
@@ -248,89 +240,81 @@
             <div class="layui-form-item">
               <label class="ly-form-label">学历</label>
               <div class="layui-input-inline">
-               <select name="modules" lay-verify="required" lay-search="">
-                <option value="">未填写</option>
-                <option value="1">layer</option>
-                <option value="2">form</option>
-                <option value="3">layim</option>
-                <option value="4">element</option>
+               <select name="yq_edu" lay-verify="required" lay-search="">
+                <option value="">不限制</option>
+                {volist name="eduarr" id="vo"}
+                  {$vo}
+                {/volist}
               </select>
               </div>
             </div>
             <div class="layui-form-item">
               <label class="ly-form-label">月薪</label>
               <div class="layui-input-inline">
-               <select name="modules" lay-verify="required" lay-search="">
-                <option value="">未填写</option>
-                <option value="1">layer</option>
-                <option value="2">form</option>
-                <option value="3">layim</option>
-                <option value="4">element</option>
+               <select name="yq_wages" lay-verify="required" lay-search="">
+                <option value="">不限制</option>
+                {volist name="wagesarr" id="vo"}
+                  {$vo}
+                {/volist}
               </select>
               </div>
             </div>
             <div class="layui-form-item">
               <label class="ly-form-label">年龄</label>
               <div class="layui-input-inline">
-               <select name="modules" lay-verify="required" lay-search="">
-                <option value="">未填写</option>
-                <option value="1">layer</option>
-                <option value="2">form</option>
-                <option value="3">layim</option>
-                <option value="4">element</option>
+               <select name="yq_age" lay-verify="required" lay-search="">
+                <option value="">不限制</option>
+                {volist name="yeararr" id="vo"}
+                  {$vo}
+                {/volist}
               </select>
               </div>
             </div>
             <div class="layui-form-item">
               <label class="ly-form-label">身高</label>
               <div class="layui-input-inline">
-               <select name="modules" lay-verify="required" lay-search="">
-                <option value="">未填写</option>
-                <option value="1">layer</option>
-                <option value="2">form</option>
-                <option value="3">layim</option>
-                <option value="4">element</option>
+               <select name="yq_stature" lay-verify="required" lay-search="">
+                <option value="">不限制</option>
+                {volist name="starr" id="vo"}
+                  {$vo}
+                {/volist}
               </select>
               </div>
             </div>
             <div class="layui-form-item">
               <label class="ly-form-label">星座</label>
               <div class="layui-input-inline">
-               <select name="modules" lay-verify="required" lay-search="">
-                <option value="">未填写</option>
-                <option value="1">layer</option>
-                <option value="2">form</option>
-                <option value="3">layim</option>
-                <option value="4">element</option>
+               <select name="yq_sign" lay-verify="required" lay-search="">
+                <option value="">不限制</option>
+                {volist name="signarr" id="vo"}
+                  {$vo}
+                {/volist}
               </select>
               </div>
             </div>
             <div class="layui-form-item">
               <label class="ly-form-label">接受离异</label>
               <div class="layui-input-inline">
-               <select name="modules" lay-verify="required" lay-search="">
-                <option value="">未填写</option>
-                <option value="1">layer</option>
-                <option value="2">form</option>
-                <option value="3">layim</option>
-                <option value="4">element</option>
+               <select name="yq_divorced" lay-verify="required" lay-search="">
+                <option value="1">接受</option>
+                <option value="2" selected="">不接受</option>
               </select>
               </div>
             </div>
             <div class="layui-form-item">
               <label class="ly-form-label">从事行业</label>
               <div class="layui-input-inline">
-                <input type="text" name="title" required  lay-verify="required" placeholder="从事行业" autocomplete="off" class="ly-input">
+                <input type="text" name="yq_industry" required  lay-verify="required" placeholder="从事行业" autocomplete="off" class="ly-input">
               </div>
             </div>
             <div class="layui-form-item">
               <label class="ly-form-label">兴趣爱好</label>
               <div class="layui-input-inline">
-                <input type="text" name="title"  lay-verify="required" placeholder="未填写" autocomplete="off" class="ly-input">
+                <input type="text" name="yq_intrste" lay-verify="required" placeholder="未填写" autocomplete="off" class="ly-input">
               </div>
             </div>
             <div style="text-align: center;">
-              <button class="layui-btn" lay-submit="" lay-filter="" style="background-color: #ff78a2;width: 60%;border-radius: 50px;">立即提交</button>
+              <button class="layui-btn" lay-submit lay-filter="yaoqiu" style="background-color: #ff78a2;width: 60%;border-radius: 50px;">立即提交</button>
             </div>
         </form>
       </div>
@@ -360,7 +344,7 @@ layui.use(['element','form'], function(){
             return '填写正确的手机号'
           }
         }
-      });      
+      });
      form.on('submit(addinfo)',function(data){
       loading = layer.load(2, {
         shade: [0.2,'#000']
@@ -377,7 +361,23 @@ layui.use(['element','form'], function(){
       })
       return false;
      })
-            
+
+     form.on('submit(yaoqiu)',function(data){
+      loading = layer.load(2, {
+        shade: [0.2,'#000']
+      });
+      var param = data.field;
+      jq.post('{:url("user/yaoqiu")}',param,function(data){
+        if(data.code==200){
+          layer.close(loading);
+          layer.msg(data.msg, {icon: 1, anim: 6, time: 1000});
+        }else{
+          layer.close(loading);
+          layer.msg(data.msg, {icon: 2, anim: 6, time: 1000});
+        }
+      })
+      return false;
+     })       
 });
 </script>
 </div>
