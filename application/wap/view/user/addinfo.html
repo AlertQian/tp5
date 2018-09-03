@@ -40,6 +40,7 @@
               <div class="upload-img">
               <button type="button" class="layui-btn layui-btn-primary" id="image"><i class="layui-icon"></i>上传图片</button><input class="layui-upload-file" name="file" type="file">
               <input name="userzm" value="" class="layui-input" type="hidden">
+              <img src="" id="showpic"> 
               </div>
             </div>
             <div class="layui-form-item">
@@ -322,11 +323,31 @@
 	</div>
 </div>
 <script>
-layui.use(['element','form'], function(){
+layui.use(['element','form','upload'], function(){
   var element = layui.element
      ,form    = layui.form
-     ,jq = layui.jquery;
-
+     ,jq = layui.jquery
+     ,upload = layui.upload;
+     
+     upload.render({
+      elem:'#image',
+      url:"{:url('upload/head')}",
+      accept:"images",
+      before:function(obj){
+        var files = obj.pushFile();
+        obj.preview(function(index, file, result){
+          console.log(result);
+          $('#showpic').attr('src',result);
+        })
+      },
+      done:function(res){
+        if(res.code > 0){
+          return layer.msg('上传失败');
+        }else{
+          return layer.msg('上传成功');
+        }
+      }
+     });  
      form.verify({
         username: function(value, item){ //value：表单的值、item：表单的DOM对象
           if(!new RegExp("^[a-zA-Z0-9_\u4e00-\u9fa5\\s·]+$").test(value)){
@@ -351,7 +372,7 @@ layui.use(['element','form'], function(){
       });
       var param = data.field;
       jq.post('{:url("user/addinfo")}',param,function(data){
-        if(data.code==200){
+        if(data.code==1){
           layer.close(loading);
           layer.msg(data.msg, {icon: 1, anim: 6, time: 1000});
         }else{
@@ -368,7 +389,7 @@ layui.use(['element','form'], function(){
       });
       var param = data.field;
       jq.post('{:url("user/yaoqiu")}',param,function(data){
-        if(data.code==200){
+        if(data.code==1){
           layer.close(loading);
           layer.msg(data.msg, {icon: 1, anim: 6, time: 1000});
         }else{
