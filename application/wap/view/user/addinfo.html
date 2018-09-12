@@ -234,10 +234,17 @@
         <div class="layui-form-item" style="border-bottom: none;">
           <label class="ly-form-label">头像</label>
           <div class="upload-img">
-          <button type="button" class="layui-btn layui-btn-primary" id="image"><i class="layui-icon"></i>上传图片</button><input class="layui-upload-file" name="file" type="file">
+          <button type="button" class="layui-btn layui-btn-primary" id="image"><i class="layui-icon"></i>上传图片</button>
+          <input class="layui-upload-file" name="file" type="file">
           <input name="userzm" value="" class="layui-input" type="hidden">
             <div class="base-img" style="margin-top: 20px;width: 100%;text-align: center;">
-            <img id="showpic" style="width: 80%;" src="/uploads/imgupload/20180908/f684e18b6f26999da49a6a2b2e40a9d2.png">
+            <img id="showpic" style="width: 80%;min-height: 150px;border: 1px solid #eee;border-radius: 5px;" src="/wap/main/images/jiaoyou_face_nofind.jpg">
+            <div class="layui-upload-list" id="demo2"></div>
+            </div>
+          </div>
+          <div class="layui-form-item" style="border-bottom: none;">
+            <div style="text-align: center;">
+              <button class="layui-btn" id="uploadaction" lay-submit>立即提交</button>
             </div>
           </div>
         </div>  
@@ -258,12 +265,12 @@
             <div class="layui-form-item">
               <label class="ly-form-label">月薪</label>
               <div class="layui-input-inline">
-               <select name="yq_wages" lay-verify="required" lay-search="">
+                <select name="yq_wages" lay-verify="required" lay-search="">
                 <option value="">不限制</option>
                 {volist name="wagesarr" id="vo"}
-                  {$vo}
+                {$vo}
+                </select>
                 {/volist}
-              </select>
               </div>
             </div>
             <div class="layui-form-item">
@@ -328,17 +335,7 @@
 	  </div>
 	</div>
 </div>
-<script type="text/javascript">
-  $('#showpic').cropper({
-    aspectRatio: 15 / 15,
-    preview: '.img-preview',
-    crop: function(e) {
-        // Output the result data for cropping image.
-        
-    },
-    
-    });
-</script>
+
 <script>
 layui.use(['element','form','upload'], function(){
   var element = layui.element
@@ -346,27 +343,42 @@ layui.use(['element','form','upload'], function(){
      ,jq = layui.jquery
      ,upload = layui.upload;
      
-     upload.render({
+      var uploadinst = upload.render({
       elem:'#image',
       url:"{:url('upload/head')}",
       accept:"images",
-     /* before:function(obj){
-        var files = obj.pushFile();
-        console.log(files);
+      auto:false,
+      bindAction:'#uploadaction',
+      choose:function(obj){
+        //var files = obj.pushFile();
         obj.preview(function(index, file, result){
-          console.log(result);
-          $('#showpic').attr('src',result);
-        })
-      },*/
+          //uploadinst.config.elem.next()[0].value = '';
+          $ret=$('#showpic').attr('src',result);
+          //console.log($ret);
+          if($ret){
+            $('#showpic').cropper({
+                aspectRatio: 9 / 9,
+                crop:function(data){
+                  
+                }
+            })
+          }
+          //$('#demo2').append('<img src="'+ result +'" alt="'+ file.name +'" class="layui-upload-img">')
+        });
+        
+      },
+      before:function(obj){
+        //layer.load();
+        /*$('#showpic').cropper({
+            aspectRatio: 9 / 9
+        })*/
+      },
       done:function(res){
-        if(res.code > 0){
-          console.log('23');
-          console.log(res.data);
-          return layer.msg('上传失败');
-        }else{
-          console.log(res.url);
+        if(res.code == 200){
+          layer.closeAll('loading');
           return layer.msg('上传成功');
-          
+        }else{
+          return layer.msg('上传失败');   
         }
       }
      });  
