@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>开始使用Layui</title>
+  <link rel="stylesheet" href="/static/layui/css/layui.css">
+  <link rel="stylesheet" href="/wap/main/css/addinfo.css">
+  <link rel="stylesheet" href="/static/crop/css/cropper.css">
+</head>
+<body>
+<!-- 你的HTML代码 --> 
+<script src="/fds/js/jquery-1.11.3.min.js"></script>
+<script src="/static/layui/layui.js"></script>
+<script src="/static/crop/js/cropper.js"></script>
+<div class="layui-main" style="width: 100%;">
+<div class="header">
+  <a href="javascript:history.back(-1)" class="back"><i class="layui-icon layui-icon-left ico-style"></i></a>
+  <span class="tagname">开通我的交友</span>
+  <div class="layui-inline flrt">
+  <a href="" class="my login-ico"><i class="layui-icon layui-icon-username ico-style"></i></a>
+  <a href="" class="my nav-ico"><i class="layui-icon layui-icon-shrink-right ico-style"></i></a>
+  </div>
+  <div class="layui-clear"></div>
+</div>
+<div class="wrapper"> 
+	<div class="layui-tab layui-tab-brief">
+	  <ul class="layui-tab-title">
+	    <li class="layui-this">基本资料</li>
+	    <li>完善资料</li>
+      <li>上传头像</li>
+      <li>交友要求</li>
+	  </ul>
+	  <div class="layui-tab-content">
+	    <div class="layui-tab-item layui-show">
+        <form class="layui-form" action="">
+            {:token()}
+            <div class="layui-form-item">
+              <label class="ly-form-label">姓名</label>
+              <div class="layui-input-inline">
+                <input type="text" name="realname" required  lay-verify="required|username" placeholder="必填" autocomplete="off" class="ly-input">
+              </div>
+            </div>
+            <div class="layui-form-item">
+              <label class="ly-form-label">性别</label>
+              <div class="layui-input-block">
+                <input name="sex" value="男" title="男" checked="" type="radio">
+                <input name="sex" value="女" title="女" type="radio">
+              </div>
+            </div>
+            <div class="layui-form-item">
+              <label class="ly-form-label">年龄</label>
+              <div class="layui-input-inline">
+               <select name="age" lay-verify="required" lay-search="">
+                <option value="">未填写</option>
+                {volist name="yeararr" id="vo"}
+                  {$vo}
+                {/volist}
+              </select>
+              </div>
+            </div>
+            <div class="layui-form-item">
+              <label class="ly-form-label">身高</label>
+              <div class="layui-input-inline">
+               <select name="stature" lay-verify="" lay-search="">
+                <option value="">未填写</option>
+                {volist name="starr" id="vo"}
+                  {$vo}
+                {/volist}
+              </select>
+              </div>
+            </div>
+            <!-- <div class="layui-form-item">
+              <label class="ly-form-label">感情</label>
+              <div class="layui-input-inline">
+              <select name="emotion" lay-verify="required" lay-search="">
+                <option value="">未填写</option>
+                <option value="1">单身</option>
+                <option value="2">离异</option>
+              </select>
+              </div>
+            </div> -->
+            <div class="layui-form-item">
+              <label class="ly-form-label">地区</label>
+              <div class="layui-input-inline">
+                <select name="county" lay-verify="required">
+                  <option value="">请选择县</option>
+                  <option value="南城县" selected="">南城县</option>
+                </select>
+              </div>
+              <div class="layui-input-inline">
+                <select name="town" lay-verify="required">
+                  <option value="">请选择镇</option>
+                  {volist name="townarr" id="vo"}
+                    {$vo}
+                  {/volist}
+                </select>
+              </div>
+              <div class="layui-input-inline">
+                <input type="text" name="dtarea" placeholder="详细地址" class="ly-input">
+              </div>  
+            </div>
+            <div class="layui-form-item">
+              <label class="ly-form-label">签名</label>
+              <div class="layui-input-inline">
+                <textarea name="signature" required lay-verify="" placeholder="仅限50字" class="ly-textarea"></textarea>
+              </div>
+            </div>
+            <div class="layui-form-item">
+              <label class="ly-form-label">内心独白</label>
+              <div class="layui-input-inline">
+                <textarea name="content" required lay-verify="" placeholder="仅限300字" class="ly-textarea" style="height: 100px;"></textarea>
+              </div>
+            </div>
+            <blockquote class="layui-elem-quote quote">以下信息将作为您的征婚交友联系方式</blockquote>
+            <div class="layui-form-item">
+              <label class="ly-form-label">交友方式</label>
+              <div class="layui-input-block">
+                <input name="jytype" value="1" title="公开交友" checked="" type="radio">
+                <input name="jytype" value="2" title="委托红娘" type="radio">
+                <div class="layui-form-mid layui-word-aux">1.公开交友：其他会员需向网站支付相应的积分即可获得您的联系资料</div>
+                <div class="layui-form-mid layui-word-aux" style="padding-top: 0px!important;">2.委托红娘：向所有人隐藏联系资料，其他会员只能通过红娘牵线服务取得您的同意后方可获得联系方式</div>
+              </div>
+            </div>
+            <div class="layui-form-item">
+              <label class="ly-form-label">Q Q</label>
+              <div class="layui-input-inline">
+                <input type="text" name="qq"  lay-verify="" placeholder="未填写" autocomplete="off" class="ly-input">
+              </div>
+            </div>
+            <div class="layui-form-item">
+              <label class="ly-form-label">微信</label>
+              <div class="layui-input-inline">
+                <input type="text" name="wechat" lay-verify="" placeholder="未填写" autocomplete="off" class="ly-input">
+              </div>
+            </div>
+            <div class="layui-form-item">
+              <label class="ly-form-label">手机</label>
+              <div class="layui-input-inline">
+                <input type="text" name="phone" required  lay-verify="required|ckphone" placeholder="必填" autocomplete="off" class="ly-input">
+              </div>
+            </div>
+            <div style="text-align: center;">
+              <div class="layui-form-mid layui-word-aux" style="float: none;">点击"提交"就表示我已同意<a href="" style="color: #4fbe3e">网上征婚交友服务协议</a></div>
+              <button class="layui-btn" lay-submit lay-filter="addinfo" style="background-color: #ff78a2;width: 60%;border-radius: 50px;">立即提交</button>
+            </div>
+        </form>
+      </div>
+	    <div class="layui-tab-item">
+        <form class="layui-form" action="">
+            <div class="layui-form-item">
+              <label class="ly-form-label">学历</label>
+              <div class="layui-input-inline">
+               <select name="edu" lay-verify="required" lay-search="">
+                <option value="">未填写</option>
+                {volist name="eduarr" id="vo"}
+                  {$vo}
+                {/volist}
+              </select>
+              </div>
+            </div>
+            <div class="layui-form-item">
+              <label class="ly-form-label">月薪</label>
+              <div class="layui-input-inline">
+               <select name="wages" lay-verify="required" lay-search="">
+                <option value="">未填写</option>
+                {volist name="wagesarr" id="vo"}
+                  {$vo}
+                {/volist}
+              </select>
+              </div>
+            </div>
+            <!-- <div class="layui-form-item">
+              <label class="ly-form-label">住房</label>
+              <div class="layui-input-inline">
+               <select name="modules" lay-verify="required" lay-search="">
+                <option value="">未填写</option>
+                <option value="1">layer</option>
+                <option value="2">form</option>
+                <option value="3">layim</option>
+                <option value="4">element</option>
+              </select>
+              </div>
+            </div>
+            <div class="layui-form-item">
+              <label class="ly-form-label">购车</label>
+              <div class="layui-input-inline">
+               <select name="modules" lay-verify="required" lay-search="">
+                <option value="">未填写</option>
+                <option value="1">layer</option>
+                <option value="2">form</option>
+                <option value="3">layim</option>
+                <option value="4">element</option>
+              </select>
+              </div>
+            </div> -->
+            <div class="layui-form-item">
+              <label class="ly-form-label">星座</label>
+              <div class="layui-input-inline">
+               <select name="modules" lay-verify="required" lay-search="">
+                <option value="">未填写</option>
+                {volist name="signarr" id="vo"}
+                  {$vo}
+                {/volist}
+              </select>
+              </div>
+            </div>
+            <div class="layui-form-item">
+              <label class="ly-form-label">个性</label>
+              <div class="layui-input-inline">
+                <textarea name="" required lay-verify="required" placeholder="仅限50字" class="ly-textarea"></textarea>
+              </div>
+            </div>
+            <div class="layui-form-item">
+              <label class="ly-form-label">从事行业</label>
+              <div class="layui-input-inline">
+                <input type="text" name="title" required  lay-verify="required" placeholder="从事行业" autocomplete="off" class="ly-input">
+              </div>
+            </div>
+            <div class="layui-form-item">
+              <label class="ly-form-label">兴趣爱好</label>
+              <div class="layui-input-inline">
+                <input type="text" name="title"  lay-verify="required" placeholder="未填写" autocomplete="off" class="ly-input">
+              </div>
+            </div>
+            <div style="text-align: center;">
+              <button class="layui-btn" lay-submit="" lay-filter="" style="background-color: #ff78a2;width: 60%;border-radius: 50px;">立即提交</button>
+            </div>
+        </form>
+      </div>
+      <div class="layui-tab-item">
+        <div class="layui-form-item" style="border-bottom: none;">
+          <label class="ly-form-label">头像</label>
+          <div class="upload-img">
+          <button type="button" class="layui-btn layui-btn-primary" id="image"><i class="layui-icon"></i>上传图片</button>
+          <input class="layui-upload-file" name="file" type="file">
+          <input name="userzm" value="" class="layui-input" type="hidden">
+            <div class="base-img" style="margin-top: 20px;width: 100%;text-align: center;">
+            <img id="showpic" style="width: 80%;min-height: 150px;border: 1px solid #eee;border-radius: 5px;" src="/wap/main/images/jiaoyou_face_nofind.jpg">
+            </div>
+            <div class="img-preview" style="width: 300px;height: 150px;margin-top: 10px"></div>
+          </div>
+          <div class="layui-form-item" style="border-bottom: none;">
+            <div style="text-align: center;">
+              <button class="layui-btn" id="rotate-left"  lay-submit>左旋</button>
+              <button class="layui-btn" id="rotate-right" lay-submit>右旋</button>
+              <button class="layui-btn" id="reset-images" lay-submit>重置</button>
+              <button class="layui-btn" id="uploadaction" lay-submit>保存</button>
+            </div>
+          </div>
+        </div>  
+      </div>  
+	    <div class="layui-tab-item">
+        <form class="layui-form" action="">
+            <div class="layui-form-item">
+              <label class="ly-form-label">学历</label>
+              <div class="layui-input-inline">
+               <select name="yq_edu" lay-verify="required" lay-search="">
+                <option value="">不限制</option>
+                {volist name="eduarr" id="vo"}
+                  {$vo}
+                {/volist}
+              </select>
+              </div>
+            </div>
+            <div class="layui-form-item">
+              <label class="ly-form-label">月薪</label>
+              <div class="layui-input-inline">
+                <select name="yq_wages" lay-verify="required" lay-search="">
+                <option value="">不限制</option>
+                {volist name="wagesarr" id="vo"}
+                {$vo}
+                </select>
+                {/volist}
+              </div>
+            </div>
+            <div class="layui-form-item">
+              <label class="ly-form-label">年龄</label>
+              <div class="layui-input-inline">
+               <select name="yq_age" lay-verify="required" lay-search="">
+                <option value="">不限制</option>
+                {volist name="yeararr" id="vo"}
+                  {$vo}
+                {/volist}
+              </select>
+              </div>
+            </div>
+            <div class="layui-form-item">
+              <label class="ly-form-label">身高</label>
+              <div class="layui-input-inline">
+               <select name="yq_stature" lay-verify="required" lay-search="">
+                <option value="">不限制</option>
+                {volist name="starr" id="vo"}
+                  {$vo}
+                {/volist}
+              </select>
+              </div>
+            </div>
+            <div class="layui-form-item">
+              <label class="ly-form-label">星座</label>
+              <div class="layui-input-inline">
+               <select name="yq_sign" lay-verify="required" lay-search="">
+                <option value="">不限制</option>
+                {volist name="signarr" id="vo"}
+                  {$vo}
+                {/volist}
+              </select>
+              </div>
+            </div>
+            <div class="layui-form-item">
+              <label class="ly-form-label">接受离异</label>
+              <div class="layui-input-inline">
+               <select name="yq_divorced" lay-verify="required" lay-search="">
+                <option value="1">接受</option>
+                <option value="2" selected="">不接受</option>
+              </select>
+              </div>
+            </div>
+            <div class="layui-form-item">
+              <label class="ly-form-label">从事行业</label>
+              <div class="layui-input-inline">
+                <input type="text" name="yq_industry" required  lay-verify="required" placeholder="从事行业" autocomplete="off" class="ly-input">
+              </div>
+            </div>
+            <div class="layui-form-item">
+              <label class="ly-form-label">兴趣爱好</label>
+              <div class="layui-input-inline">
+                <input type="text" name="yq_intrste" lay-verify="required" placeholder="未填写" autocomplete="off" class="ly-input">
+              </div>
+            </div>
+            <div style="text-align: center;">
+              <button class="layui-btn" lay-submit lay-filter="yaoqiu" style="background-color: #ff78a2;width: 60%;border-radius: 50px;">立即提交</button>
+            </div>
+        </form>
+      </div>
+	  </div>
+	</div>
+</div>
+
+<script>
+layui.use(['element','form','upload'], function(){
+  var element = layui.element
+     ,form    = layui.form
+     ,jq = layui.jquery
+     ,upload = layui.upload;
+      var uploadinst = upload.render({
+      elem:'#image',
+      url:"{:url('upload/head')}",
+      accept:"images",
+      auto:false,
+      bindAction:'#uploadaction',
+      choose:function(obj){
+        //var files = obj.pushFile();
+        obj.preview(function(index, file, result){
+          //uploadinst.config.elem.next()[0].value = '';
+          $ret=$('#showpic').attr('src',result);
+          //console.log($ret);
+          if($ret){
+            $('#showpic').cropper({
+                aspectRatio: 9 / 9,
+                preview: '.img-preview',
+                crop:function(data){
+                  
+                }
+            })
+            var r= new FileReader();
+            var f=this.files[0];
+            var s=r.readAsDataURL(f);
+            console.log(s);
+            $('#rotate-right').click(function(){
+              $('#showpic').cropper('rotate',90);
+            });
+            $('#rotate-left').click(function(){
+              $('#showpic').cropper('rotate',-90);
+            });
+            $('#reset-images').click(function(){
+              $('#showpic').cropper('reset');
+            })
+          }
+          
+          //$('#rotate-left').cropper('rotate',90);
+           
+          //$('#demo2').append('<img src="'+ result +'" alt="'+ file.name +'" class="layui-upload-img">')
+        });
+        
+      },
+      before:function(obj){
+        //layer.load();
+        /*$('#showpic').cropper({
+            aspectRatio: 9 / 9
+        })*/
+      },
+      done:function(res){
+        if(res.code == 200){
+          layer.closeAll('loading');
+          return layer.msg(res.msg);
+        }else{
+          return layer.msg(res.msg);
+        }
+      },
+      error:function(){
+        return layer.msg('系统繁忙，稍后再试');
+      }
+     });  
+     form.verify({
+        username: function(value, item){ //value：表单的值、item：表单的DOM对象
+          if(!new RegExp("^[a-zA-Z0-9_\u4e00-\u9fa5\\s·]+$").test(value)){
+            return '用户名不能有特殊字符';
+          }
+          if(/(^\_)|(\__)|(\_+$)/.test(value)){
+            return '用户名首尾不能出现下划线\'_\'';
+          }
+          if(/^\d+\d+\d$/.test(value)){
+            return '用户名不能全为数字';
+          }
+        }
+        ,ckphone:function(value,item){
+          if(!(/^0?1[3|4|5|6|7|8][0-9]\d{8}$/).test(value)){
+            return '填写正确的手机号'
+          }
+        }
+      });
+     form.on('submit(addinfo)',function(data){
+      loading = layer.load(2, {
+        shade: [0.2,'#000']
+      });
+      var param = data.field;
+      jq.post('{:url("user/addinfo")}',param,function(data){
+        if(data.code==1){
+          layer.close(loading);
+          layer.msg(data.msg, {icon: 1, anim: 6, time: 1000});
+        }else{
+          layer.close(loading);
+          layer.msg(data.msg, {icon: 2, anim: 6, time: 1000});
+        }
+      })
+      return false;
+     })
+
+     form.on('submit(yaoqiu)',function(data){
+      loading = layer.load(2, {
+        shade: [0.2,'#000']
+      });
+      var param = data.field;
+      jq.post('{:url("user/yaoqiu")}',param,function(data){
+        if(data.code==1){
+          layer.close(loading);
+          layer.msg(data.msg, {icon: 1, anim: 6, time: 1000});
+        }else{
+          layer.close(loading);
+          layer.msg(data.msg, {icon: 2, anim: 6, time: 1000});
+        }
+      })
+      return false;
+     })       
+});
+</script>
+</div>
+</body>
+</html>
