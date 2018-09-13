@@ -239,12 +239,15 @@
           <input name="userzm" value="" class="layui-input" type="hidden">
             <div class="base-img" style="margin-top: 20px;width: 100%;text-align: center;">
             <img id="showpic" style="width: 80%;min-height: 150px;border: 1px solid #eee;border-radius: 5px;" src="/wap/main/images/jiaoyou_face_nofind.jpg">
-            <div class="layui-upload-list" id="demo2"></div>
             </div>
+            <div class="img-preview" style="width: 300px;height: 150px;margin-top: 10px"></div>
           </div>
           <div class="layui-form-item" style="border-bottom: none;">
             <div style="text-align: center;">
-              <button class="layui-btn" id="uploadaction" lay-submit>立即提交</button>
+              <button class="layui-btn" id="rotate-left"  lay-submit>左旋</button>
+              <button class="layui-btn" id="rotate-right" lay-submit>右旋</button>
+              <button class="layui-btn" id="reset-images" lay-submit>重置</button>
+              <button class="layui-btn" id="uploadaction" lay-submit>保存</button>
             </div>
           </div>
         </div>  
@@ -342,7 +345,6 @@ layui.use(['element','form','upload'], function(){
      ,form    = layui.form
      ,jq = layui.jquery
      ,upload = layui.upload;
-     
       var uploadinst = upload.render({
       elem:'#image',
       url:"{:url('upload/head')}",
@@ -358,11 +360,28 @@ layui.use(['element','form','upload'], function(){
           if($ret){
             $('#showpic').cropper({
                 aspectRatio: 9 / 9,
+                preview: '.img-preview',
                 crop:function(data){
                   
                 }
             })
+            var r= new FileReader();
+            var f=this.files[0];
+            var s=r.readAsDataURL(f);
+            console.log(s);
+            $('#rotate-right').click(function(){
+              $('#showpic').cropper('rotate',90);
+            });
+            $('#rotate-left').click(function(){
+              $('#showpic').cropper('rotate',-90);
+            });
+            $('#reset-images').click(function(){
+              $('#showpic').cropper('reset');
+            })
           }
+          
+          //$('#rotate-left').cropper('rotate',90);
+           
           //$('#demo2').append('<img src="'+ result +'" alt="'+ file.name +'" class="layui-upload-img">')
         });
         
@@ -376,10 +395,13 @@ layui.use(['element','form','upload'], function(){
       done:function(res){
         if(res.code == 200){
           layer.closeAll('loading');
-          return layer.msg('上传成功');
+          return layer.msg(res.msg);
         }else{
-          return layer.msg('上传失败');   
+          return layer.msg(res.msg);
         }
+      },
+      error:function(){
+        return layer.msg('系统繁忙，稍后再试');
       }
      });  
      form.verify({

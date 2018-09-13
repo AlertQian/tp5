@@ -18,21 +18,24 @@ class Upload extends Controller
 	    $ret=$image->thumb(300, 300)->save($thumbpath. DS .$name);
 	    $imgpath=ROOT_PATH . DS . 'public'. DS .'uploads'. DS .'imgupload';
 	    if($file){
-	        $info = $file->validate(['size'=>307200,'ext'=>'jpg,png,gif'])->move($imgpath);
+	        $info = $file->validate(['size'=>3017200,'ext'=>'jpg,png,gif'])->move($imgpath);
 	        if($info){
 	        	$savename= $info->getSaveName();
 	        	$url=DS .'uploads'. DS .'imgupload'. DS .$savename;
 	        	$response = array(
 	        	   'code' => 200,
-				   'url'  => $url 
+				   'msg'  => '上传成功'
 				);
 	        	echo json_encode($response);
 	        }else{
 	            // 上传失败获取错误信息
-	            echo $file->getError();
+	            $msg = array(
+				   'msg'  => $file->getError()
+				);
+	            echo json_encode($msg);
 	        }
 	    }else{
-	    	echo ROOT_PATH . DS.'------';
+	    	return '文件上传有误';
 	    }
     }
     
