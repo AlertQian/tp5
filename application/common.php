@@ -139,8 +139,8 @@ function townArr(){
 //学历数组
 function eduArr(){
   $arr=array('初中及以下','高中/中专','大专','本科','研究生','博士及以上');
-  foreach ($arr as $value) {
-      $eduarr[]= '<option value="'.$value.'">'.$value.'</option>';
+  foreach ($arr as $key => $value) {
+      $eduarr[]= '<option value="'.$key.'">'.$value.'</option>';
   }
   return $eduarr;
 }

@@ -4,6 +4,7 @@ use think\Controller;
 
 class Upload extends Controller
 {
+	private $file;
     public function head()
     {
     	$file = request()->file('file');
@@ -38,5 +39,40 @@ class Upload extends Controller
 	    	return '文件上传有误';
 	    }
     }
-    
+    public function uploadImg(){
+    	$errorCode = $file['error'];
+
+      if ($errorCode === UPLOAD_ERR_OK) {
+        $type = exif_imagetype($file['tmp_name']);
+
+        if ($type) {
+          $extension = image_type_to_extension($type);
+          $src = 'img/' . date('YmdHis') . '.original' . $extension;
+
+          if ($type == IMAGETYPE_GIF || $type == IMAGETYPE_JPEG || $type == IMAGETYPE_PNG) {
+
+            if (file_exists($src)) {
+              unlink($src);
+            }
+
+            $result = move_uploaded_file($file['tmp_name'], $src);
+
+            if ($result) {
+              $this -> src = $src;
+              $this -> type = $type;
+              $this -> extension = $extension;
+              $this -> setDst();
+            } else {
+               $this -> msg = 'Failed to save file';
+            }
+          } else {
+            $this -> msg = 'Please upload image with the following types: JPG, PNG, GIF';
+          }
+        } else {
+          $this -> msg = 'Please upload image file';
+        }
+      } else {
+        $this -> msg = $this -> codeToMessage($errorCode);
+      }
+    }
 }

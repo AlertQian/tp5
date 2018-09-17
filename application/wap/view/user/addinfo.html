@@ -237,7 +237,7 @@ cursor: pointer;
           <label class="ly-form-label">头像</label>
           <div class="upload-img">
           <div class="file-box">
-          <input type="file" class="file-btn" id="inputImage"/>
+          <input type="file" name="file" class="file-btn" id="inputImage"/>
           <i class="layui-icon" style="font-size: 18px;position: relative;top: 2px;"></i> 上传文件
           </div>
           <input name="userzm" value="" class="layui-input" type="hidden">
@@ -366,8 +366,24 @@ $(function(){
   })  
   $('#uploadaction').click(function(){
     $canvas=$image.cropper('getCroppedCanvas');
-    $data=$canvas.toDataURL('image/jpeg');
-    console.log($data);
+    $canvas.toBlob(function (blob) {
+      var formData = new FormData();
+      formData.append('croppedImage', blob);
+      $.ajax({
+        url:"{:url('upload/uploadImg')}",
+        method: "POST",
+        data: formData,
+        async:false,
+        processData: false,
+        contentType: false,
+        success: function () {
+          console.log('Upload success');
+        },
+        error: function () {
+          console.log('Upload error');
+        }
+      });
+    });
   });
   if (URL) {
     $inputImage.change(function () {
@@ -405,65 +421,6 @@ layui.use(['element','form','upload'], function(){
      ,form    = layui.form
      ,jq = layui.jquery
      ,upload = layui.upload;
-      /*var uploadinst = upload.render({
-      elem:'#image',
-      url:"{:url('upload/head')}",
-      accept:"images",
-      auto:false,
-      bindAction:'#uploadaction',
-      choose:function(obj){
-        //var files = obj.pushFile();
-        obj.preview(function(index, file, result){
-          //uploadinst.config.elem.next()[0].value = '';
-          $ret=$('#showpic').attr('src',result);
-          //console.log($ret);
-          if($ret){
-            $('#showpic').cropper({
-                aspectRatio: 9 / 9,
-                preview: '.img-preview',
-                crop:function(data){
-                  
-                }
-            })
-            var r= new FileReader();
-            var f=this.files[0];
-            var s=r.readAsDataURL(f);
-            console.log(s);
-            $('#rotate-right').click(function(){
-              $('#showpic').cropper('rotate',90);
-            });
-            $('#rotate-left').click(function(){
-              $('#showpic').cropper('rotate',-90);
-            });
-            $('#reset-images').click(function(){
-              $('#showpic').cropper('reset');
-            })
-          }
-          
-          //$('#rotate-left').cropper('rotate',90);
-           
-          //$('#demo2').append('<img src="'+ result +'" alt="'+ file.name +'" class="layui-upload-img">')
-        });
-        
-      },
-      before:function(obj){
-        //layer.load();
-        $('#showpic').cropper({
-            aspectRatio: 9 / 9
-        })
-      },
-      done:function(res){
-        if(res.code == 200){
-          layer.closeAll('loading');
-          return layer.msg(res.msg);
-        }else{
-          return layer.msg(res.msg);
-        }
-      },
-      error:function(){
-        return layer.msg('系统繁忙，稍后再试');
-      }
-     }); */ 
      form.verify({
         username: function(value, item){ //value：表单的值、item：表单的DOM对象
           if(!new RegExp("^[a-zA-Z0-9_\u4e00-\u9fa5\\s·]+$").test(value)){
