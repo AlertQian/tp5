@@ -7,7 +7,6 @@ class Upload extends Controller
     public function head()
     {
     	$file = request()->file('croppedImage');
-    	
 	    // 移动到框架应用根目录/public/uploads/ 目录下
 	    $image = \think\Image::open($file);
 	    $size = $image->size();
@@ -15,14 +14,19 @@ class Upload extends Controller
 	    if(!is_dir($thumbpath)){
 	    	mkdir($thumbpath,0777,true);
 	    }
-	    $name=time().rand(100, 1000).'.jpg';
+	    $name=time().rand(100, 1000).'.png';
 	    $ret=$image->thumb(300, 300)->save($thumbpath. DS .$name);
+	    $name2=md5(time().rand(100, 1000)).'.png';
 	    $imgpath=ROOT_PATH . DS . 'public'. DS .'uploads'. DS .'imgupload';
+	    if(!is_dir($imgpath)){
+	    	mkdir($imgpath,0777,true);
+	    }
 	    if($file){
-	        $info = $file->validate(['size'=>3017200,'ext'=>'jpg,png,gif'])->move($imgpath);
+	        //$info = $file->validate(['size'=>3017200,'ext'=>'jpg,png,gif'])->move($imgpath);
+	        $info =$image->save($imgpath. DS .$name2);
 	        if($info){
-	        	$savename= $info->getSaveName();
-	        	$url=DS .'uploads'. DS .'imgupload'. DS .$savename;
+	        	//$savename= $info->getSaveName();
+	        	//$url=DS .'uploads'. DS .'imgupload'. DS .$savename;
 	        	$response = array(
 	        	   'code' => 200,
 				   'msg'  => '上传成功'
