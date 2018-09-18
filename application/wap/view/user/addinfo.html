@@ -370,10 +370,9 @@ $(function(){
       var formData = new FormData();
       formData.append('croppedImage', blob);
       $.ajax({
-        url:"{:url('upload/uploadImg')}",
+        url:"{:url('upload/head')}",
         method: "POST",
         data: formData,
-        async:false,
         processData: false,
         contentType: false,
         success: function () {

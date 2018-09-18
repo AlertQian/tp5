@@ -4,10 +4,10 @@ use think\Controller;
 
 class Upload extends Controller
 {
-	private $file;
     public function head()
     {
-    	$file = request()->file('file');
+    	$file = request()->file('croppedImage');
+    	
 	    // 移动到框架应用根目录/public/uploads/ 目录下
 	    $image = \think\Image::open($file);
 	    $size = $image->size();
@@ -40,6 +40,7 @@ class Upload extends Controller
 	    }
     }
     public function uploadImg(){
+    	$file=$_FILES['croppedImage'];
     	$errorCode = $file['error'];
 
       if ($errorCode === UPLOAD_ERR_OK) {
