@@ -17,7 +17,7 @@ $(document).ready(function(){
 	  var myreg=/^[1][3,4,5,7,8][0-9]{9}$/;  
 	  if (!myreg.test($str)) {  
 	      return false;  
-	  } else {  
+	  } else { 
 	      return true;  
 	  }  
 	}
@@ -37,7 +37,11 @@ $(document).ready(function(){
 		   ,chrpwd  =$("#chrpwd").val()
 		   ,token   =$("input[name=__token__]").val()
 		   ,typeid  =$("input[name=typeid]").val();
-		if(chrphone.length == 0 || !isPoneAvailable(chrphone)){
+		if(chrphone.length == 0){
+			layer.msg("请填写手机号");
+			return false;
+		}
+		if(!isPoneAvailable(chrphone)){
 			layer.msg("请正确填写手机号");
 			return false;
 		}
@@ -55,7 +59,13 @@ $(document).ready(function(){
 			type:"post",
 			data:{chrphone:chrphone,nickname:nickname,chrpwd:chrpwd,typeid:typeid,__token__:token},
 			success:function(data){
-				layer.msg(data.msg);
+				if(data.code == 1){
+					layer.msg(data.msg,{icon: 1, anim: 6, time: 1000},function(){
+						window.location.reload();
+					});
+				}else{
+					layer.msg(data.msg,{icon: 2, anim: 6, time: 1000});
+				}
 			},
 			error:function(){
 				layer.msg('error'); 

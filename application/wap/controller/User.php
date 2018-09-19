@@ -2,26 +2,48 @@
 namespace app\wap\controller;
 use app\index\model\UserInfo;
 use app\index\model\Yaoqiu;
+use app\index\model\User as UserModel;
 /**
  * 
  */
 class User extends Common
 {
-	
+	public function _initialize(){
+    	if(!session('validate')){
+    		return $this->redirect('login/index');
+    	}else{
+    		$user=new UserModel;
+    		$ret=$user->where('pwd_hash',session('validate'))->find();
+    		if(!$ret){
+    			session('validate',null);
+    			session('nickname',null);
+                return $this->redirect('login/index');
+    		}
+    	}
+    }
 	public function index(){
 		return $this->fetch();
 	}
 	public function set(){
-		echo "hellow user set";
+
+		echo session('nickname');
 	}
 	//添加基本资料
 	public function addinfo(){
+		$user=new UserModel;
+		$info=$user->where(['pwd_hash'=>session('validate'),'nickname'=>session('nickname')])->find();
+		if($info){
+			$userid=$info['userid'];
+			$phone=$info['phone'];
+			$this->assign('phone',$phone);
+		}
         if(request()->isPost()){
         	$userinfo=new UserInfo;
+        	$is_uerinfo=$userinfo::where('userid',$userid)->find();
         	$data=input('post.');
         	$place=$data['county'].$data['town'].$data['dtarea'];
         	$data['place']=$place;
-        	$data['userid']='';
+        	$data['userid']=$userid;
         	$data['addtime']=time();
         	$data['signature']=remove_xss($data['signature']);
         	$data['content']=remove_xss($data['content']);
@@ -64,4 +86,10 @@ class User extends Common
 	public function real(){
 		return $this->fetch();
 	}
+	//退出
+    public function logout(){
+        session('validate',null);
+        session('nickname',null);
+        return $this->redirect('login/index');
+    }
 }
