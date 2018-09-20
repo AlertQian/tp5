@@ -49,6 +49,18 @@ $(document).ready(function(){
 			layer.msg("请输入昵称");
 			return false;
 		}
+		if(!new RegExp("^[a-zA-Z0-9_\u4e00-\u9fa5\\s·]+$").test(nickname)){
+			layer.msg("昵称不能有特殊字符");
+			return false;
+          }
+          if(/(^\_)|(\__)|(\_+$)/.test(nickname)){
+            layer.msg("昵称首尾不能出现下划线 _");
+			return false;
+          }
+          if(/^\d+\d+\d$/.test(nickname)){
+            layer.msg("昵称不能全为数字");
+			return false;
+          }
 		if(chrpwd.length == 0){
 			layer.msg("请输入密码");
 			return false;

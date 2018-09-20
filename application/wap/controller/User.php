@@ -31,15 +31,18 @@ class User extends Common
 	//添加基本资料
 	public function addinfo(){
 		$user=new UserModel;
+		$userinfo=new UserInfo;
 		$info=$user->where(['pwd_hash'=>session('validate'),'nickname'=>session('nickname')])->find();
 		if($info){
 			$userid=$info['userid'];
 			$phone=$info['phone'];
 			$this->assign('phone',$phone);
 		}
+        $is_uerinfo=$userinfo::where('userid',$userid)->find();
+        if($is_uerinfo){
+        	$this->assign('ret',$is_uerinfo);
+        }
         if(request()->isPost()){
-        	$userinfo=new UserInfo;
-        	$is_uerinfo=$userinfo::where('userid',$userid)->find();
         	$data=input('post.');
         	$place=$data['county'].$data['town'].$data['dtarea'];
         	$data['place']=$place;
@@ -48,11 +51,16 @@ class User extends Common
         	$data['signature']=remove_xss($data['signature']);
         	$data['content']=remove_xss($data['content']);
         	$this->check_form('UserInfo',$data);
-        	$ret=$userinfo->add($data);
-        	if($ret){
-        		$this->success('已提交');
+        	if($is_uerinfo){
+        		$data['tables_id']=$is_uerinfo['tables_id'];
+        		$ret=$userinfo->edit($data);
         	}else{
-        		$this->error('提交失败');
+        		$ret=$userinfo->add($data);
+        	}
+        	if($ret){
+        	    return $this->success('已提交');
+        	}else{
+        		return $this->error('提交失败');
         	}
         }
 		$yeararr= yearArr();
