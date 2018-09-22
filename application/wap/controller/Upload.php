@@ -7,77 +7,34 @@ class Upload extends Controller
     public function head()
     {
     	$file = request()->file('croppedImage');
+    	
 	    // 移动到框架应用根目录/public/uploads/ 目录下
 	    $image = \think\Image::open($file);
-	    $size = $image->size();
-	    $thumbpath=ROOT_PATH . DS . 'public'. DS .'uploads'. DS .'imgthumb'. DS .date('Ymd');
+	    $thumbpath=ROOT_PATH . DS . 'public'. DS .'uploads'. DS .'headimg'. DS .date('Ymd');
 	    if(!is_dir($thumbpath)){
 	    	mkdir($thumbpath,0777,true);
 	    }
-	    $name=time().rand(100, 1000).'.png';
-	    $ret=$image->thumb(300, 300)->save($thumbpath. DS .$name);
-	    $name2=md5(time().rand(100, 1000)).'.png';
-	    $imgpath=ROOT_PATH . DS . 'public'. DS .'uploads'. DS .'imgupload';
-	    if(!is_dir($imgpath)){
-	    	mkdir($imgpath,0777,true);
-	    }
-	    if($file){
-	        //$info = $file->validate(['size'=>3017200,'ext'=>'jpg,png,gif'])->move($imgpath);
-	        $info =$image->save($imgpath. DS .$name2);
-	        if($info){
-	        	//$savename= $info->getSaveName();
-	        	//$url=DS .'uploads'. DS .'imgupload'. DS .$savename;
+	    $name=md5(time().rand(100, 1000)).'.png';
+	    if($image){
+	        $ret=$image->thumb(300, 300)->save($thumbpath. DS .$name);
+	        if($ret){
+	        	$url=$thumbpath. DS .$name;
+	        	
 	        	$response = array(
 	        	   'code' => 200,
-				   'msg'  => '上传成功'
+				   'msg'  => '上传成功',
+				   'url'  => $url
 				);
 	        	echo json_encode($response);
 	        }else{
 	            // 上传失败获取错误信息
-	            $msg = array(
-				   'msg'  => $file->getError()
+	            $response = array(
+				   'msg'  => '上传失败'
 				);
-	            echo json_encode($msg);
+	            echo json_encode($response);
 	        }
 	    }else{
 	    	return '文件上传有误';
 	    }
-    }
-    public function uploadImg(){
-    	$file=$_FILES['croppedImage'];
-    	$errorCode = $file['error'];
-
-      if ($errorCode === UPLOAD_ERR_OK) {
-        $type = exif_imagetype($file['tmp_name']);
-
-        if ($type) {
-          $extension = image_type_to_extension($type);
-          $src = 'img/' . date('YmdHis') . '.original' . $extension;
-
-          if ($type == IMAGETYPE_GIF || $type == IMAGETYPE_JPEG || $type == IMAGETYPE_PNG) {
-
-            if (file_exists($src)) {
-              unlink($src);
-            }
-
-            $result = move_uploaded_file($file['tmp_name'], $src);
-
-            if ($result) {
-              $this -> src = $src;
-              $this -> type = $type;
-              $this -> extension = $extension;
-              $this -> setDst();
-            } else {
-               $this -> msg = 'Failed to save file';
-            }
-          } else {
-            $this -> msg = 'Please upload image with the following types: JPG, PNG, GIF';
-          }
-        } else {
-          $this -> msg = 'Please upload image file';
-        }
-      } else {
-        $this -> msg = $this -> codeToMessage($errorCode);
-      }
     }
 }

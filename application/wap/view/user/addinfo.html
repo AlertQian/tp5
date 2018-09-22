@@ -66,21 +66,21 @@ cursor: pointer;
             <div class="layui-form-item">
               <label class="ly-form-label">姓名</label>
               <div class="layui-input-inline">
-                <input type="text" name="realname" required  lay-verify="required|username" placeholder="必填" autocomplete="off" class="ly-input">
+                <input type="text" name="realname" required  lay-verify="required|username" placeholder="必填" autocomplete="off" class="ly-input" value="{$ret.realname?$ret.realname:''}">
               </div>
             </div>
             <div class="layui-form-item">
               <label class="ly-form-label">性别</label>
               <div class="layui-input-block">
-                <input name="sex" value="男" title="男" checked="" type="radio">
-                <input name="sex" value="女" title="女" type="radio">
+                <input name="sex" value="男" title="男" type="radio" {eq name="$ret.sex" value="男"}checked{/eq}>
+                <input name="sex" value="女" title="女" type="radio" {eq name="$ret.sex" value="女"}checked{/eq}>
               </div>
             </div>
             <div class="layui-form-item">
               <label class="ly-form-label">年龄</label>
               <div class="layui-input-inline">
                <select name="age" lay-verify="required" lay-search="">
-                <option value="">未填写</option>
+                <option value="">{$ret.age?$ret.age:'未填写'}</option>
                 {volist name="yeararr" id="vo"}
                   {$vo}
                 {/volist}
@@ -91,7 +91,7 @@ cursor: pointer;
               <label class="ly-form-label">身高</label>
               <div class="layui-input-inline">
                <select name="stature" lay-verify="" lay-search="">
-                <option value="">未填写</option>
+                <option value="">{$ret.stature?$ret.stature:'未填写'}</option>
                 {volist name="starr" id="vo"}
                   {$vo}
                 {/volist}
@@ -118,7 +118,7 @@ cursor: pointer;
               </div>
               <div class="layui-input-inline">
                 <select name="town" lay-verify="required">
-                  <option value="">请选择镇</option>
+                  <option value="">{$ret.age?$ret.age:'请选择镇'}</option>
                   {volist name="townarr" id="vo"}
                     {$vo}
                   {/volist}
@@ -165,7 +165,7 @@ cursor: pointer;
             <div class="layui-form-item">
               <label class="ly-form-label">手机</label>
               <div class="layui-input-inline">
-                <input type="text" name="phone" required  lay-verify="required|ckphone" placeholder="必填" autocomplete="off" class="ly-input">
+                <input type="text" name="phone" required  lay-verify="required|ckphone" placeholder="必填" autocomplete="off" class="ly-input" value="{$phone?$phone:''}">
               </div>
             </div>
             <div style="text-align: center;">
@@ -368,18 +368,28 @@ $(function(){
     $canvas=$image.cropper('getCroppedCanvas');
     $canvas.toBlob(function (blob) {
       var formData = new FormData();
+      loading = layer.load(2, {
+        shade: [0.2,'#000']
+      });
       formData.append('croppedImage', blob);
       $.ajax({
         url:"{:url('upload/head')}",
         method: "POST",
         data: formData,
+        dataType:'json',
         processData: false,
         contentType: false,
-        success: function () {
-          console.log('Upload success');
+        success: function (e) {
+          if(e.code == 200){
+            layer.close(loading);
+            layer.msg(e.msg, {icon: 1, anim: 6, time: 1000});
+          }else{
+            layer.close(loading);
+            layer.msg(e.msg, {icon: 2, anim: 6, time: 1000});
+          }
         },
         error: function () {
-          console.log('Upload error');
+          layer.msg('Upload error');
         }
       });
     },"image/jpeg");
@@ -423,13 +433,13 @@ layui.use(['element','form','upload'], function(){
      form.verify({
         username: function(value, item){ //value：表单的值、item：表单的DOM对象
           if(!new RegExp("^[a-zA-Z0-9_\u4e00-\u9fa5\\s·]+$").test(value)){
-            return '用户名不能有特殊字符';
+            return '正确输入姓名';
           }
           if(/(^\_)|(\__)|(\_+$)/.test(value)){
-            return '用户名首尾不能出现下划线\'_\'';
+            return '正确输入姓名';
           }
           if(/^\d+\d+\d$/.test(value)){
-            return '用户名不能全为数字';
+            return '正确输入姓名';
           }
         }
         ,ckphone:function(value,item){

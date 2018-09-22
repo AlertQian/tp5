@@ -5,14 +5,40 @@ use think\captcha\Captcha;
 use app\index\model\User;
 class Login extends Common
 {
-	public function index(){
-		/*if(!session('validate')){
 
+	public function index(){
+       if(!session('validate')){
+			if(request()->isPost()){
+				$user=new User();
+				$data=input('post.');
+				$ip=request()->ip();
+				$logname=$data['logname'];
+				$passwd=md5($data['password']);
+				$this->check_form('Login',$data);
+				if(check_phone($logname)){
+				  $ret=$user->where(['phone'=>$logname,'password'=>$passwd])->find();
+				}else if(check_email($logname)){
+				  $ret=$user->where(['email'=>$logname,'password'=>$passwd])->find();
+				}else{
+                  $ret=$user->where(['nickname'=>$logname,'password'=>$passwd])->find();
+				}
+				if($ret){
+					session('validate',$ret['pwd_hash']);
+					session('nickname',$ret['nickname']);
+					$updata=[
+						'logintime'=>time(),
+						'logip'    =>$ip
+					];
+					$user->where('userid',$ret['userid'])->update($updata);
+					return $this->success('登入成功','user/index');
+				}else{
+					return $this->error('账号或密码错误');
+				}
+			}
+			return $this->fetch();
 		}else{
-			//$this->redirect('user/set');
-		}*/
-       
-		return $this->fetch();
+			return $this->redirect('user/index');
+		}
 	}
 
 	public function reg(){
@@ -31,7 +57,9 @@ class Login extends Common
 							return $this->error($msg);
 						}
 						$pwd=md5($data['chrpwd']);
-						$pwd_hash=substr(md5($data['chrphone']), 8, 16);
+						//生成密盐
+						$salt=$data['chrphone'].mt_rand(1524, 9758).time();
+						$pwd_hash=substr(md5($salt), 8, 16);
 						$info=[
 							'nickname' =>$data['nickname'],
 							'phone'    =>$data['chrphone'],
@@ -46,6 +74,7 @@ class Login extends Common
 						$ret=$user->save($info);
 						if($ret){
 							session('validate',$pwd_hash);
+							session('nickname',$data['nickname']);
 							return $this->success('注册成功');
 						}else{
 							return $this->error('注册失败');
@@ -59,14 +88,11 @@ class Login extends Common
 			}
 			return $this->fetch();
 		}else{
-			$this->redirect('user/set');
+			$this->redirect('user/index');
 		}
 		
 	}
-	public function login(){
-
-		return $this->fetch();
-	}
+	
 	public function code(){
 		//require_once 'curl.func.php';
 		$appkey = 'f480c8cb2795c75e';//你的appkey
