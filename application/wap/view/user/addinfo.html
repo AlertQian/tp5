@@ -43,7 +43,7 @@ cursor: pointer;
 <script src="/static/crop/js/cropper.js"></script>
 <div class="layui-main" style="width: 100%;">
 <div class="header">
-  <a href="javascript:history.back(-1)" class="back"><i class="layui-icon layui-icon-left ico-style"></i></a>
+  <a href="{:url('user/index')}" class="back"><i class="layui-icon layui-icon-left ico-style"></i></a>
   <span class="tagname">开通我的交友</span>
   <div class="layui-inline flrt">
   <a href="" class="my login-ico"><i class="layui-icon layui-icon-username ico-style"></i></a>
@@ -52,12 +52,12 @@ cursor: pointer;
   <div class="layui-clear"></div>
 </div>
 <div class="wrapper"> 
-	<div class="layui-tab layui-tab-brief">
+	<div class="layui-tab layui-tab-brief" lay-filter="info">
 	  <ul class="layui-tab-title">
-	    <li class="layui-this">基本资料</li>
-	    <li>完善资料</li>
-      <li>上传头像</li>
-      <li>交友要求</li>
+	    <li class="layui-this" lay-id="baseinfo">基本资料</li>
+	    <li lay-id="detail">完善资料</li>
+      <li lay-id="headimg">上传头像</li>
+      <li lay-id="yaoqiu">交友要求</li>
 	  </ul>
 	  <div class="layui-tab-content">
 	    <div class="layui-tab-item layui-show">
@@ -355,6 +355,7 @@ $(function(){
       preview: '.img-preview',
       
     };
+  
   $('#rotate-right').click(function(){
     $image.cropper('rotate',90);
   });
@@ -430,6 +431,13 @@ layui.use(['element','form','upload'], function(){
      ,form    = layui.form
      ,jq = layui.jquery
      ,upload = layui.upload;
+      var layid = location.hash.replace(/^#info=/, '');
+      element.tabChange('info', layid); //假设当前地址为：http://a.com#test1=222，那么选项卡会自动切换到“发送消息”这一项
+      
+      //监听Tab切换，以改变地址hash值
+      element.on('tab(info)', function(){
+        location.hash = 'info='+ this.getAttribute('lay-id');
+      });
      form.verify({
         username: function(value, item){ //value：表单的值、item：表单的DOM对象
           if(!new RegExp("^[a-zA-Z0-9_\u4e00-\u9fa5\\s·]+$").test(value)){
