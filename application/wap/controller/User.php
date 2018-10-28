@@ -8,6 +8,7 @@ use app\index\model\User as UserModel;
  */
 class User extends Common
 {
+	protected $userid;
 	public function _initialize(){
     	if(!session('validate')){
     		return $this->redirect('login/index');
@@ -19,6 +20,7 @@ class User extends Common
     			session('nickname',null);
                 return $this->redirect('login/index');
     		}
+    	    $this->userid=$ret['userid'];
     	}
     }
 	public function index(){
@@ -32,6 +34,7 @@ class User extends Common
 	public function addinfo(){
 		$user=new UserModel;
 		$userinfo=new UserInfo;
+		$yaoqiu=new Yaoqiu;
 		$info=$user->where(['pwd_hash'=>session('validate'),'nickname'=>session('nickname')])->find();
 		if($info){
 			$userid=$info['userid'];
@@ -39,10 +42,14 @@ class User extends Common
 			$this->assign('phone',$phone);
 		}
         $is_uerinfo=$userinfo::where('userid',$userid)->find();
+        $is_yaoqiu=$yaoqiu::where('userid',$userid)->find();
         if(!$is_uerinfo){
         	$is_uerinfo['sex']="男";
         }
         $this->assign('ret',$is_uerinfo);
+        if($is_yaoqiu){
+        	$this->assign('yaoqiu',$is_yaoqiu);
+        }
         if(request()->isPost()){
         	$data=input('post.');
         	$place=$data['county'].$data['town'].$data['dtarea'];
@@ -79,12 +86,19 @@ class User extends Common
 		return $this->fetch();
 	}
 	public function yaoqiu(){
-		if(request()->isPost()){
-			$yaoqiu=new Yaoqiu;
+		$yaoqiu=new Yaoqiu;
+		$userid=$this->userid;
+		$is_yaoqiu=$yaoqiu::where('userid',$userid)->find();
+		if(request()->isPost()){	
 			$data=input('post.');
-			$data['userid']='';
+			$data['userid']=$userid;
 			$data['addtime']=time();
-			$ret=$yaoqiu->save($data);
+			if($is_yaoqiu){
+				$data['id']=$is_yaoqiu['id'];
+				$ret=$yaoqiu->edit($data);
+			}else{
+				$ret=$yaoqiu->save($data);
+			}
 			if($ret){
 				$this->success('已提交');
 			}else{

@@ -144,6 +144,10 @@ function eduArr(){
   }
   return $eduarr;
 }
+function eduArrCn($key){
+  $arr=array('初中及以下','高中/中专','大专','本科','研究生','博士及以上');
+  return $arr[$key];
+}
 //月薪
 function wagesArr(){
   $arr=array('1000以下','1000-2000','2000-3000','3000-4000','4000-5000','5000-8000','8000-10000','10000以上');
@@ -152,6 +156,10 @@ function wagesArr(){
   }
   return $wagesarr;
 }
+function wagesArrCn($key){
+  $arr=array('1000以下','1000-2000','2000-3000','3000-4000','4000-5000','5000-8000','8000-10000','10000以上');
+  return $arr[$key];
+}
 //星座
 function signArr(){
   $arr=array('白羊座','金牛座','双子座','巨蟹座','狮子座','处女座','天秤座','天蝎座','射手座','摩羯座','水瓶座','双鱼座');
@@ -159,4 +167,8 @@ function signArr(){
     $signarr[]='<option value="'.$key.'">'.$value.'</option>';
   }
   return $signarr;
+}
+function signArrCn($key){
+  $arr=array('白羊座','金牛座','双子座','巨蟹座','狮子座','处女座','天秤座','天蝎座','射手座','摩羯座','水瓶座','双鱼座');
+  return $arr[$key];
 }

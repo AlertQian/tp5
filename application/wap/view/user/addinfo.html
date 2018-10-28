@@ -80,7 +80,7 @@ cursor: pointer;
               <label class="ly-form-label">年龄</label>
               <div class="layui-input-inline">
                <select name="age" lay-verify="required" lay-search="">
-                <option value="">{$ret.age?$ret.age:'未填写'}</option>
+                <option value="{$ret.age?$ret.age:''}">{$ret.age?$ret.age:'未填写'}</option>
                 {volist name="yeararr" id="vo"}
                   {$vo}
                 {/volist}
@@ -91,7 +91,7 @@ cursor: pointer;
               <label class="ly-form-label">身高</label>
               <div class="layui-input-inline">
                <select name="stature" lay-verify="" lay-search="">
-                <option value="">{$ret.stature?$ret.stature:'未填写'}</option>
+                <option value="{$ret.stature?$ret.stature:''}">{$ret.stature?$ret.stature:'未填写'}</option>
                 {volist name="starr" id="vo"}
                   {$vo}
                 {/volist}
@@ -118,7 +118,7 @@ cursor: pointer;
               </div>
               <div class="layui-input-inline">
                 <select name="town" lay-verify="required">
-                  <option value="">{$ret.age?$ret.age:'请选择镇'}</option>
+                  <option value="{$ret.town?$ret.town:''}">{$ret.town?$ret.town:'请选择镇'}</option>
                   {volist name="townarr" id="vo"}
                     {$vo}
                   {/volist}
@@ -261,7 +261,8 @@ cursor: pointer;
               <label class="ly-form-label">学历</label>
               <div class="layui-input-inline">
                <select name="yq_edu" lay-verify="required" lay-search="">
-                <option value="">不限制</option>
+                <option value="{$yaoqiu.yq_edu?$yaoqiu.yq_edu:''}">{if condition="$yaoqiu.yq_edu"}{$yaoqiu.yq_edu|eduArrCn}{else/}不限制{/if}
+                </option>
                 {volist name="eduarr" id="vo"}
                   {$vo}
                 {/volist}
@@ -272,7 +273,7 @@ cursor: pointer;
               <label class="ly-form-label">月薪</label>
               <div class="layui-input-inline">
                 <select name="yq_wages" lay-verify="required" lay-search="">
-                <option value="">不限制</option>
+                <option value="{$yaoqiu.yq_wages?$yaoqiu.yq_wages:''}">{if condition="$yaoqiu.yq_wages"}{$yaoqiu.yq_wages|wagesArrCn}{else/}不限制{/if}</option>
                 {volist name="wagesarr" id="vo"}
                 {$vo}
                 {/volist}
@@ -283,7 +284,7 @@ cursor: pointer;
               <label class="ly-form-label">年龄</label>
               <div class="layui-input-inline">
                <select name="yq_age" lay-verify="required" lay-search="">
-                <option value="">不限制</option>
+                <option value="{$yaoqiu.yq_age?$yaoqiu.yq_age:''}">{$yaoqiu.yq_age?$yaoqiu.yq_age:'不限制'}</option>
                 {volist name="yeararr" id="vo"}
                   {$vo}
                 {/volist}
@@ -294,7 +295,7 @@ cursor: pointer;
               <label class="ly-form-label">身高</label>
               <div class="layui-input-inline">
                <select name="yq_stature" lay-verify="required" lay-search="">
-                <option value="">不限制</option>
+                <option value="{$yaoqiu.yq_stature?$yaoqiu.yq_stature:''}">{$yaoqiu.yq_stature?$yaoqiu.yq_stature:'不限制'}</option>
                 {volist name="starr" id="vo"}
                   {$vo}
                 {/volist}
@@ -305,7 +306,7 @@ cursor: pointer;
               <label class="ly-form-label">星座</label>
               <div class="layui-input-inline">
                <select name="yq_sign" lay-verify="required" lay-search="">
-                <option value="">不限制</option>
+                <option value="{$yaoqiu.yq_sign?$yaoqiu.yq_sign:''}">{if condition="$yaoqiu.yq_sign"}{$yaoqiu.yq_sign|signArrCn}{else/}不限制{/if}</option>
                 {volist name="signarr" id="vo"}
                   {$vo}
                 {/volist}
@@ -324,13 +325,13 @@ cursor: pointer;
             <div class="layui-form-item">
               <label class="ly-form-label">从事行业</label>
               <div class="layui-input-inline">
-                <input type="text" name="yq_industry" required  lay-verify="required" placeholder="从事行业" autocomplete="off" class="ly-input">
+                <input type="text" name="yq_industry" required  lay-verify="required" placeholder="从事行业" autocomplete="off" class="ly-input" value="{$yaoqiu.yq_industry?$yaoqiu.yq_industry:''}">
               </div>
             </div>
             <div class="layui-form-item">
               <label class="ly-form-label">兴趣爱好</label>
               <div class="layui-input-inline">
-                <input type="text" name="yq_intrste" lay-verify="required" placeholder="未填写" autocomplete="off" class="ly-input">
+                <input type="text" name="yq_intrste" lay-verify="required" placeholder="未填写" autocomplete="off" class="ly-input" value="{$yaoqiu.yq_intrste?$yaoqiu.yq_intrste:''}">
               </div>
             </div>
             <div style="text-align: center;">
@@ -423,6 +424,7 @@ $(function(){
   } else {
     $inputImage.prop('disabled', true).parent().addClass('disabled');
   }
+  
 })
 </script>
 <script>
@@ -464,7 +466,9 @@ layui.use(['element','form','upload'], function(){
       jq.post('{:url("user/addinfo")}',param,function(data){
         if(data.code==1){
           layer.close(loading);
-          layer.msg(data.msg, {icon: 1, anim: 6, time: 1000});
+          layer.msg(data.msg, {icon: 1, anim: 6, time: 1000},function(){
+            alert('123');
+          });
         }else{
           layer.close(loading);
           layer.msg(data.msg, {icon: 2, anim: 6, time: 1000});
