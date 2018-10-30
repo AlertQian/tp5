@@ -1,5 +1,6 @@
 <?php
 namespace app\wap\controller;
+use app\index\model\UserInfo;
 use think\Controller;
 
 class Upload extends Controller
@@ -17,13 +18,12 @@ class Upload extends Controller
 	    $name=md5(time().rand(100, 1000)).'.png';
 	    if($image){
 	        $ret=$image->thumb(300, 300)->save($thumbpath. DS .$name);
+	        $imgurl=DS .'uploads'. DS .'headimg'. DS .date('Ymd'). DS .$name;
 	        if($ret){
-	        	$url=$thumbpath. DS .$name;
-	        	
 	        	$response = array(
 	        	   'code' => 200,
 				   'msg'  => '上传成功',
-				   'url'  => $url
+				   'url'  => $imgurl
 				);
 	        	echo json_encode($response);
 	        }else{

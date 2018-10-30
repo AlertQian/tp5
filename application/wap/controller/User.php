@@ -115,4 +115,16 @@ class User extends Common
         session('nickname',null);
         return $this->redirect('login/index');
     }
+    //上传头像
+    public function headimg(){
+    	$imgurl=input('imgurl');
+    	$userinfo=new UserInfo;
+    	$userid=$this->userid;
+	    $ret=$userinfo->where('userid',$userid)->update(['headimg'=>$imgurl]);
+	    if($ret){
+	        $this->success('ok');
+	    }else{
+	    	$this->error('no');
+	    }
+    }
 }
