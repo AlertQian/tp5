@@ -26,10 +26,10 @@ position: absolute;
 width: 100%;
 height: 100%;
 top: 0;
-    left: 0;
-    outline: none;
-    background-color: transparent;
-    filter:alpha(opacity=0);
+left: 0;
+outline: none;
+background-color: transparent;
+filter:alpha(opacity=0);
 -moz-opacity:0;
 -khtml-opacity: 0;
 opacity: 0;
@@ -125,19 +125,19 @@ cursor: pointer;
                 </select>
               </div>
               <div class="layui-input-inline">
-                <input type="text" name="dtarea" placeholder="详细地址" class="ly-input">
+                <input type="text" name="dtarea" placeholder="详细地址" class="ly-input" value="{$ret.dtarea?$ret.dtarea:''}">
               </div>  
             </div>
             <div class="layui-form-item">
               <label class="ly-form-label">签名</label>
               <div class="layui-input-inline">
-                <textarea name="signature" required lay-verify="" placeholder="仅限50字" class="ly-textarea"></textarea>
+                <textarea name="signature" required lay-verify="" placeholder="仅限50字" class="ly-textarea">{$ret.signature?$ret.signature:''}</textarea>
               </div>
             </div>
             <div class="layui-form-item">
               <label class="ly-form-label">内心独白</label>
               <div class="layui-input-inline">
-                <textarea name="content" required lay-verify="" placeholder="仅限300字" class="ly-textarea" style="height: 100px;"></textarea>
+                <textarea name="content" required lay-verify="" placeholder="仅限300字" class="ly-textarea" style="height: 100px;">{$ret.content?$ret.content:''}</textarea>
               </div>
             </div>
             <blockquote class="layui-elem-quote quote">以下信息将作为您的征婚交友联系方式</blockquote>
@@ -153,13 +153,13 @@ cursor: pointer;
             <div class="layui-form-item">
               <label class="ly-form-label">Q Q</label>
               <div class="layui-input-inline">
-                <input type="text" name="qq"  lay-verify="" placeholder="未填写" autocomplete="off" class="ly-input">
+                <input type="text" name="qq"  lay-verify="" placeholder="未填写" autocomplete="off" class="ly-input" value="{$ret.qq?$ret.qq:''}">
               </div>
             </div>
             <div class="layui-form-item">
               <label class="ly-form-label">微信</label>
               <div class="layui-input-inline">
-                <input type="text" name="wechat" lay-verify="" placeholder="未填写" autocomplete="off" class="ly-input">
+                <input type="text" name="wechat" lay-verify="" placeholder="未填写" autocomplete="off" class="ly-input" value="{$ret.wechat?$ret.wechat:''}">
               </div>
             </div>
             <div class="layui-form-item">
@@ -242,8 +242,7 @@ cursor: pointer;
           </div>
           <input name="userzm" value="" class="layui-input" type="hidden">
             <div class="base-img" style="margin-top: 20px;width: 100%;text-align: center;">
-            <!-- <img id="image" style="width: 80%;min-height: 150px;border: 1px solid #eee;border-radius: 5px;" src="/wap/main/images/jiaoyou_face_nofind.jpg"> -->
-            <img id="image" style="width: 80%;min-height: 150px;border: 1px solid #eee;border-radius: 5px;" src="{$ret.headimg}">
+            <img id="image" style="width: 80%;min-height: 150px;border: 1px solid #eee;border-radius: 5px;" src="{$ret.headimg?$ret.headimg:'/wap/main/images/jiaoyou_face_nofind.jpg'}">
             </div>
           </div>
           <div class="layui-form-item" style="border-bottom: none;margin-top: 10px;display: none;" id="gnitem">

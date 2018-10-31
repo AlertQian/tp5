@@ -50,12 +50,8 @@ class User extends Common
         	$is_uerinfo['sex']="男";
         }
         $this->assign('ret',$is_uerinfo);
-        if($is_yaoqiu){
-        	$this->assign('yaoqiu',$is_yaoqiu);
-        }
-        if($is_improve){
-        	$this->assign('improve',$is_improve);
-        }
+        $this->assign('yaoqiu',$is_yaoqiu);
+        $this->assign('improve',$is_improve);
         if(request()->isPost()){
         	$data=input('post.');
         	$place=$data['county'].$data['town'].$data['dtarea'];
