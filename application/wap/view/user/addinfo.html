@@ -180,7 +180,7 @@ cursor: pointer;
               <label class="ly-form-label">学历</label>
               <div class="layui-input-inline">
                <select name="edu" lay-verify="required" lay-search="">
-                <option value="">未填写</option>
+                <option value="{$improve.edu?$improve.edu:''}">{if condition="$improve.edu"}{$improve.edu|eduArrCn}{else/}未填写{/if}</option>
                 {volist name="eduarr" id="vo"}
                   {$vo}
                 {/volist}
@@ -191,7 +191,7 @@ cursor: pointer;
               <label class="ly-form-label">月薪</label>
               <div class="layui-input-inline">
                <select name="wages" lay-verify="required" lay-search="">
-                <option value="">未填写</option>
+                <option value="{$improve.wages?$improve.wages:''}">{if condition="$improve.wages"}{$improve.wages|wagesArrCn}{else/}未填写{/if}</option>
                 {volist name="wagesarr" id="vo"}
                   {$vo}
                 {/volist}
@@ -201,8 +201,8 @@ cursor: pointer;
             <div class="layui-form-item">
               <label class="ly-form-label">星座</label>
               <div class="layui-input-inline">
-               <select name="modules" lay-verify="required" lay-search="">
-                <option value="">未填写</option>
+               <select name="sign" lay-verify="required" lay-search="">
+                <option value="{$improve.sign?$improve.sign:''}">{if condition="$improve.sign"}{$improve.sign|signArrCn}{else/}未填写{/if}</option>
                 {volist name="signarr" id="vo"}
                   {$vo}
                 {/volist}
@@ -212,23 +212,23 @@ cursor: pointer;
             <div class="layui-form-item">
               <label class="ly-form-label">个性</label>
               <div class="layui-input-inline">
-                <textarea name="" required lay-verify="required" placeholder="仅限50字" class="ly-textarea"></textarea>
+                <textarea name="character" placeholder="仅限50字" class="ly-textarea">{$improve.character?$improve.character:''}</textarea>
               </div>
             </div>
             <div class="layui-form-item">
               <label class="ly-form-label">从事行业</label>
               <div class="layui-input-inline">
-                <input type="text" name="title" required  lay-verify="required" placeholder="从事行业" autocomplete="off" class="ly-input">
+                <input type="text" name="industry" placeholder="从事行业" autocomplete="off" class="ly-input" value="{$improve.industry?$improve.industry:''}">
               </div>
             </div>
             <div class="layui-form-item">
               <label class="ly-form-label">兴趣爱好</label>
               <div class="layui-input-inline">
-                <input type="text" name="title"  lay-verify="required" placeholder="未填写" autocomplete="off" class="ly-input">
+                <input type="text" name="intrste" placeholder="未填写" autocomplete="off" class="ly-input" value="{$improve.intrste?$improve.intrste:''}">
               </div>
             </div>
             <div style="text-align: center;">
-              <button class="layui-btn" lay-submit="" lay-filter="" style="background-color: #ff78a2;width: 60%;border-radius: 50px;">立即提交</button>
+              <button class="layui-btn" lay-submit="" lay-filter="improve" style="background-color: #ff78a2;width: 60%;border-radius: 50px;">立即提交</button>
             </div>
         </form>
       </div>
@@ -483,7 +483,26 @@ layui.use(['element','form','upload'], function(){
       })
       return false;
      })
-
+     //完善资料
+     form.on('submit(improve)',function(data){
+      loading = layer.load(2, {
+        shade: [0.2,'#000']
+      });
+      var param = data.field;
+      jq.post('{:url("user/improve")}',param,function(data){
+        if(data.code==1){
+          layer.close(loading);
+          layer.msg(data.msg, {icon: 1, anim: 6, time: 1000},function(){
+            location.reload();
+          });
+        }else{
+          layer.close(loading);
+          layer.msg(data.msg, {icon: 2, anim: 6, time: 1000});
+        }
+      })
+      return false;
+     })
+     //要求
      form.on('submit(yaoqiu)',function(data){
       loading = layer.load(2, {
         shade: [0.2,'#000']
@@ -492,7 +511,9 @@ layui.use(['element','form','upload'], function(){
       jq.post('{:url("user/yaoqiu")}',param,function(data){
         if(data.code==1){
           layer.close(loading);
-          layer.msg(data.msg, {icon: 1, anim: 6, time: 1000});
+          layer.msg(data.msg, {icon: 1, anim: 6, time: 1000},function(){
+            location.reload();
+          });
         }else{
           layer.close(loading);
           layer.msg(data.msg, {icon: 2, anim: 6, time: 1000});

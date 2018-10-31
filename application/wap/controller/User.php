@@ -1,6 +1,7 @@
 <?php
 namespace app\wap\controller;
 use app\index\model\UserInfo;
+use app\index\model\UserImprove;
 use app\index\model\Yaoqiu;
 use app\index\model\User as UserModel;
 /**
@@ -35,6 +36,7 @@ class User extends Common
 		$user=new UserModel;
 		$userinfo=new UserInfo;
 		$yaoqiu=new Yaoqiu;
+		$improve=new UserImprove;
 		$info=$user->where(['pwd_hash'=>session('validate'),'nickname'=>session('nickname')])->find();
 		if($info){
 			$userid=$info['userid'];
@@ -43,12 +45,16 @@ class User extends Common
 		}
         $is_uerinfo=$userinfo::where('userid',$userid)->find();
         $is_yaoqiu=$yaoqiu::where('userid',$userid)->find();
+        $is_improve=$improve::where('userid',$userid)->find();
         if(!$is_uerinfo){
         	$is_uerinfo['sex']="男";
         }
         $this->assign('ret',$is_uerinfo);
         if($is_yaoqiu){
         	$this->assign('yaoqiu',$is_yaoqiu);
+        }
+        if($is_improve){
+        	$this->assign('improve',$is_improve);
         }
         if(request()->isPost()){
         	$data=input('post.');
@@ -85,6 +91,29 @@ class User extends Common
 		$this->assign('signarr',$signarr);
 		return $this->fetch();
 	}
+	//完善资料
+	public function improve(){
+		$object=new UserImprove;
+		$userid=$this->userid;
+		$is_object=$object::where('userid',$userid)->find();
+		if(request()->isPost()){	
+			$data=input('post.');
+			$data['userid']=$userid;
+			$data['addtime']=time();
+			if($is_object){
+				$data['id']=$is_object['id'];
+				$ret=$object->edit($data);
+			}else{
+				$ret=$object->save($data);
+			}
+			if($ret){
+				$this->success('已提交');
+			}else{
+				$this->error('提交失败');
+			}
+		}
+	}
+	//要求
 	public function yaoqiu(){
 		$yaoqiu=new Yaoqiu;
 		$userid=$this->userid;
