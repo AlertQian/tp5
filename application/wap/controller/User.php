@@ -25,6 +25,12 @@ class User extends Common
     	}
     }
 	public function index(){
+		$userinfo=new UserInfo;
+		$userid=$this->userid;
+		$obj=$userinfo::where('userid',$userid)->find();
+		if($obj){
+			$this->assign('obj',$obj);
+		}
 		return $this->fetch();
 	}
 	public function set(){
