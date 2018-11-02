@@ -260,7 +260,7 @@ cursor: pointer;
             <div class="layui-form-item">
               <label class="ly-form-label">学历</label>
               <div class="layui-input-inline">
-               <select name="yq_edu" lay-verify="required" lay-search="">
+               <select name="yq_edu" lay-search="">
                 <option value="{$yaoqiu.yq_edu?$yaoqiu.yq_edu:''}">{if condition="$yaoqiu.yq_edu"}{$yaoqiu.yq_edu|eduArrCn}{else/}不限制{/if}
                 </option>
                 {volist name="eduarr" id="vo"}
@@ -272,7 +272,7 @@ cursor: pointer;
             <div class="layui-form-item">
               <label class="ly-form-label">月薪</label>
               <div class="layui-input-inline">
-                <select name="yq_wages" lay-verify="required" lay-search="">
+                <select name="yq_wages" lay-search="">
                 <option value="{$yaoqiu.yq_wages?$yaoqiu.yq_wages:''}">{if condition="$yaoqiu.yq_wages"}{$yaoqiu.yq_wages|wagesArrCn}{else/}不限制{/if}</option>
                 {volist name="wagesarr" id="vo"}
                 {$vo}
@@ -283,7 +283,7 @@ cursor: pointer;
             <div class="layui-form-item">
               <label class="ly-form-label">年龄</label>
               <div class="layui-input-inline">
-               <select name="yq_age" lay-verify="required" lay-search="">
+               <select name="yq_age" lay-search="">
                 <option value="{$yaoqiu.yq_age?$yaoqiu.yq_age:''}">{$yaoqiu.yq_age?$yaoqiu.yq_age:'不限制'}</option>
                 {volist name="yeararr" id="vo"}
                   {$vo}
@@ -294,7 +294,7 @@ cursor: pointer;
             <div class="layui-form-item">
               <label class="ly-form-label">身高</label>
               <div class="layui-input-inline">
-               <select name="yq_stature" lay-verify="required" lay-search="">
+               <select name="yq_stature" lay-search="">
                 <option value="{$yaoqiu.yq_stature?$yaoqiu.yq_stature:''}">{$yaoqiu.yq_stature?$yaoqiu.yq_stature:'不限制'}</option>
                 {volist name="starr" id="vo"}
                   {$vo}
@@ -305,8 +305,8 @@ cursor: pointer;
             <div class="layui-form-item">
               <label class="ly-form-label">星座</label>
               <div class="layui-input-inline">
-               <select name="yq_sign" lay-verify="required" lay-search="">
-                <option value="{$yaoqiu.yq_sign?$yaoqiu.yq_sign:''}">{if condition="$yaoqiu.yq_sign"}{$yaoqiu.yq_sign|signArrCn}{else/}不限制{/if}</option>
+               <select name="yq_sign" lay-search="">
+                <option value="{$yaoqiu.yq_sign?$yaoqiu.yq_sign:''}">{if condition="$yaoqiu.yq_sign"}{$yaoqiu.yq_sign|signArrCn}{else/}请选择{/if}</option>
                 {volist name="signarr" id="vo"}
                   {$vo}
                 {/volist}
@@ -325,13 +325,13 @@ cursor: pointer;
             <div class="layui-form-item">
               <label class="ly-form-label">从事行业</label>
               <div class="layui-input-inline">
-                <input type="text" name="yq_industry" required  lay-verify="required" placeholder="从事行业" autocomplete="off" class="ly-input" value="{$yaoqiu.yq_industry?$yaoqiu.yq_industry:''}">
+                <input type="text" name="yq_industry" placeholder="从事行业" autocomplete="off" class="ly-input" value="{$yaoqiu.yq_industry?$yaoqiu.yq_industry:''}">
               </div>
             </div>
             <div class="layui-form-item">
               <label class="ly-form-label">兴趣爱好</label>
               <div class="layui-input-inline">
-                <input type="text" name="yq_intrste" lay-verify="required" placeholder="未填写" autocomplete="off" class="ly-input" value="{$yaoqiu.yq_intrste?$yaoqiu.yq_intrste:''}">
+                <input type="text" name="yq_intrste" placeholder="未填写" autocomplete="off" class="ly-input" value="{$yaoqiu.yq_intrste?$yaoqiu.yq_intrste:''}">
               </div>
             </div>
             <div style="text-align: center;">

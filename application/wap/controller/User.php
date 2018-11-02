@@ -158,4 +158,8 @@ class User extends Common
 	    	$this->error('no');
 	    }
     }
+    //安全设置
+    public function safe(){
+    	return $this->fetch();
+    }
 }
