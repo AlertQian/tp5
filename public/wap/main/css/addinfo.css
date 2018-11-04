@@ -53,3 +53,15 @@
   .layui-form-radioed > i,.layui-form-radioed > i:hover,.layui-form-radio > i:hover{
     color: #ff78a2;
   }
+
+  .foot_link{background-color:#f4f4f4;color:#aaa; font-size:12px; text-align:center; margin:0 0; padding:10px 0;}
+.foot_link .link { color:#ccc; font-size:14px;}
+.foot_link .link li {padding:0 10px;display:inline-block; line-height:16px; vertical-align:middle; border-right:1px solid #ccc;}
+.foot_link .link li:last-child { border-right:0 none;}
+.foot_link a {color:#666;}
+.foot_link .link .po_re { z-index:2;}
+.foot_link .link .po { display:none; position:absolute; top:-158px; left:50%; width:100px; margin-left:-50px; background-color:#fff; border:1px solid #ddd;}
+.foot_link .link .po p { border-bottom:1px solid #ddd;}
+.foot_link .link .po p:last-child { border-bottom:0 none;}
+.foot_link .link .po a { display:block; padding:10px 0;}
+.foot_link .link .po:after { display:block; position:absolute; left:50%; bottom:-4px; margin-left:-3px; width:6px; height:6px; overflow:hidden; background-color:#fff; border-bottom:1px solid #ddd; border-right:1px solid #ddd;transform:rotate(45deg); content:' ';}
