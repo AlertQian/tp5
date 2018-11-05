@@ -10,10 +10,6 @@
     <link rel="stylesheet" href="/wap/main/css/addinfo.css">
     <script src="/static/layui/layui.js"></script>
 </head>
-<style type="text/css">
-
-
-</style>
 <body>
 <div class="header">
   <a href="{:url('user/index')}" class="back"><i class="layui-icon layui-icon-left ico-style"></i></a>
@@ -29,46 +25,51 @@
 	<div class="layui-collapse">
 	  <div class="layui-colla-item">
 	    <h2 class="layui-colla-title">修改昵称</h2>
+	    <form class="layui-form">
 	    <div class="layui-colla-content layui-show">
 	    	<div class="layui-form-item">
 	    	<label class="ly-form-label">昵称</label>
 	    	<div class="layui-input-inline">
-                <input type="text" name="realname" required  lay-verify="required|username" placeholder="昵称" autocomplete="off" class="ly-input" value="{$ret.realname?$ret.realname:''}">
+                <input type="text" name="nickname" required  lay-verify="required" placeholder="昵称" autocomplete="off" class="ly-input" value="{$nickname?$nickname:''}">
             </div>
             </div>
+            <input type="hidden" name="types" value="1">
             <div style="text-align: center;">
-            <button class="layui-btn" lay-submit lay-filter="addinfo" style="background: #5cc55c;width: 60%;border-radius: 50px;">保存</button>
+            <button class="layui-btn" lay-submit lay-filter="subt" style="background: #5cc55c;width: 60%;border-radius: 50px;">保存</button>
             </div>
 	    </div>
+	    </form>
 	  </div>
 	  <div class="layui-colla-item">
 	    <h2 class="layui-colla-title">修改密码</h2>
+	    <form class="layui-form">
 	    <div class="layui-colla-content layui-show">
 	    	<div class="layui-form-item">
 	    	<label class="ly-form-label">原始密码</label>
 	    	<div class="layui-input-inline">
-                <input type="text" name="realname" required  lay-verify="required|username" placeholder="原始密码" autocomplete="off" class="ly-input" value="{$ret.realname?$ret.realname:''}">
+                <input type="password" name="pwd" required  lay-verify="required" placeholder="必填" autocomplete="off" class="ly-input" value="">
             </div>
             </div>
             <div class="layui-form-item">
 	    	<label class="ly-form-label">新密码</label>
 	    	<div class="layui-input-inline">
-                <input type="text" name="realname" required  lay-verify="required|username" placeholder="新密码" autocomplete="off" class="ly-input" value="{$ret.realname?$ret.realname:''}">
+                <input type="password" name="newpwd" required  lay-verify="required" placeholder="必填" autocomplete="off" class="ly-input" value="">
             </div>
             </div>
             <div class="layui-form-item">
 	    	<label class="ly-form-label">确认密码</label>
 	    	<div class="layui-input-inline">
-                <input type="text" name="realname" required  lay-verify="required|username" placeholder="确认密码" autocomplete="off" class="ly-input" value="{$ret.realname?$ret.realname:''}">
+                <input type="password" name="againpwd" required  lay-verify="required" placeholder="必填" autocomplete="off" class="ly-input" value="">
             </div>
             </div>
+            <input type="hidden" name="types" value="2">
             <div style="text-align: center;">
-            <button class="layui-btn" lay-submit lay-filter="addinfo" style="background: #5cc55c;width: 60%;border-radius: 50px;">保存</button>
+            <button class="layui-btn" lay-submit lay-filter="subt" style="background: #5cc55c;width: 60%;border-radius: 50px;">保存</button>
             </div>
 	    </div>
+	    </form>
 	  </div>
 	</div>
-
 	<div class="foot_link" id="foot_link">
 		<ul class="link">
 		<li><a href="">首页</a></li>
@@ -79,10 +80,29 @@
 </div>
 <script>
 //注意：折叠面板 依赖 element 模块，否则无法进行功能性操作
-layui.use('element', function(){
-  var element = layui.element;
-  
-  //…
+layui.use(['element','form'], function(){
+	var element = layui.element
+		,form    = layui.form
+	    ,jq = layui.jquery;
+	form.on('submit(subt)',function(data){
+	  loading = layer.load(2, {
+	    shade: [0.2,'#000']
+	  });
+	  var param = data.field;
+	  jq.post('{:url("user/safe")}',param,function(data){
+	    if(data.code==1){
+	      layer.close(loading);
+	      layer.msg(data.msg, {icon: 1, anim: 6, time: 1000},function(){
+	        location.reload();
+	      });
+	    }else{
+	      layer.close(loading);
+	      layer.msg(data.msg, {icon: 2, anim: 6, time: 1000});
+	    }
+	  })
+	  return false;
+	})
+  //
 });
 </script>
 </body>

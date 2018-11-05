@@ -35,7 +35,7 @@
 	<div class="wrapper" style="background: #eee">
 		<div class="member_head member_head_2">
 		  <div class="user_head"><a href="/member/modify.aspx?action=tou" class="face"><img src="{$obj.headimg?$obj.headimg:'/wap/main/images/jiaoyou_face_nofind.jpg'}" alt="" width="96" height="96"></a><s class="s"></s></div>
-		  <div class="userName" id="userName">{$Think.session.nickname}</div>
+		  <div class="userName" id="userName">{$obj.nickname}</div>
 		  <a href="{:url('user/addinfo')}" class="txt">修改资料</a><s class="s_bor"></s><a href="{:url('user/safe')}" class="txt">安全设置</a>
 		  <a href="javascript:void(0);" class="real real_0_0">未认证<s class="s"></s></a>
 		 </div>

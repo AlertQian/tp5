@@ -27,7 +27,11 @@ class User extends Common
 	public function index(){
 		$userinfo=new UserInfo;
 		$userid=$this->userid;
-		$obj=$userinfo::where('userid',$userid)->find();
+		$obj=$userinfo::alias('a')
+		    ->join('lv_user b','a.userid=b.userid')
+		    ->field('a.headimg,b.nickname')
+			->where('a.userid',$userid)
+			->find();
 		if($obj){
 			$this->assign('obj',$obj);
 		}
@@ -43,11 +47,13 @@ class User extends Common
 		$userinfo=new UserInfo;
 		$yaoqiu=new Yaoqiu;
 		$improve=new UserImprove;
-		$info=$user->where(['pwd_hash'=>session('validate'),'nickname'=>session('nickname')])->find();
+		$info=$user->where(['pwd_hash'=>session('validate')])->find();
 		if($info){
 			$userid=$info['userid'];
 			$phone=$info['phone'];
 			$this->assign('phone',$phone);
+		}else{
+			return $this->redirect('login/index');
 		}
         $is_uerinfo=$userinfo::where('userid',$userid)->find();
         $is_yaoqiu=$yaoqiu::where('userid',$userid)->find();
@@ -160,6 +166,31 @@ class User extends Common
     }
     //安全设置
     public function safe(){
+    	$user=new UserModel;
+    	$userid=$this->userid;
+    	$nickname=$user::where('userid',$userid)->value('nickname');
+    	if($nickname){
+    		$this->assign('nickname',$nickname);
+    	}
+    	if(request()->isPost()){
+    		$data=input('post.');
+    		$type=$data['types'];
+    		if($type==1){
+    			$nickname=$data['nickname'];
+    			//还要判断nickname
+    			$ret=$user::where('userid',$userid)->update(['nickname'=>$nickname]);
+    			if($ret){
+					$this->success('已提交');
+				}else{
+					$this->error('提交失败');
+				}
+    		}else if($type==2){
+
+    		}
+
+
+
+    	}
     	return $this->fetch();
     }
 }
