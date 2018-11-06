@@ -4,6 +4,7 @@ use app\index\model\UserInfo;
 use app\index\model\UserImprove;
 use app\index\model\Yaoqiu;
 use app\index\model\User as UserModel;
+use think\Validate;
 /**
  * 
  */
@@ -26,14 +27,20 @@ class User extends Common
     }
 	public function index(){
 		$userinfo=new UserInfo;
+		$user=new UserModel;
 		$userid=$this->userid;
-		$obj=$userinfo::alias('a')
-		    ->join('lv_user b','a.userid=b.userid')
-		    ->field('a.headimg,b.nickname')
-			->where('a.userid',$userid)
-			->find();
+		$obj=$user::field('nickname,userid')->where('userid',$userid)->find();
 		if($obj){
-			$this->assign('obj',$obj);
+			$ret=$userinfo->where('userid',$userid)->find();
+			if($ret){
+				$obj['headimg']=$ret['headimg'];
+				$this->assign('ret',$ret);
+			}else{
+				$obj['headimg']='/wap/main/images/jiaoyou_face_nofind.jpg';
+			}
+            $this->assign('obj',$obj);
+		}else{
+			return $this->redirect('login/index');
 		}
 		return $this->fetch();
 	}
@@ -176,11 +183,26 @@ class User extends Common
     		$data=input('post.');
     		$type=$data['types'];
     		if($type==1){
-    			$nickname=$data['nickname'];
-    			//还要判断nickname
-    			$ret=$user::where('userid',$userid)->update(['nickname'=>$nickname]);
+    			$name=$data['nickname'];
+    			//还要判断nickname的长度
+    			$rules=[
+    				'nickname'  => 'require|max:25',
+    			];
+    			$msg=[
+    				'nickname.require'=>'昵称不能为空',
+    				'nickname.max'=>'名称太长'
+    			];
+    			$validate=new Validate($rules,$msg);
+    			if(!$validate->check($data)){
+					$msg=$validate->getError();
+					return $this->error($msg);
+				}
+				if($nickname == $name){
+					$this->error('昵称没有改变');
+				}
+    			$ret=$user::where('userid',$userid)->update(['nickname'=>$name]);
     			if($ret){
-					$this->success('已提交');
+					$this->success('保存成功');
 				}else{
 					$this->error('提交失败');
 				}

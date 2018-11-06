@@ -13,16 +13,17 @@ class Login extends Common
 				$data=input('post.');
 				$ip=request()->ip();
 				$logname=$data['logname'];
-				$passwd=md5($data['password']);
 				$this->check_form('Login',$data);
 				if(check_phone($logname)){
-				  $ret=$user->where(['phone'=>$logname,'password'=>$passwd])->find();
+				  $ret=$user->where(['phone'=>$logname])->find();
 				}else if(check_email($logname)){
-				  $ret=$user->where(['email'=>$logname,'password'=>$passwd])->find();
+				  $ret=$user->where(['email'=>$logname])->find();
 				}else{
-                  $ret=$user->where(['nickname'=>$logname,'password'=>$passwd])->find();
+                  $ret=$user->where(['nickname'=>$logname])->find();
 				}
 				if($ret){
+					$passwd=md5($data['password'].$ret['pwd_hash']);
+					if($ret['password']==$passwd){
 					session('validate',$ret['pwd_hash']);
 					session('nickname',$ret['nickname']);
 					$updata=[
@@ -31,6 +32,7 @@ class Login extends Common
 					];
 					$user->where('userid',$ret['userid'])->update($updata);
 					return $this->success('登入成功','user/index');
+					}
 				}else{
 					return $this->error('账号或密码错误');
 				}
@@ -56,10 +58,10 @@ class Login extends Common
 							$msg=$validate->getError();
 							return $this->error($msg);
 						}
-						$pwd=md5($data['chrpwd']);
 						//生成密盐
 						$salt=$data['chrphone'].mt_rand(1524, 9758).time();
 						$pwd_hash=substr(md5($salt), 8, 16);
+						$pwd=md5($data['chrpwd'].$pwd_hash);
 						$info=[
 							'nickname' =>$data['nickname'],
 							'phone'    =>$data['chrphone'],
