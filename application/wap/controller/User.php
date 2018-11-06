@@ -175,8 +175,11 @@ class User extends Common
     public function safe(){
     	$user=new UserModel;
     	$userid=$this->userid;
-    	$nickname=$user::where('userid',$userid)->value('nickname');
-    	if($nickname){
+    	$obj=$user::where('userid',$userid)->find();
+    	if($obj){
+    		$nickname=$obj['nickname'];
+    		$pwd_hash=$obj['pwd_hash'];
+    		$password=$obj['password'];
     		$this->assign('nickname',$nickname);
     	}
     	if(request()->isPost()){
@@ -207,7 +210,23 @@ class User extends Common
 					$this->error('提交失败');
 				}
     		}else if($type==2){
-
+    			$pwd=$data['pwd'];
+    			$newpwd=$data['newpwd'];
+    			$againpwd=$data['againpwd'];
+    			if($password !== md5($pwd.$pwd_hash)){
+    				$this->error('原始密码错误！');
+    			}
+    			if($newpwd !== $againpwd){
+    				$this->error('两次密码不一致！');
+    			}else{
+    				$newpassword=md5($newpwd.$pwd_hash);
+    				$ret=$user::where('userid',$userid)->update(['password'=>$newpassword]);
+    				if($ret){
+						$this->success('保存成功');
+					}else{
+						$this->error('提交失败');
+					}
+    			}
     		}
 
 
