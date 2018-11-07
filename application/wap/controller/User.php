@@ -203,6 +203,10 @@ class User extends Common
 				if($nickname == $name){
 					$this->error('昵称没有改变');
 				}
+				$isset=$user::where('nickname',$name)->find();
+				if($isset){
+					$this->error('该昵称已被注册');
+				}
     			$ret=$user::where('userid',$userid)->update(['nickname'=>$name]);
     			if($ret){
 					$this->success('保存成功');
@@ -228,9 +232,6 @@ class User extends Common
 					}
     			}
     		}
-
-
-
     	}
     	return $this->fetch();
     }
