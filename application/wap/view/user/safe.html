@@ -93,7 +93,7 @@ layui.use(['element','form'], function(){
 	    if(data.code==1){
 	      layer.close(loading);
 	      layer.msg(data.msg, {icon: 1, anim: 6, time: 1000},function(){
-	        location.reload();
+	        location.href=data.url;
 	      });
 	    }else{
 	      layer.close(loading);

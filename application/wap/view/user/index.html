@@ -39,11 +39,15 @@
 		  <a href="{:url('user/addinfo')}" class="txt">修改资料</a><s class="s_bor"></s><a href="{:url('user/safe')}" class="txt">安全设置</a>
 		  <a href="javascript:void(0);" class="real real_0_0">未认证<s class="s"></s></a>
 		 </div>
-		 {if condition='!isset($ret)'}
+		{if condition='!isset($ret)'}
 		<div class="amount_addjiaoyou">
 		  <a href="{:url('user/addinfo')}"><s class="ico"></s><span class="txt">您还未加入交友哦！<em>现在加入</em>！</span></a><s class="s"></s>
-		 </div>
-		 {/if}
+		</div>
+		{else/}
+		<div class="amount_addjiaoyou">
+		   <a href="{:url('user/addinfo')}"><s class="ico"></s><span class="txt">您已加入交友哦！<em style="position: absolute;right: 38px;">个人主页</em></span></a><s class="s"></s>
+		</div>
+		{/if}
 		<div id="memberNav">
 		   <ul class="memberNav">
 		   <li class="jy_ico_01"><a href="{:url('user/addinfo')}">基本信息</a></li>

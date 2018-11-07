@@ -32,6 +32,8 @@ class Login extends Common
 					];
 					$user->where('userid',$ret['userid'])->update($updata);
 					return $this->success('登入成功','user/index');
+					}else{
+						return $this->error('账号或密码错误');
 					}
 				}else{
 					return $this->error('账号或密码错误');

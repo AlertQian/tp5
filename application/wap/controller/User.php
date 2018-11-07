@@ -201,7 +201,7 @@ class User extends Common
 					return $this->error($msg);
 				}
 				if($nickname == $name){
-					$this->error('昵称没有改变');
+					$this->success('保存成功');
 				}
 				$isset=$user::where('nickname',$name)->find();
 				if($isset){
@@ -209,7 +209,7 @@ class User extends Common
 				}
     			$ret=$user::where('userid',$userid)->update(['nickname'=>$name]);
     			if($ret){
-					$this->success('保存成功');
+					$this->success('保存成功','user/index');
 				}else{
 					$this->error('提交失败');
 				}
@@ -220,13 +220,31 @@ class User extends Common
     			if($password !== md5($pwd.$pwd_hash)){
     				$this->error('原始密码错误！');
     			}
+    			$rules=[
+    				'pwd'  => 'require|length:6,16',
+    				'newpwd'  => 'require|length:6,16',
+    				'againpwd'  => 'require|length:6,16',
+    			];
+    			$msg=[
+    				'pwd.require'=>'必填项不能为空',
+    				'pwd.length'=>'密码长度必须在6到16之间！',
+    				'newpwd.require'=>'必填项不能为空',
+    				'newpwd.length'=>'密码长度必须在6到16之间！',
+    				'againpwd.require'=>'必填项不能为空',
+    				'againpwd.length'=>'密码长度必须在6到16之间！'
+    			];
+    			$validate=new Validate($rules,$msg);
+    			if(!$validate->check($data)){
+					$msg=$validate->getError();
+					return $this->error($msg);
+				}
     			if($newpwd !== $againpwd){
     				$this->error('两次密码不一致！');
     			}else{
     				$newpassword=md5($newpwd.$pwd_hash);
     				$ret=$user::where('userid',$userid)->update(['password'=>$newpassword]);
     				if($ret){
-						$this->success('保存成功');
+						$this->success('保存成功','user/index');
 					}else{
 						$this->error('提交失败');
 					}
