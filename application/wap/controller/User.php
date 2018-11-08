@@ -62,7 +62,7 @@ class User extends Common
 		}else{
 			return $this->redirect('login/index');
 		}
-        $is_uerinfo=$userinfo::where('userid',$userid)->find();
+        $is_uerinfo=$userinfo::where('userid',$userid)->find();   
         $is_yaoqiu=$yaoqiu::where('userid',$userid)->find();
         $is_improve=$improve::where('userid',$userid)->find();
         if(!$is_uerinfo){
@@ -80,8 +80,9 @@ class User extends Common
         	$data['signature']=remove_xss($data['signature']);
         	$data['content']=remove_xss($data['content']);
         	$this->check_form('UserInfo',$data);
-        	if($is_uerinfo){
-        		$data['tables_id']=$is_uerinfo['tables_id'];
+	        $tables_id=$userinfo::where('userid',$userid)->value('tables_id');
+        	if($tables_id){
+        		$data['tables_id']=$tables_id;
         		$ret=$userinfo->edit($data);
         	}else{
         		$ret=$userinfo->add($data);
