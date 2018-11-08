@@ -11,4 +11,7 @@ class Index extends Common
     	//return 'Hello,'.$idsa;
     	//return $this->request->param('name');
     }
+    public function homepage(){
+    	echo "e1q2e";
+    }
 }

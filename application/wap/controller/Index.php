@@ -15,4 +15,10 @@ class Index extends Controller
     public function layuiAdmin(){
     	
     }
+    //个人主页
+    public function homepage($id){
+        $id=input('id');
+        echo $id;
+       return $this->fetch('template1');
+    }
 }
