@@ -45,7 +45,6 @@ class User extends Common
 		return $this->fetch();
 	}
 	public function set(){
-
 		echo session('nickname');
 	}
 	//添加基本资料

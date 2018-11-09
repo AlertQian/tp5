@@ -20,6 +20,4 @@ return [
    '[homepage]'     => [
         ':id'   => ['wap/index/homepage',['ext' => 'html'],['id' => '\d+']],
     ],
-    
-
 ];
