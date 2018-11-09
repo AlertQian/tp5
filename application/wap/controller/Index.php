@@ -18,7 +18,6 @@ class Index extends Controller
     //个人主页
     public function homepage($id){
         $id=input('id');
-        echo $id;
-       return $this->fetch('template1');
+        return $this->fetch();
     }
 }
