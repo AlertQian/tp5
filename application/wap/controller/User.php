@@ -53,9 +53,9 @@ class User extends Common
 		$userinfo=new UserInfo;
 		$yaoqiu=new Yaoqiu;
 		$improve=new UserImprove;
-		$info=$user->where(['pwd_hash'=>session('validate')])->find();
+		$userid=$this->userid;
+		$info=$user->where('userid',$userid)->find();
 		if($info){
-			$userid=$info['userid'];
 			$phone=$info['phone'];
 			$this->assign('phone',$phone);
 		}else{
