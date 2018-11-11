@@ -22,6 +22,7 @@ class Index extends Controller
         $userimprove=new UserImprove;
         $yaoqiu=new Yaoqiu;
         $ret=$user::alias('a')->join('lv_user_info b','a.userid=b.userid')->field('a.nickname,b.*')->where('a.userid',$id)->find();
+        $ret['place']=$ret['county'].$ret['town'];
         $this->assign('ret',$ret);
         $improve=$userimprove::where('userid',$id)->find();
         if($improve){

@@ -40,13 +40,15 @@
 		<div class="topr"><a href="javascript:void(0);" onClick="return addkeep();"><i class="icon"></i><span id="keepnum" data-iskeep="0">6</span></a></div>
 		<h2>{$ret.nickname}<i class="icon wsc1"></i><span class="ico1 display1">单</span> <span class="ico2 display0">离</span></h2>
 		<h3>{$ret.signature}</h3>
-		<h4 id="tagList"><span class="list">北京丰台</span><span class="list">上班一族</span><span class="list">5000-8000元</span></h4>
+		<h4 id="tagList"><span class="list">{$ret.place}</span><span class="list">{$improve.sign|signArrCn}</span><span class="list">{if condition="$improve.wages"}{$improve.wages|wagesArrCn}元{else/}未填写{/if}</span></h4>
 		<div class="top-link"><a href="javascript:void(0);" class="links icon" id="givecontact2" data-selector="contact">联系Ta</a> <a href="javascript:void(0);" class="links links2 icon" id="handshandle2" data-selector="handshandle_way">红娘牵线</a></div>
 		<div class="tb_top_1">
 			<ul>
 				<li class="li_3"><em>单身</em>感情</li>
 				<li class="li_3"><em>{$ret.stature}cm</em>身高</li>
-				<li class="li_3"><em>{$ret.stature}</em>学历</li>
+				<li class="li_3">
+					<em>{if condition="$improve.edu"}{$improve.edu|eduArrCn}{else/}未填写{/if}</em>学历
+				</li>
 				<li class="li_3"><em>{$ret.age}</em>年龄</li>
 			</ul>
 		</div>
