@@ -35,6 +35,19 @@ filter:alpha(opacity=0);
 opacity: 0;
 cursor: pointer;
 }
+.view-item{
+width: 60%;text-align: left;color: #666;
+}
+.view-item i{position: relative;right: -60%;color: #666;}
+.select_muban_inner .inner { padding:10px 0;}
+.select_muban_inner ul { overflow-x:hidden; overflow-y:auto; height:330px;}
+.select_muban_inner li { margin:0 10px 10px 10px; text-align:center; border:1px solid #eee; background-color:#f9f9f9; padding:5px;}
+.select_muban_inner .selected { border:1px solid #82cc13;}
+.select_muban_inner li .tit { font-size:14px; margin-top:5px;}
+.select_muban_inner li img { vertical-align:top; width:100%;}
+.select_muban_inner .hd { height:50px; line-height:50px; padding:0 8px; background-color:#fcfcfc; border-top-left-radius:4px; border-top-right-radius:4px;}
+.select_muban_inner .hd .btn { display:block; background-color:#69a90f; color:#fff; font-size:14px; padding:0 9px; line-height:30px; height:30px; margin-top:9px;}
+
 </style>
 <body>
 <!-- 你的HTML代码 --> 
@@ -142,7 +155,9 @@ cursor: pointer;
             </div>
             <div class="layui-form-item">
               <label class="ly-form-label">选择模板</label>
-              <div class="ly-form-label" style="width: 60%;text-align: left;color: #666;">系统默认模板<i class="layui-icon layui-icon-right" style="position: relative;right: -60%;color: #666;"></i></div>
+              <div class="ly-form-label view-item"><span>默认模板</span><i class="layui-icon layui-icon-right"></i></div>
+              <input type="hidden" name="tempnum" value="">
+              <input type="hidden" name="tempcn" value="">
             </div>
             <blockquote class="layui-elem-quote quote">以下信息将作为您的征婚交友联系方式</blockquote>
             <div class="layui-form-item">
@@ -445,10 +460,11 @@ $(function(){
 })
 </script>
 <script>
-layui.use(['element','form','upload'], function(){
+layui.use(['element','form','upload','layer'], function(){
   var element = layui.element
      ,form    = layui.form
      ,jq = layui.jquery
+     ,layer = layui.layer
      ,upload = layui.upload;
       var layid = location.hash.replace(/^#info=/, '');
       element.tabChange('info', layid); //假设当前地址为：http://a.com#test1=222，那么选项卡会自动切换到“发送消息”这一项
@@ -530,7 +546,28 @@ layui.use(['element','form','upload'], function(){
         }
       })
       return false;
-     })       
+     })
+     $('.view-item').on('click',function(){
+      layer.open({
+        type: 1,
+        title:'选择模板',
+        area: ['90%', '636px'],
+        btn:['确认','取消'],
+        btnAlign: 'c',
+        content: '<div class="select_muban_inner"><div class="inner"><ul id="select_muban_inner_inner" style="height: 566px;"><li data-val="0" class="selected"><img src="/wap/main/images/tempimgs/jiaoyou_muban_wap_0.jpg" alt=""><p class="tit">默认模板</p></li><li data-val="1" class=""><img src="/wap/main/images/tempimgs/jiaoyou_muban_wap_1.jpg" alt=""><p class="tit">花好月圆</p></li><li data-val="2" class=""><img src="/wap/main/images/tempimgs/jiaoyou_muban_wap_2.jpg" alt=""><p class="tit">大花轿</p></li><li data-val="3" class=""><img src="/wap/main/images/tempimgs/jiaoyou_muban_wap_3.jpg" alt=""><p class="tit">相伴一生</p></li></ul></div></div>',
+      });
+      //模板选择
+      $('.inner').find('li').each(function(data){
+        $(this).click(function(){
+          $val=$(this).attr('data-val');
+          $name=$(this).find('.tit').html();
+          $(this).addClass('selected').siblings().removeClass('selected');
+          $('input[name=tempnum]').val($val);
+          $('input[name=tempcn]').val($name);
+          $('.view-item > span').text($name);
+        })
+      })
+     })
 });
 </script>
 </div>
