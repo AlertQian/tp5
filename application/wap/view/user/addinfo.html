@@ -155,7 +155,7 @@ width: 60%;text-align: left;color: #666;
             </div>
             <div class="layui-form-item">
               <label class="ly-form-label">选择模板</label>
-              <div class="ly-form-label view-item"><span>默认模板</span><i class="layui-icon layui-icon-right"></i></div>
+              <div class="ly-form-label view-item"><span>{$ret.tempcn?$ret.tempcn:'花好月圆'}</span><i class="layui-icon layui-icon-right"></i></div>
               <input type="hidden" name="tempnum" value="">
               <input type="hidden" name="tempcn" value="">
             </div>
@@ -554,7 +554,7 @@ layui.use(['element','form','upload','layer'], function(){
         area: ['90%', '636px'],
         btn:['确认','取消'],
         btnAlign: 'c',
-        content: '<div class="select_muban_inner"><div class="inner"><ul id="select_muban_inner_inner" style="height: 566px;"><li data-val="0" class="selected"><img src="/wap/main/images/tempimgs/jiaoyou_muban_wap_0.jpg" alt=""><p class="tit">默认模板</p></li><li data-val="1" class=""><img src="/wap/main/images/tempimgs/jiaoyou_muban_wap_1.jpg" alt=""><p class="tit">花好月圆</p></li><li data-val="2" class=""><img src="/wap/main/images/tempimgs/jiaoyou_muban_wap_2.jpg" alt=""><p class="tit">大花轿</p></li><li data-val="3" class=""><img src="/wap/main/images/tempimgs/jiaoyou_muban_wap_3.jpg" alt=""><p class="tit">相伴一生</p></li></ul></div></div>',
+        content: '<div class="select_muban_inner"><div class="inner"><ul id="select_muban_inner_inner" style="height: 566px;"><li data-val="1" class="selected"><img src="/wap/main/images/tempimgs/jiaoyou_muban_wap_1.jpg" alt=""><p class="tit">花好月圆</p></li><li data-val="2" class=""><img src="/wap/main/images/tempimgs/jiaoyou_muban_wap_2.jpg" alt=""><p class="tit">大花轿</p></li><li data-val="3" class=""><img src="/wap/main/images/tempimgs/jiaoyou_muban_wap_3.jpg" alt=""><p class="tit">相伴一生</p></li><li data-val="4" class=""><img src="/wap/main/images/tempimgs/jiaoyou_muban_wap_4.jpg" alt=""><p class="tit">情窦初开</p></li><li data-val="5" class=""><img src="/wap/main/images/tempimgs/jiaoyou_muban_wap_5.jpg" alt=""><p class="tit">等待缘分</p></li><li data-val="6" class=""><img src="/wap/main/images/tempimgs/jiaoyou_muban_wap_6.jpg" alt=""><p class="tit">想有个家</p></li><li data-val="7" class=""><img src="/wap/main/images/tempimgs/jiaoyou_muban_wap_7.jpg" alt=""><p class="tit">才子佳人</p></li><li data-val="8" class=""><img src="/wap/main/images/tempimgs/jiaoyou_muban_wap_8.jpg" alt=""><p class="tit">相濡以沫</p></li><li data-val="9" class=""><img src="/wap/main/images/tempimgs/jiaoyou_muban_wap_9.jpg" alt=""><p class="tit">夕阳相伴</p></li></ul></div></div>',
       });
       //模板选择
       $('.inner').find('li').each(function(data){

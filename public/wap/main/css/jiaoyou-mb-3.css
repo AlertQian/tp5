@@ -1,0 +1,15 @@
+@charset "utf-8";
+body { background:url(/wap/main/images/3/jiaoyou_wap_bg.jpg) repeat-y 0 0; background-size:contain;}
+.contain-bottom { background: url(/wap/main/images/3/jiaoyou_wap_banner_bottom.jpg) no-repeat 0 0; background-size:contain;}
+#foot_link { background-color:transparent; background-size:contain; color:#9d8ec1;}
+#foot_link a { color:#dad5e7;}
+#foot_link .po a { color:#666;}
+#foot_link .link li { border-right:1px solid #8f7faf;}
+#foot_link .link li:last-child { border-right:0 none;}
+
+.filter2 .tab .more a .s, .icon, .friend-list li .wen .juli:before, .sh-list li .wen h1 .name .s:before { background-image: url(3/jiaoyou_wap_icon.png)!important;}
+.containr h2,.tb_top_1 ul .li_3 em,.tops h2 { color:#6e37d2;}
+.topm p { background:#6e37d2;}
+.tops .links { border:1px solid #ad51e1; color:#ad51e1;}
+.tops .links2 { border-color:#f5509a; color:#f5509a;}
+.contain-tj h2 .line { border-color:#e137ec;}

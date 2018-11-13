@@ -1,18 +1,17 @@
 @charset "utf-8";
-body { background:url(/wap/main/images/8/jiaoyou_wap_bg.jpg) repeat-y 0 0/contain;}
-.contain-bottom { background:url(/wap/main/images/8/jiaoyou_wap_banner_bottom.jpg) repeat-y 0 0/contain;}
-#foot_link { background:transparent url(/wap/main/images/8/jiaoyou_wap_footer.jpg) no-repeat 0/cover; color:#aca4a6;}
-#foot_link a { color:#464143;}
+body { background:#77bc29;}
+.contain-bottom { background: url(/wap/main/images/4/jiaoyou_wap_banner_bottom.jpg) no-repeat 0 0; background-size:contain;}
+#foot_link { background-image:url(/wap/main/images/4/jiaoyou_wap_footer.jpg); background-color:transparent; background-size:contain; color:#5d9320;}
+#foot_link a { color:#21340b;}
 #foot_link .po a { color:#666;}
-#foot_link .link li { border-right:1px solid #7d7275;}
+#foot_link .link li { border-right:1px solid #3b5e14;}
 #foot_link .link li:last-child { border-right:0 none;}
 
-.filter2 .tab .more a .s, .icon, .friend-list li .wen .juli:before, .sh-list li .wen h1 .name .s:before { background-image: url(8/jiaoyou_wap_icon.png)!important;}
-.containr h2,.tb_top_1 ul .li_3 em { color:#e397b9;}
-.tops h2 { color:#e397b9;}
-.topm p { background:#e397b9;}
-.tops .links { border:1px solid #35e2bb; color:#35e2bb;}
-.tops .links2 { border-color:#e397b9; color:#e397b9;}
+.filter2 .tab .more a .s, .icon, .friend-list li .wen .juli:before, .sh-list li .wen h1 .name .s:before { background-image: url(4/jiaoyou_wap_icon.png)!important;}
+.containr h2,.tb_top_1 ul .li_3 em,.tops h2 { color:#a1ca11;}
+.topm p { background:#a1ca11;}
+.tops .links { border:1px solid #f35e5e; color:#f35e5e;}
+.tops .links2 { border-color:#a2ca10; color:#a2ca10;}
 .contain-tj h2 .line { border:0 none;}
 
 .contain-middle {padding:0; background:transparent; margin-top:0; border-radius:0;}
@@ -26,6 +25,6 @@ body { background:url(/wap/main/images/8/jiaoyou_wap_bg.jpg) repeat-y 0 0/contai
 .contain-tj { padding:0;}
 .contain-tj h2 { margin-left:0; background-color:#fcfbfb; padding:2px 10px; border-top-left-radius:5px; border-top-right-radius:5px;}
 .contain-tjlist { padding:10px 15px 0;}
-.contain-tj h2 span { color:#e397b9;}
+.contain-tj h2 span { color:#a1ca11;}
 .contain-tj h2 i { left:10px; top:14px;}
 .contain-tj h2 span { margin-left:18px;}
