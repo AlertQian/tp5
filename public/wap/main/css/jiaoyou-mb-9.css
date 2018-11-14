@@ -7,7 +7,7 @@ body { background-color:#ed7b3c;}
 #foot_link .link li { border-right:1px solid #763d1e;}
 #foot_link .link li:last-child { border-right:0 none;}
 
-.filter2 .tab .more a .s, .icon, .friend-list li .wen .juli:before, .sh-list li .wen h1 .name .s:before { background-image: url(9/jiaoyou_wap_icon.png)!important;}
+.filter2 .tab .more a .s, .icon, .friend-list li .wen .juli:before, .sh-list li .wen h1 .name .s:before { background-image: url(/wap/main/images/9/jiaoyou_wap_icon.png)!important;}
 .containr h2,.tb_top_1 ul .li_3 em { color:#f57f0c;}
 .tops h2 { color:#f57f0c;}
 .topm p { background:#f57f0c;}

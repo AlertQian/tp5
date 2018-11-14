@@ -1,5 +1,5 @@
 @charset "utf-8";
-.filter2 .tab .more a .s,.icon,.friend-list li .wen .juli:before,.sh-list li .wen h1 .name .s:before { background:url(../images/jiaoyou_wap_icon.png) no-repeat 0 0; background-size:53px auto;}
+.filter2 .tab .more a .s,.icon,.friend-list li .wen .juli:before,.sh-list li .wen h1 .name .s:before { background:url(/wap/main/images/jiaoyou_wap_icon.png) no-repeat 0 0; background-size:53px auto;}
 
 #foot_link { border-top:0 none;}
 body { background-color:#f4f4f4;}
