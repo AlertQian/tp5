@@ -120,6 +120,14 @@ function yearArr(){
     }
     return $yeararr;
 }
+//年龄数组标签
+function yearArritem(){
+    $years = array('60后','65后','70后','75后','80后','85后','90后','95后','00后','05后');
+    foreach($years as $year){
+      $yeararr[]= '<option value="'.$year.'">'.$year.'</option>'; 
+    }
+    return $yeararr;
+}
 //身高数组
 function statureArr(){
     $stature=range(150,200);
@@ -171,4 +179,57 @@ function signArr(){
 function signArrCn($key){
   $arr=array('不限','白羊座','金牛座','双子座','巨蟹座','狮子座','处女座','天秤座','天蝎座','射手座','摩羯座','水瓶座','双鱼座');
   return $arr[$key];
+}
+function emotionCn($val){
+switch ($val) {
+  case '1':
+    return '单身';
+    break;
+  case '2':
+    return '离异';
+    break;
+  default:
+    return '保密';
+    break;
+}
+}
+//年龄标签
+function yeasItem($num){
+  $years=substr($num, -2,2);
+  switch ($years) {
+    case $years>=60 && $years<65:
+      $item = '60后';
+      break;
+    case $years>=65 && $years<70:
+      $item = '65后';
+      break;
+    case $years>=70 && $years<75:
+      $item = '70后';
+      break;
+    case $years>=75 && $years<80:
+      $item = '75后';
+      break;
+    case $years>=80 && $years<85:
+      $item = '80后';
+      break;
+    case $years>=85 && $years<90:
+      $item = '85后';
+      break;
+    case $years>=90 && $years<95:
+      $item = '90后';
+      break;
+    case $years>=95 && $years<=99:
+      $item = '95后';
+      break;
+    case $years>=00 && $years<05:
+      $item = '00后';
+      break;
+    case $years>=05 && $years<10:
+      $item = '05后';
+      break;  
+    default:
+      $item ='';
+      break;
+  }
+  return $item;
 }

@@ -111,16 +111,17 @@ width: 60%;text-align: left;color: #666;
               </select>
               </div>
             </div>
-            <!-- <div class="layui-form-item">
+            <div class="layui-form-item">
               <label class="ly-form-label">感情</label>
               <div class="layui-input-inline">
               <select name="emotion" lay-verify="required" lay-search="">
-                <option value="">未填写</option>
+                <option value="{$ret.emotion?$ret.emotion:''}">{if condition='$ret.emotion'}{$ret.emotion|emotionCn}{else/}必填{/if}</option>
                 <option value="1">单身</option>
                 <option value="2">离异</option>
+                <option value="3">保密</option>
               </select>
               </div>
-            </div> -->
+            </div>
             <div class="layui-form-item">
               <label class="ly-form-label">地区</label>
               <div class="layui-input-inline">
@@ -292,7 +293,7 @@ width: 60%;text-align: left;color: #666;
               <label class="ly-form-label">月薪</label>
               <div class="layui-input-inline">
                 <select name="yq_wages" lay-search="">
-                <option value="{$yaoqiu.yq_wages?$yaoqiu.yq_wages:''}">{if condition="$yaoqiu.yq_wages"}{$yaoqiu.yq_wages|wagesArrCn}{else/}不限制{/if}</option>
+                <option value="{$yaoqiu.yq_wages?$yaoqiu.yq_wages:'不限制'}">{if condition="$yaoqiu.yq_wages"}{$yaoqiu.yq_wages|wagesArrCn}{else/}不限制{/if}</option>
                 {volist name="wagesarr" id="vo"}
                 {$vo}
                 {/volist}
@@ -304,7 +305,7 @@ width: 60%;text-align: left;color: #666;
               <div class="layui-input-inline">
                <select name="yq_age" lay-search="">
                 <option value="{$yaoqiu.yq_age?$yaoqiu.yq_age:''}">{$yaoqiu.yq_age?$yaoqiu.yq_age:'不限制'}</option>
-                {volist name="yeararr" id="vo"}
+                {volist name="yeararritem" id="vo"}
                   {$vo}
                 {/volist}
               </select>
@@ -312,9 +313,18 @@ width: 60%;text-align: left;color: #666;
             </div>
             <div class="layui-form-item">
               <label class="ly-form-label">身高</label>
-              <div class="layui-input-inline">
-               <select name="yq_stature" lay-search="">
-                <option value="{$yaoqiu.yq_stature?$yaoqiu.yq_stature:''}">{$yaoqiu.yq_stature?$yaoqiu.yq_stature:'不限制'}</option>
+              <div class="layui-input-inline" style="width: 22%;display: inline-block;margin:0px;">
+               <select name="yq_stature_min" lay-search="">
+                <option value="{$yaoqiu.yq_stature_min?$yaoqiu.yq_stature_min:''}">{$yaoqiu.yq_stature_min?$yaoqiu.yq_stature_min:'不限'}</option>
+                {volist name="starr" id="vo"}
+                  {$vo}
+                {/volist}
+              </select>
+              </div>
+              <span style="color: #666;margin-left: 20px"> - </span> 
+              <div class="layui-input-inline" style="width: 22%;display: inline-block;margin: 0 20px;">
+               <select name="yq_stature_max" lay-search="">
+                <option value="{$yaoqiu.yq_stature_max?$yaoqiu.yq_stature_max:''}">{$yaoqiu.yq_stature_max?$yaoqiu.yq_stature_max:'不限'}</option>
                 {volist name="starr" id="vo"}
                   {$vo}
                 {/volist}

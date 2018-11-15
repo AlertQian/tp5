@@ -75,6 +75,7 @@ class User extends Common
         	$place=$data['county'].$data['town'].$data['dtarea'];
         	$data['place']=$place;
         	$data['userid']=$userid;
+        	$data['yearsitem']=yeasItem($data['age']);
         	$data['addtime']=time();
         	$data['signature']=remove_xss($data['signature']);
         	$data['content']=remove_xss($data['content']);
@@ -93,11 +94,13 @@ class User extends Common
         	}
         }
 		$yeararr= yearArr();
+		$yeararritem= yearArritem();
 		$starr= statureArr();
 		$townarr= townArr();
 		$eduarr= eduArr();
 		$wagesarr= wagesArr();
 		$signarr= signArr();
+		$this->assign('yeararritem',$yeararritem);
 		$this->assign('yeararr',$yeararr);
 		$this->assign('starr',$starr);
 		$this->assign('townarr',$townarr);
@@ -251,6 +254,10 @@ class User extends Common
     			}
     		}
     	}
+    	return $this->fetch();
+    }
+    //上传图片
+    public function imglist(){
     	return $this->fetch();
     }
 }

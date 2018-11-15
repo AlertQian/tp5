@@ -20,7 +20,11 @@
 <div class="header">
 	<a href="javascript:history.back(-1)" id="header_back" class="back">返回</a>
 	<div class="search" id="search_ico" onclick="showNewPage('搜索',searchHtml,newPageSearch);" style="display:none;">搜索</div>
+	{if condition="$Think.session.nickname neq null"}
 	<a href="{:url('user/index')}" class="my ico_ok" id="login_ico">我的</a>
+	{else/}
+	<a href="{:url('login/index')}" class="my" id="login_ico">我的</a>
+	{/if}
 	<div class="type" id="nav_ico">导航</div>
 	<span id="ipageTitle" style="">{$ret.nickname}</span>
 </div>
@@ -36,7 +40,6 @@
 	<div class="tops">
 		<div class="topm"><img src="{$ret.headimg}"><p class="display1">推荐会员</p></div>
 		<div class="topl" id="giveflower2" data-selector="flower"><i class="icon"></i><span id="flowernum">13</span></div>
-		
 		<div class="topr"><a href="javascript:void(0);" onClick="return addkeep();"><i class="icon"></i><span id="keepnum" data-iskeep="0">6</span></a></div>
 		<h2>{$ret.nickname}<i class="icon wsc1"></i><span class="ico1 display1">单</span> <span class="ico2 display0">离</span></h2>
 		<h3>{$ret.signature}</h3>
@@ -44,12 +47,12 @@
 		<div class="top-link"><a href="javascript:void(0);" class="links icon" id="givecontact2" data-selector="contact">联系Ta</a> <a href="javascript:void(0);" class="links links2 icon" id="handshandle2" data-selector="handshandle_way">红娘牵线</a></div>
 		<div class="tb_top_1">
 			<ul>
-				<li class="li_3"><em>单身</em>感情</li>
+				<li class="li_3"><em>{$ret.emotion|emotionCn}</em>感情</li>
 				<li class="li_3"><em>{$ret.stature}cm</em>身高</li>
 				<li class="li_3">
 					<em>{if condition="$improve.edu"}{$improve.edu|eduArrCn}{else/}未填写{/if}</em>学历
 				</li>
-				<li class="li_3"><em>{$ret.age}</em>年龄</li>
+				<li class="li_3"><em>{$ret.yearsitem}</em>年龄</li>
 			</ul>
 		</div>
 	</div>
@@ -63,8 +66,7 @@
 		
 		
 		<div class="noisreal" data-num="1">对不起，需要成为<a href="https://www.mh163k.com/jiaoyou/connections.aspx?action=commend" style="color:#36c;">推荐</a>会员才能查看我的相册</div>
-		
-	</div>
+	</div> 
 	<!-- <div class="slide_wrapper">
 		<div id="slide" class="clearfix" style="display:none">
 			<div class="player_h5" id="player_h5" style="display:none; left:0;" data-width="36"><video controls webkit-playsinline playsinline autoplay></video></div>
@@ -83,6 +85,7 @@
 			<h2><em class="em1 icon"></em>内心独白</h2>
 			<p style="padding-left:24px;">{$ret.content}</p>
 			</div>
+			{if condition="isset($improve)"}
 			<div class="containr_bd">
 			<h2><em class="em2 icon"></em>完善资料</h2>
 			<p><span>学历：</span>{if condition="$improve.edu"}{$improve.edu|eduArrCn}{else/}未填写{/if}</p>
@@ -91,8 +94,9 @@
 			<p><span>月薪：</span>{if condition="$improve.wages"}{$improve.wages|wagesArrCn}{else/}未填写{/if}</p>
 			<p><span>从事行业：</span>{$improve.industry?$improve.industry:'未填写'}</p>
 			<p><span>兴趣爱好：</span>{$improve.intrste?$improve.intrste:'未填写'}</p>
-			
 			</div>
+			{/if}
+			{if condition="isset($yaoqiu)"}
 			<div class="containr_bd">
 			<h2><em class="em3 icon"></em>交友要求</h2>
 			<p><span>年龄：</span>{$yaoqiu.yq_age?$yaoqiu.yq_age:'不限制'}</p>
@@ -100,8 +104,9 @@
 			<p><span>月薪：</span>{$yaoqiu.yq_wages|wagesArrCn}</p>
 			<p><span>从事行业：</span>{$yaoqiu.yq_industry?$yaoqiu.yq_industry:'不限制'}</p>
 			<p><span>接受离异：</span>{if condition="$yaoqiu.yq_divorced ==1"}接受{else/}不接受{/if}</p>
-			<p><span>身高：</span>{$yaoqiu.yq_stature?$yaoqiu.yq_stature:'不限制'}</p>
+			<p><span>身高：</span>{$yaoqiu.yq_stature_min?$yaoqiu.yq_stature_min:'不限制'} - {$yaoqiu.yq_stature_max?$yaoqiu.yq_stature_max:'不限制'}{if condition="$yaoqiu.yq_stature_max"} cm{/if}</p>
 			</div>
+			{/if}
 		</div>
 	</div>
 	<div class="contain-tj">
