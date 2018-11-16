@@ -37,4 +37,8 @@ class Index extends Controller
         $this->assign('yaoqiu',$is_yaoqiu);
         return $this->fetch();
     }
+    public function xieyi(){
+        return $this->fetch();
+    }
+    
 }

@@ -326,7 +326,7 @@ font-weight:normal; text-shadow:none;}
 .my_prop_imgitem .set_FM.checked { background-color:#5cc55c;}
 .my_prop_imgitem .i_img_alt { display:none;}
 .my_prop_imgitem input{ border:1px solid #cccccc;}
-.my_prop_imgitem .del { display:block; position:absolute; top:-5px; right:-5px; width:18px; height:18px; background:url(../images/upimg_pub.png) no-repeat -3px -71px; background-size:23px auto; text-indent:-999em; overflow:hidden;}
+.my_prop_imgitem .del { display:block; position:absolute; top:-5px; right:-5px; width:18px; height:18px; background:url(/wap/main/images/upimg_pub.png) no-repeat -3px -71px; background-size:23px auto; text-indent:-999em; overflow:hidden;}
 .my_prop_imgitem .imgview,.upimgFileBtn { display:block; vertical-align:top; width:100%; height:auto; border:1px solid #ddd; -webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;background-color: #f9f9f9;}
 .upimgFileBtn { cursor:pointer;}
 

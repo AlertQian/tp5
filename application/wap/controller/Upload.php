@@ -37,4 +37,8 @@ class Upload extends Controller
 	    	return '文件上传有误';
 	    }
     }
+    public function upimgs(){
+    	$file = request()->file('file');
+    	/*var_dump($file);*/
+    }
 }
