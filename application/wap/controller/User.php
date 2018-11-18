@@ -258,6 +258,12 @@ class User extends Common
     }
     //上传图片
     public function imglist(){
+    	if(request()->isPost())
+    	{
+    		$imgs=input('post.');
+    		
+    		var_dump($imgs);
+    	}
     	return $this->fetch();
     }
 }
