@@ -40,5 +40,4 @@ class Index extends Controller
     public function xieyi(){
         return $this->fetch();
     }
-    
 }

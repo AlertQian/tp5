@@ -260,9 +260,9 @@ class User extends Common
     public function imglist(){
     	if(request()->isPost())
     	{
-    		$imgs=input('post.');
-    		
-    		var_dump($imgs);
+    		$data=input('post.');
+    		echo $data['str'];
+    		//var_dump($imgs);
     	}
     	return $this->fetch();
     }
