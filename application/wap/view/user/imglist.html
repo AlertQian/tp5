@@ -73,23 +73,28 @@
         });
         
 	})
-	/*$.post("{:url('user/imglist')}",{'str':'123'},function(){
+    $('#submit').click(function(e){
+    	e.preventDefault();
+    	var imgs=$('input[name=imgs]').val();
+    	$.ajax({
+    		url:"{:url('user/imglist')}",
+    		data:{imgs:imgs},
+    		type:'post',
+    		success:function(data){
+    			if(data.code ==1){
+    				layer.msg(data.msg);
+    			}else{
+    				layer.msg(data.msg);
+    			}
+    		},
+    		error:function(){
+    			layer.msg('error');
+    		}
+    	})
+    })
+</script>
+<script type="text/javascript">
 
-        })*/
-        $('#submit').click(function(){
-        	var str="info";
-        	$.ajax({
-        		url:"{:url('user/imglist')}",
-        		data:{str:str},
-        		type:'post',
-        		success:function(){
-
-        		},
-        		error:function(){
-        			layer.msg('error');
-        		}
-        	})
-        })
 </script>
 </body>
 </html>

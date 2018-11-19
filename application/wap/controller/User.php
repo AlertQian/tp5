@@ -258,11 +258,18 @@ class User extends Common
     }
     //上传图片
     public function imglist(){
+    	$userinfo=new UserInfo;
+    	$userid=$this->userid;
     	if(request()->isPost())
     	{
     		$data=input('post.');
-    		echo $data['str'];
-    		//var_dump($imgs);
+    		$imgs=$data['imgs'];
+    		$ret=$userinfo->where('userid',$userid)->update(['showimgs'=>$imgs]);
+    		if($ret){
+				$this->success('保存成功','user/index');
+			}else{
+				$this->error('提交失败');
+			}
     	}
     	return $this->fetch();
     }
