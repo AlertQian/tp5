@@ -35,12 +35,18 @@
     <div class="my_prop_img">
 		<div id="J_imageView" class="my_prop_imgitem_node clearfix" style="margin-right:0;">
 			<div class="upimgFileBtnNode"><div id="pageLoaderNode"><span id="pageLoader">loadding</span></div><img src="/wap/main/images/upimg.png" id="upimgFileBtn" class="upimgFileBtn imgview" alt="" style="height: 89px;"></div>
-			<input type="hidden" name="imgs" class="layui-input">
+			<input type="hidden" name="imgs" class="layui-input" value="{$showimgs?$showimgs:''}">
+			<input type="hidden" name="isimgs" class="layui-input" value="{$showimgs?$showimgs:''}">
+			{if condition="isset($showimgs)"}
+			{volist name="imgsarr" id="vo"}
+			<div class="my_prop_imgitem"><div class="imgviewNode"><img src="{$vo}" class="imgview" style="height: 89px;"></div><a href="javascript:;" class="del">删除</a></div>
+			{/volist}
+			{/if}
 		</div>
     </div>
 </div>
 <div class="reg_tips" style="margin-bottom:15px;">点击"提交"就表示我已同意<a href="{:url('index/xieyi')}">网上征婚交友服务协议</a></div>
-<button type="submit" id="submit" class="save">提 交</button>
+<button type="submit" id="submit" class="save">保 存</button>
 </div>
 <div class="foot_link" id="foot_link">
 	<ul class="link">
@@ -48,11 +54,9 @@
 	</ul>
 	Copyright @ 2003-2018 mh163k.com
 </div>
-<script src="/fds/js/jquery-1.11.3.min.js"></script>
 <script type="text/javascript">
 	layui.use('upload',function(){
 		var $ = layui.jquery
-		,jq = layui.jquery
 		,arr =new Array()
         ,upload = layui.upload;
         upload.render({
@@ -68,33 +72,57 @@
 		    ,done: function(res){
 		      arr.push(res.url);
 		      str = arr.join(',');
-		      $('input[name=imgs]').val(str);
+		      $imgs=$('input[name=isimgs]').val();
+		      if($imgs.length !== 0){
+		      	$imgurl=$imgs+','+str;
+		      }else{
+		      	$imgurl=str;
+		      }
+		      $('input[name=imgs]').val($imgurl);
 			}
         });
-        
-	})
-    $('#submit').click(function(e){
-    	e.preventDefault();
-    	var imgs=$('input[name=imgs]').val();
-    	$.ajax({
-    		url:"{:url('user/imglist')}",
-    		data:{imgs:imgs},
-    		type:'post',
-    		success:function(data){
-    			if(data.code ==1){
-    				layer.msg(data.msg);
+        $('#submit').click(function(e){
+	    	e.preventDefault();
+	    	var imgs=$('input[name=imgs]').val();
+	    	$.ajax({
+	    		url:"{:url('user/imglist')}",
+	    		data:{imgs:imgs},
+	    		type:'post',
+	    		success:function(data){
+	    			if(data.code ==1){
+	    				layer.msg(data.msg,{icon: 1,anim: 6, time: 2000},function(){
+	    					location.reload();
+	    				});
+	    			}else{
+	    				layer.msg(data.msg,{icon: 2,anim: 6, time: 2000});
+	    			}
+	    		},
+	    		error:function(){
+	    			layer.msg('error');
+	    		}
+	    	})
+	    })
+		$(document).on('click',".del",function(e){
+			e.preventDefault();
+			var index = $(".del").index(this)
+			,tag=","
+			,imgs=$('input[name=imgs]').val();
+			arrList = imgs.split(",");
+			$url=arrList[index];
+			arrList.splice(index,1);
+			var delimg=arrList.join(',');
+			$.post("{:url('user/unsetimg')}",{urls:$url},function(data){
+				if(data.code ==1){
+    				layer.msg(data.msg,{icon: 1,anim: 6, time: 2000});
     			}else{
-    				layer.msg(data.msg);
-    			}
-    		},
-    		error:function(){
-    			layer.msg('error');
-    		}
-    	})
-    })
-</script>
-<script type="text/javascript">
-
+    				layer.msg(data.msg,{icon: 2,anim: 6, time: 2000});
+    			}	
+			});
+		    $("input[name=imgs]").val(delimg);
+		    $(this).parent('.my_prop_imgitem').remove();
+		})
+	})
+    
 </script>
 </body>
 </html>

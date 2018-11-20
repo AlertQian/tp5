@@ -260,17 +260,39 @@ class User extends Common
     public function imglist(){
     	$userinfo=new UserInfo;
     	$userid=$this->userid;
+    	$showimgs=$userinfo->where('userid',$userid)->value('showimgs');
     	if(request()->isPost())
     	{
     		$data=input('post.');
     		$imgs=$data['imgs'];
+    		/*if(empty($imgs)){
+    			$this->error('请选择相片');
+    		}*/
+    		if($imgs == $showimgs){
+    			$this->success('已保存');
+    		}
     		$ret=$userinfo->where('userid',$userid)->update(['showimgs'=>$imgs]);
     		if($ret){
-				$this->success('保存成功','user/index');
+				$this->success('保存成功');
 			}else{
-				$this->error('提交失败');
+				$this->error('保存失败');
 			}
     	}
+    	if($showimgs){
+    		$imgsarr=explode(',', $showimgs);
+        	$this->assign('imgsarr', $imgsarr);
+    		$this->assign('showimgs',$showimgs);
+    	}
     	return $this->fetch();
+    }
+    //删除图片
+    public function unsetimg(){
+    	$urls=input('urls');
+    	$delet_url='.'.DS.$urls;
+    	if(unlink($delet_url)){
+			$this->success('已删除,记得点击保存');
+		}else{
+			$this->error('删除失败');
+		}
     }
 }
