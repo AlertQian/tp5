@@ -25,6 +25,9 @@ class Index extends Controller
         $ret=$user::alias('a')->join('lv_user_info b','a.userid=b.userid')->field('a.nickname,b.*')->where('a.userid',$id)->find();
         if($ret){
             $ret['place']=$ret['county'].$ret['town'];
+            $showimgs=$ret['showimgs'];
+            $imgsarr=explode(',', $showimgs);
+            $this->assign('imgsarr', $imgsarr);
             $this->assign('ret',$ret);
         }else{
             return "is not exit";

@@ -58,12 +58,17 @@
 	</div>
 	
 	<div class="picsaNode" id="picsaNode">
+		{if condition="isset($imgsarr)"}
 		<div class="inner">
 			<ul class="clearfix" id="picsaNodeInner">
-				
+				{volist name="imgsarr" id="vo"}
+				<li data-id="310"><img original="{$vo}" src="{$vo}"></li>	
+				{/volist}
 			</ul>
 		</div>
+		{else/}
 		<div class="noisreal" data-num="1">对不起，需要成为<a href="https://www.mh163k.com/jiaoyou/connections.aspx?action=commend" style="color:#36c;">推荐</a>会员才能查看我的相册</div>
+		{/if}
 	</div> 
 	<!-- <div class="slide_wrapper">
 		<div id="slide" class="clearfix" style="display:none">
