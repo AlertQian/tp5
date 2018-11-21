@@ -265,9 +265,6 @@ class User extends Common
     	{
     		$data=input('post.');
     		$imgs=$data['imgs'];
-    		/*if(empty($imgs)){
-    			$this->error('请选择相片');
-    		}*/
     		if($imgs == $showimgs){
     			$this->success('已保存');
     		}
