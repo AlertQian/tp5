@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta charset="utf-8" />
-<title>独倚画屏-征婚-163k地方门户网站系统</title>
+<title>{$ret.nickname}-征婚-163k地方门户网站系统</title>
 <meta name="keywords" content="交友栏目关键字,关键字,关键字,关键字,关键字" />
 <meta name="description" content="交友栏目描述" />
 <link href="/wap/main/css/jiaoyou-mb.css" rel="stylesheet" type="text/css">
@@ -14,6 +14,8 @@
 <meta name="format-detection" content="telephone=no" />
 <link rel="stylesheet" rev="stylesheet" href="/wap/main/css/mb-base.css?tc=150759" />
 <link rel="stylesheet" rev="stylesheet" href="/wap/main/css/mb-common.css?tc=150759" />
+<script src="/fds/js/jquery-1.11.3.min.js"></script>
+<script src="/static/layer/layer.js"></script>
 </head>
 <body>
 <div id="pageMain" class="page_srcoll page-current">
@@ -43,26 +45,32 @@
 		<div class="topr"><a href="javascript:void(0);" onClick="return addkeep();"><i class="icon"></i><span id="keepnum" data-iskeep="0">6</span></a></div>
 		<h2>{$ret.nickname}<i class="icon wsc1"></i><span class="ico1 display1">单</span> <span class="ico2 display0">离</span></h2>
 		<h3>{$ret.signature}</h3>
-		<h4 id="tagList"><span class="list">{$ret.place}</span><span class="list">{$improve.sign|signArrCn}</span><span class="list">{if condition="$improve.wages"}{$improve.wages|wagesArrCn}元{else/}未填写{/if}</span></h4>
+		<h4 id="tagList">
+			<span class="list">{$ret.place}</span>
+			{if condition="isset($improve)"}
+			<span class="list">{$improve.sign|signArrCn}</span>
+			<span class="list">{if condition="$improve.wages"}{$improve.wages|wagesArrCn}元{else/}未填写{/if}</span>
+			{/if}
+		</h4>
 		<div class="top-link"><a href="javascript:void(0);" class="links icon" id="givecontact2" data-selector="contact">联系Ta</a> <a href="javascript:void(0);" class="links links2 icon" id="handshandle2" data-selector="handshandle_way">红娘牵线</a></div>
 		<div class="tb_top_1">
 			<ul>
 				<li class="li_3"><em>{$ret.emotion|emotionCn}</em>感情</li>
 				<li class="li_3"><em>{$ret.stature}cm</em>身高</li>
 				<li class="li_3">
-					<em>{if condition="$improve.edu"}{$improve.edu|eduArrCn}{else/}未填写{/if}</em>学历
+					<em>{if condition="isset($improve) and $improve.edu"}{$improve.edu|eduArrCn}{else/}未填写{/if}</em>学历
 				</li>
 				<li class="li_3"><em>{$ret.yearsitem}</em>年龄</li>
 			</ul>
 		</div>
-	</div>
-	
+	</div>	
 	<div class="picsaNode" id="picsaNode">
-		{if condition="isset($imgsarr)"}
-		<div class="inner">
+		{if condition='isset($imgsarr)'}
+		<div class="inner" id="layer-photos-demo">
 			<ul class="clearfix" id="picsaNodeInner">
-				{volist name="imgsarr" id="vo"}
-				<li data-id="310"><img original="{$vo}" src="{$vo}"></li>	
+				{volist name='imgsarr' id='vo'}
+				<li data-id="310"><img src="{$vo}" layer-src="{$vo}"></li>	
+
 				{/volist}
 			</ul>
 		</div>
@@ -70,16 +78,6 @@
 		<div class="noisreal" data-num="1">对不起，需要成为<a href="https://www.mh163k.com/jiaoyou/connections.aspx?action=commend" style="color:#36c;">推荐</a>会员才能查看我的相册</div>
 		{/if}
 	</div> 
-	<!-- <div class="slide_wrapper">
-		<div id="slide" class="clearfix" style="display:none">
-			<div class="player_h5" id="player_h5" style="display:none; left:0;" data-width="36"><video controls webkit-playsinline playsinline autoplay></video></div>
-			<div id="content_player" style="background-color:#000;">
-				
-			</div>
-			<ul id="indicator2"></ul>
-			<span class="prev" id="slide_prev" style="display:none">上一张</span><span class="next" id="slide_next" style="display:none">下一张</span>
-		</div>
-	</div> -->
 	<div class="contain-middle">
 		<div class="containr">
 			<div class="containr_bd">
@@ -110,51 +108,34 @@
 			{/if}
 		</div>
 	</div>
+	{if condition='isset($userlist)'}
 	<div class="contain-tj">
 		<h2><i class="icon"></i><span>相似推荐</span><div class="line"></div></h2>
 		<ul class="contain-tjlist clearfix" id="myDiv">
-			
+			{volist name="userlist" id='vo'}
 			<li class="item">
-			<a href=""><img src="" alt="" /><p>x4demo9</p></a>
+			<a href="{:url('wap/index/homepage',['id'=>$vo.userid])}"><img src="{$vo.headimg}" alt="" /><p>{$vo.nickname}</p></a>
 			</li>
-			
-			<li class="item">
-			<a href=""><img alt="" /><p>x4demo7</p></a>
-			</li>
-			
-			<li class="item">
-			<a href=""><img alt="" /><p>ceshi_14</p></a>
-			</li>
-			
-			<li class="item">
-			<a href=""><img alt="" /><p>x4demo10</p></a>
-			</li>
-			
-			<li class="item">
-			<a href=""><img alt="" /><p>x4demo4</p></a>
-			</li>
-			
+			{/volist}
 		</ul>
-		<a href="javascript:void(0);" onClick="return getxiangsi();" style="display:block; text-align:center; margin:15px 0 0; padding:0 0 25px; color:#999;">轻击一下 换一换</a>
+		<!-- <a href="javascript:void(0);" onClick="return getxiangsi();" style="display:block; text-align:center; margin:15px 0 0; padding:0 0 25px; color:#999;">轻击一下 换一换</a> -->
 	</div>
+	{/if}
 	</div>
 	<div class="foot_link" id="foot_link">
 		<ul class="link">
-		<li><a href="https://www.mh163k.com/">首页</a></li><!--<li><a href="https://www.mh163k.com/request.ashx?action=iswap&iswap=0">电脑版</a></li>--><li><a href="https://www.mh163k.com/help/article_13.html">联系我们</a></li><!--<li><a href="http://app.163k.com/download.aspx?id=12299" data-img="../UploadFile/index/2015/9-7/201509071154513472674.png">客户端</a></li>--><li><a href="https://www.mh163k.com/service/">反馈留言</a></li><li class="po_re"><a href="javascript:void(0);" id="shangjiaSelect" data-isShow="0">工作平台</a></li>
+		<li><a href="https://www.mh163k.com/">首页</a></li><!--<li><a href="https://www.mh163k.com/request.ashx?action=iswap&iswap=0">电脑版</a></li>--><li><a href="https://www.mh163k.com/help/article_13.html">联系我们</a></li><!--<li><a href="http://app.163k.com/download.aspx?id=12299" data-img="../UploadFile/index/2015/9-7/201509071154513472674.png">客户端</a></li>--><li><a href="https://www.mh163k.com/service/">反馈留言</a></li>
 		</ul>
 		Copyright @ 2003-2018 mh163k.com
 	</div>
-	<p style="display:none;"></p>
 </div>
 <div class="windowIframe" id="windowIframe" data-loaded="0">
 	<div class="header"><a href="javascript:;" class="back close">返回</a><span id="windowIframeTitle"></span></div>
 	<div class="body" id="windowIframeBody"></div>
 </div>
-<div id="l-map" style="display:none;"></div>
 </div>
-<input type="hidden" value="7768" data-chrname="花开花落" data-styleid="0" data-chrpic="http://qzapp.qlogo.cn/qzapp/101042022/9248C4C4332FF187DC326AA496B16FBA/30" data-jifennun="0" data-daijinnum="0" data-isadmin="0" data-isfabukill="1" data-isrepiskill="1" data-isrepsaveiskill="0" id="LoginUserInfo" />
 <div class="bottom clearfix">
-	<div class="bottoml"><img src=""/><p><em>独倚画屏</em><span>女 90后</span></p><b></b></div>
+	<div class="bottoml"><img src="{$ret.headimg}"/><p><em>{$ret.nickname}</em><span>{$ret.sex} {$ret.yearsitem}</span></p><b></b></div>
 	<div class="bottomr">
 		<a href="javascript:void(0);" class="contents" id="givecontact" data-selector="contact"><i class="icon"></i>联系</a>
 		<a href="javascript:void(0);" class="giveflower" id="giveflower" data-selector="flower"><i class="icon"></i>送花</a>
@@ -162,5 +143,12 @@
 		<a href="javascript:void(0);" id="handshandle" data-selector="handshandle_way"><i class="icon"></i>牵线</a>
 	</div>
 </div>
+<script>
+//调用示例
+layer.photos({
+  photos: '#layer-photos-demo'
+  ,anim: 5 //0-6的选择，指定弹出图片动画类型，默认随机（请注意，3.0之前的版本用shift参数）
+}); 
+</script>
 </body>
 </html>
