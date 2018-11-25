@@ -10,8 +10,23 @@ class Index extends Controller
     public function index()
     {
         $user=new UserModel;
-        $ret=$user::alias('a')->join('lv_user_info b','a.userid=b.userid')->field('a.nickname,b.*')->select();
+        $orderby=input('orderby');
+        
+        $order="b.addtime desc";
+        $where="1=1";
+        if($orderby == 1){
+            $order="b.addtime desc";
+        }else if($orderby == 2){
+            $where="b.sex ='女'";
+        }else if($orderby == 3){
+            $where="b.sex ='男'";
+        }else{
+            $order="b.addtime desc";
+        }
+        $ret=$user::alias('a')->join('lv_user_info b','a.userid=b.userid')->field('a.nickname,b.*')->where($where)->order($order)->paginate(2);
+        $page=$ret->render();
         $this->assign('ret',$ret);
+        $this->assign('page',$page);
         return $this->fetch();
     }
     public function hello($idsa){

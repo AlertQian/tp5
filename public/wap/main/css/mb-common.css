@@ -29,7 +29,7 @@ font-weight:normal; text-shadow:none;}
 
 .nav_APP { position:absolute; right:5px; left:5px; top:52px; z-index:99; display:none;}
 .nav_APP ul { display:table; width:100%; border-radius:4px; background:rgba(0,0,0,.75); padding:7px 0 0; text-align:left;}
-.nav_APP ul li { display:inline-block; width:25%; text-align:center; margin:6px 0;}
+.nav_APP ul li { display:inline-block; width:30%; text-align:center; margin:6px 0;}
 .nav_APP a { color:#fff; display:block; padding-top:46px; font-size:14px; line-height:18px; position:relative;}
 .nav_APP .s { display:block; position:absolute; top:0; left:50%; background-size:42px auto; background-repeat:no-repeat; width:42px; height:42px; background-position:0 0; margin-left:-21px;}
 .nav_APP .arrow-up { position:absolute; top:-6px; right:13px; display:block; width:0; height:0; border-left:6px solid transparent; border-right:6px solid transparent; border-bottom:6px solid #000; opacity:.75;}
