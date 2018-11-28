@@ -1,0 +1,18 @@
+<div class="header">
+	<a href="javascript:history.back(-1)" id="header_back" class="back">返回</a>
+	<div class="search" id="search_ico" onclick="showNewPage('搜索',searchHtml,newPageSearch);" style="display:none;">搜索</div>
+	{if condition="$Think.session.nickname neq null"}
+	<a href="{:url('user/index')}" class="my ico_ok" id="login_ico">我的</a>
+	{else/}
+	<a href="{:url('login/index')}" class="my" id="login_ico">我的</a>
+	{/if}
+	<div class="type" id="nav_ico">导航</div>
+	<span id="ipageTitle" style="">{$title}</span>
+	<div class="nav_APP" id="nav_APP" style="display: none;">
+		<ul class="clearfix" id="nav_APP_data2">
+		<li><a href="{:url('wap/index/index')}">首页<s class="s" style="background-image:url(/wap/main/images/nav_icon/headIcon.png);"></s></a></li>
+		<li><a href="">活动<s class="s" style="background-image:url(/wap/main/images/nav_icon/201705251752370917548.png);"></s></a></li>
+		<li><a href="">社区<s class="s" style="background-image:url(/wap/main/images/nav_icon/201705251752556953922.png);"></s></a></li>
+		</ul><span class="arrow-up"></span>
+	</div>
+</div>

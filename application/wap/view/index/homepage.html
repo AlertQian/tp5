@@ -19,17 +19,7 @@
 </head>
 <body>
 <div id="pageMain" class="page_srcoll page-current">
-<div class="header">
-	<a href="javascript:history.back(-1)" id="header_back" class="back">返回</a>
-	<div class="search" id="search_ico" onclick="showNewPage('搜索',searchHtml,newPageSearch);" style="display:none;">搜索</div>
-	{if condition="$Think.session.nickname neq null"}
-	<a href="{:url('user/index')}" class="my ico_ok" id="login_ico">我的</a>
-	{else/}
-	<a href="{:url('login/index')}" class="my" id="login_ico">我的</a>
-	{/if}
-	<div class="type" id="nav_ico">导航</div>
-	<span id="ipageTitle" style="">{$ret.nickname}</span>
-</div>
+{include file="public/header" /}
 <div class="login_inner" id="login_inner"></div>
 <div class="o_main" style="padding-bottom:50px;">
 	<div class="contain-top">
@@ -122,12 +112,7 @@
 	</div>
 	{/if}
 	</div>
-	<div class="foot_link" id="foot_link">
-		<ul class="link">
-		<li><a href="https://www.mh163k.com/">首页</a></li><!--<li><a href="https://www.mh163k.com/request.ashx?action=iswap&iswap=0">电脑版</a></li>--><li><a href="https://www.mh163k.com/help/article_13.html">联系我们</a></li><!--<li><a href="http://app.163k.com/download.aspx?id=12299" data-img="../UploadFile/index/2015/9-7/201509071154513472674.png">客户端</a></li>--><li><a href="https://www.mh163k.com/service/">反馈留言</a></li>
-		</ul>
-		Copyright @ 2003-2018 mh163k.com
-	</div>
+	{include file="public/footer" /}
 </div>
 <div class="windowIframe" id="windowIframe" data-loaded="0">
 	<div class="header"><a href="javascript:;" class="back close">返回</a><span id="windowIframeTitle"></span></div>
@@ -144,7 +129,7 @@
 	</div>
 </div>
 <script>
-//调用示例
+//图片放大
 layer.photos({
   photos: '#layer-photos-demo'
   ,anim: 5 //0-6的选择，指定弹出图片动画类型，默认随机（请注意，3.0之前的版本用shift参数）

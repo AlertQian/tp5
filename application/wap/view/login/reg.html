@@ -28,11 +28,13 @@ body { background-color:#fff!important;}
 	<div class="search" id="search_ico" onClick="showNewPage('搜索',searchHtml,newPageSearch);" style="display:none;">搜索</div>
 	<a href="" class="my" id="login_ico">我的</a>
 	<div class="type" id="nav_ico">导航</div>
-	<div class="nav_APP" id="nav_APP"><ul class="clearfix">
-	<li><a href="https://www.mh163k.com/">首页<s class="s" style="background-image:url(../UploadFile/index/2017/5-26/201705260909230968494.png);"></s></a></li>
-	
-	<li><a href="https://www.mh163k.com/k/">外卖<s class="s" style="background-image:url(../UploadFile/index/2017/5-25/201705251751129176595.png);"></s></a></li>
-	</ul><span class="arrow-up"></span></div>
+	<div class="nav_APP" id="nav_APP" style="display: none;">
+		<ul class="clearfix" id="nav_APP_data2">
+		<li><a href="{:url('wap/index/index')}">首页<s class="s" style="background-image:url(/wap/main/images/nav_icon/headIcon.png);"></s></a></li>
+		<li><a href="">活动<s class="s" style="background-image:url(/wap/main/images/nav_icon/201705251752370917548.png);"></s></a></li>
+		<li><a href="">社区<s class="s" style="background-image:url(/wap/main/images/nav_icon/201705251752556953922.png);"></s></a></li>
+		</ul><span class="arrow-up"></span>
+	</div>
 </div>
 <div class="login_inner" id="login_inner"></div>
 <div class="o_main">
@@ -71,7 +73,7 @@ body { background-color:#fff!important;}
 		<li class="reg"><a href="{:url('login/index')}">账号登录</a></li>
 	</ul>
 </div>
+{include file="public/footer" /}
 </div>
-
 </body>
 </html>

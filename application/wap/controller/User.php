@@ -42,6 +42,7 @@ class User extends Common
 		}else{
 			return $this->redirect('login/index');
 		}
+		$this->assign('title','会员中心');
 		return $this->fetch();
 	}
 	public function set(){
@@ -107,6 +108,7 @@ class User extends Common
 		$this->assign('eduarr',$eduarr);
 		$this->assign('wagesarr',$wagesarr);
 		$this->assign('signarr',$signarr);
+		$this->assign('title','交友信息');
 		return $this->fetch();
 	}
 	//完善资料
@@ -154,6 +156,7 @@ class User extends Common
 		}
 	}
 	public function real(){
+		$this->assign('title','实名认证');
 		return $this->fetch();
 	}
 	//退出
@@ -254,6 +257,7 @@ class User extends Common
     			}
     		}
     	}
+    	$this->assign('title','安全设置');
     	return $this->fetch();
     }
     //上传图片
@@ -280,6 +284,7 @@ class User extends Common
         	$this->assign('imgsarr', $imgsarr);
     		$this->assign('showimgs',$showimgs);
     	}
+    	$this->assign('title','我的相册');
     	return $this->fetch();
     }
     //删除图片
