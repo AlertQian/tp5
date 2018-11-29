@@ -21,6 +21,7 @@
 #returnFirstPage1 { padding-bottom:0;}
 #returnFirstPage { padding-top:0;}
 .sys_more2 a { display:block; background-color:#fff; color:#ff7da9; border:1px solid #ff7da9; border-radius:3px; padding:4px 0;}
+.layui-flow-more {padding: 15px 0 25px;text-align: center;color: #aaa;border-bottom: 0 none;}
 </style>
 </head>
 <body>
@@ -45,45 +46,39 @@
 	</div>
 	<div class="slide_tabs" id="wrapper2">
 		<ul id="scroller2" style="width: 560px; transition-timing-function: cubic-bezier(0.1, 0.57, 0.1, 1); transition-duration: 500ms; transform: translate(0px, 0px) translateZ(0px);">
-			<li class="select"><a href="?orderby=" class="item" data-orderby="">首页推荐</a></li>
+			<li class="select"><a href="javascript:;" class="item" data-orderby="">首页推荐</a></li>
 			<!-- <li><a href="?orderby=6" class="item" data-orderby="6">附近</a></li> -->
 			<li><a href="javascript:;" class="item" data-orderby="1">最新加入</a></li>
 			<li><a href="javascript:;" class="item" data-orderby="2">女神榜</a></li>
-			<li><a href="" class="item" data-orderby="3">男神榜</a></li>
+			<li><a href="javascript:;" class="item" data-orderby="3">男神榜</a></li>
 			<!-- <li><a href="?orderby=4" class="item" data-orderby="4">鲜花榜</a></li>
 			<li><a href="?orderby=5" class="item" data-orderby="5">收藏榜</a></li> -->
 		</ul>
 		<!-- <div class="more" id="iscrollto"><span></span></div> -->
 	</div>
 	<div class="blank10"></div>
-	<div class="fullbg" id="fullbg" style="display:none;"><i class="pull2"></i></div>
-	
+	<div class="fullbg" id="fullbg" style="display:none;"><i class="pull2"></i></div>	
 	<div class="friend" id="mapPoint">
-		<div class="sys_more2" id="returnFirstPage1" style="display:none;"><a href="javascript:void(0);" onclick="return returnFirstpage(this);">返回第一页</a></div>
-		<ul class="sh-list friend-list" id="pagingList">
-		    
-		</ul>
-		<div id="pullUp" style="display:none;"><span class="loader">loadding</span></div>
-		<div class="pageNav2" id="pageNavigation">
-			<div class="FirstPage"><span class="kill">&lt;</span></div><div class="EndPage"><a href="#" onclick="return getPagingGlobal({'p':'2'});" title="下一页">&gt;</a></div><span class="pageNo">1/3</span>
-		</div>
-		<div class="sys_more2" id="returnFirstPage" style="display:none;"><a href="javascript:void(0);" onclick="return returnFirstpage(this);">返回第一页</a></div>
-		
+	    <ul class="sh-list friend-list" id="pagingList"></ul>
+	   <!--  <div class="sys_more2" id="returnFirstPage"><a href="{:url('wap/index/index')}">返回第一页</a></div> -->
 	</div>
 	{include file="public/footer" /}
 	</div>
 </div>
 <script type="text/javascript">
-layui.use('flow', function(){
+layui.use(['flow','layer'], function(){
   var $ = layui.jquery; //不用额外加载jQuery，flow模块本身是有依赖jQuery的，直接用即可。
-  var flow = layui.flow;
-  flow.lazyimg();
+  var flow = layui.flow
+     ,layer = layui.layer
+  $orderby='';
   flow.load({
     elem: '#pagingList' //指定列表容器
+    ,isLazyimg:true
     ,done: function(page, next){ //到达临界点（默认滚动触发），触发下一页
       var lis = [];
+      
       //以jQuery的Ajax请求为例，请求下一页数据（注意：page是从2开始返回）
-      $.get('/wap/index/data?page='+page, function(res){
+      $.get('/wap/index/data?page='+page+'&orderby='+$orderby, function(res){
         //假设你的列表返回在data集合中
         layui.each(res.data, function(index, item){
           $html='<li class="item clearfix" id="item81" data-x="116.417025" data-y="39.918348">'+
@@ -101,6 +96,36 @@ layui.use('flow', function(){
         next(lis.join(''), page < res.pages);    
       });
     }
+  });
+  $('.item').click(function(data){
+  	$orderby=$(this).data('orderby');
+  	$('#pagingList').remove();
+  	$('#mapPoint').append('<ul class="sh-list friend-list" id="pagingList"></ul>');
+  	flow.load({
+    elem: '#pagingList' //指定列表容器
+    ,isLazyimg:true
+    ,done: function(page, next){ //到达临界点（默认滚动触发），触发下一页
+      var lis = [];
+      //以jQuery的Ajax请求为例，请求下一页数据（注意：page是从2开始返回）
+      $.get('/wap/index/data?page='+page+'&orderby='+$orderby, function(res){
+        //假设你的列表返回在data集合中
+        layui.each(res.data, function(index, item){
+          $html='<li class="item clearfix" id="item81" data-x="116.417025" data-y="39.918348">'+
+                '<a href="/jiaoyou/'+item.userid+'.html" class="link" onclick="return setCookieID(\'81\');"><div class="sh-img">'+
+                '<img class="img" lay-src="'+item.headimg+'"  onerror="this.src=\'/wap/main/images/kuaison_nofind_product.gif\';"><p><i class="icon display1"></i></p></div>'+
+                '<div class="wen">'+
+                '<h1><span class="name"><span class="commend1">'+item.nickname+'</span><i class="icon man0"></i><i class="icon wsc1"></i><s class="s keepnum">6</s><s class="s flowernum">13</s></span></h1>'+
+                '<h2><span>'+item.yearsitem+'</span><span>'+item.stature+'cm</span></h2>'+
+                '<p>'+item.signature+'</p><p class="juli">距离未知</p>'+
+                '</div><div class="hashongbao_forbox" style="top:auto; bottom:10px; right:8px;"></div></a></li>';
+          lis.push($html);
+        }); 
+        //执行下一页渲染，第二参数为：满足“加载更多”的条件，即后面仍有分页
+        //pages为Ajax返回的总页数，只有当前页小于总页数的情况下，才会继续出现加载更多
+        next(lis.join(''), page < res.pages);
+      });
+    }
+    });
   });
 });
 </script>
