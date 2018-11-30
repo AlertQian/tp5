@@ -13,7 +13,7 @@
 <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0"/>
 <meta name="format-detection" content="telephone=no" />
 <link rel="stylesheet" rev="stylesheet" href="/wap/main/css/mb-base.css?tc=150759" />
-<link rel="stylesheet" rev="stylesheet" href="/wap/main/css/mb-common.css?tc=150759" />
+<link rel="stylesheet" rev="stylesheet" href="/wap/main/css/mb-common.css" />
 <script src="/fds/js/jquery-1.11.3.min.js"></script>
 <script src="/static/layer/layer.js"></script>
 </head>
@@ -33,7 +33,7 @@
 		<div class="topm"><img src="{$ret.headimg}"><p class="display1">推荐会员</p></div>
 		<div class="topl" id="giveflower2" data-selector="flower"><i class="icon"></i><span id="flowernum">13</span></div>
 		<div class="topr"><a href="javascript:void(0);" onClick="return addkeep();"><i class="icon"></i><span id="keepnum" data-iskeep="0">6</span></a></div>
-		<h2>{$ret.nickname}<i class="icon wsc1"></i><span class="ico1 display1">单</span> <span class="ico2 display0">离</span></h2>
+		<h2>{$ret.nickname}<i class="icon wsc1"></i><!-- <span class="ico1 display1">单</span> <span class="ico2 display0">离</span> --></h2>
 		<h3>{$ret.signature}</h3>
 		<h4 id="tagList">
 			<span class="list">{$ret.place}</span>
@@ -42,7 +42,11 @@
 			<span class="list">{if condition="$improve.wages"}{$improve.wages|wagesArrCn}元{else/}未填写{/if}</span>
 			{/if}
 		</h4>
-		<div class="top-link"><a href="javascript:void(0);" class="links icon" id="givecontact2" data-selector="contact">联系Ta</a> <a href="javascript:void(0);" class="links links2 icon" id="handshandle2" data-selector="handshandle_way">红娘牵线</a></div>
+		<div class="top-link">
+		<a href="javascript:void(0);" class="links icon" id="givecontact2" data-selector="contact">联系Ta</a>
+		<a href="javascript:void(0);" class="links links2 icon" id="handshandle2" data-selector="handshandle_way">私信消息</a>
+		<!-- <a href="javascript:void(0);" class="links links2 icon" id="handshandles2" data-selector="handshandle_way">私信消息</a> -->
+	    </div>
 		<div class="tb_top_1">
 			<ul>
 				<li class="li_3"><em>{$ret.emotion|emotionCn}</em>感情</li>
@@ -133,7 +137,23 @@
 layer.photos({
   photos: '#layer-photos-demo'
   ,anim: 5 //0-6的选择，指定弹出图片动画类型，默认随机（请注意，3.0之前的版本用shift参数）
-}); 
+});
+$(function(){
+	$('#handshandle2').click(function(){
+		var html='<textarea class="msg_cont" id="content" placeholder="请发送消息..."></textarea>';
+		var index =layer.open({
+		 	type: 1,
+		 	title:'发送私信',
+		 	area:['90%','220px'],
+		 	btn:['确定','取消'],
+            content: html,
+            yes:function(){
+            	console.log('123');
+            	layer.close(index);
+            }
+		});
+	})
+})
 </script>
 </body>
 </html>

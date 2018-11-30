@@ -623,3 +623,5 @@ body .share_fd_po .close { display:none; position:absolute; top:8px; right:8px; 
 .mianze_fixed .bd .bold { font-weight:bold; line-height: 30px; font-size: 16px;color: #f96;}
 .mianze_fixed .btn { display:block; border-top:1px solid #eee; color:#5cc55c; font-size:14px; line-height:50px; height:50px; margin-top:20px;}
 .mianze_mask { position:fixed; left:0; top:0; right:0; bottom:0; background-color:rgba(0,0,0,.7); z-index:999;}
+
+.msg_cont{width: 84%;height: 75px;resize: none;padding: 10px;font-size: 13px;margin-top: 10px;-webkit-appearance: none;}
