@@ -108,7 +108,7 @@ width: 60%;text-align: left;color: #666;
               <label class="ly-form-label">感情</label>
               <div class="layui-input-inline">
               <select name="emotion" lay-verify="required" lay-search="">
-                <option value="{$ret.emotion?$ret.emotion:''}">{if condition='$ret.emotion'}{$ret.emotion|emotionCn}{else/}必填{/if}</option>
+                <option value="{$ret.emotion?$ret.emotion:''}">{if condition='isset($ret.emotion)'}{$ret.emotion|emotionCn}{else/}必填{/if}</option>
                 <option value="1">单身</option>
                 <option value="2">离异</option>
                 <option value="3">保密</option>

@@ -3,6 +3,7 @@ namespace app\wap\controller;
 use app\index\model\UserInfo;
 use app\index\model\UserImprove;
 use app\index\model\Yaoqiu;
+use app\index\model\Message;
 use app\index\model\User as UserModel;
 use think\Controller;
 class Index extends Controller
@@ -39,7 +40,7 @@ class Index extends Controller
         $user=new UserModel;
         $userimprove=new UserImprove;
         $yaoqiu=new Yaoqiu;
-        $ret=$user::alias('a')->join('lv_user_info b','a.userid=b.userid')->field('a.nickname,b.*')->where('a.userid',$id)->find();
+        $ret=$user::alias('a')->join('lv_user_info b','a.userid=b.userid')->field('a.nickname,a.pwd_hash,b.*')->where('a.userid',$id)->find();
         if($ret){
             $ret['place']=$ret['county'].$ret['town'];
             $headpic=$ret['headimg'];
@@ -78,5 +79,59 @@ class Index extends Controller
     //服务协议
     public function xieyi(){
         return $this->fetch();
+    }
+    public function message(){
+        $model=new Message;
+        $user=new UserModel;
+        $userinfo=new UserInfo;
+        $validate=session('validate');
+        $data=input('post.');
+        $content=$data['content'];
+        if(empty($content)){
+            $this->error('请填写发送内容');
+        }
+        if($validate){
+            $userid=$user::where('pwd_hash',$validate)->value('userid');
+            $obj=$userinfo::where('userid',$userid)->find();
+            if($obj){
+                $ispass=$obj['ispass'];
+                if($ispass==1){
+                    //真实发送
+                    $data1=[
+                        'user_id' => $userid,
+                        'friend_id' =>$data['userid'],
+                        'sender_id' => $userid,
+                        'receiver_id' =>$data['userid'],
+                        'message_type' => 1,
+                        'message_content' =>$data['content'],
+                        'send_time' =>time(),
+                        'status' => 1
+                    ];
+                    //非真实发送
+                    $data2=[
+                        'user_id' => $data['userid'],
+                        'friend_id' => $userid,
+                        'sender_id' => $data['userid'],
+                        'receiver_id' => $userid,
+                        'message_type' => 1,
+                        'message_content' => $data['content'],
+                        'send_time' =>time(),
+                        'status' => 1
+                    ];
+                    $ret=$model->saveAll([$data1,$data2]);
+                    if($ret){
+                        $this->success('已发送');
+                    }else{
+                        $this->error('发送失败');
+                    }
+                }else{
+                    $this->error('您的会员还未通过审核');
+                }
+            }else{
+                $this->error('请完善资料');
+            }
+        }else{
+            $this->error('请先登入');
+        }
     }
 }

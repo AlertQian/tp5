@@ -9,6 +9,7 @@
 <link href="/wap/main/css/jiaoyou-mb-{$ret.tempnum}.css" rel="stylesheet" type="text/css">
 <style type="text/css">
 .headerblack { background-color:#000!important;}
+.layui-layer-content{text-align: center;}
 </style>
 <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0"/>
 <meta name="format-detection" content="telephone=no" />
@@ -42,11 +43,13 @@
 			<span class="list">{if condition="$improve.wages"}{$improve.wages|wagesArrCn}元{else/}未填写{/if}</span>
 			{/if}
 		</h4>
+	    {if condition='$Think.session.validate neq $ret.pwd_hash'}
 		<div class="top-link">
 		<a href="javascript:void(0);" class="links icon" id="givecontact2" data-selector="contact">联系Ta</a>
 		<a href="javascript:void(0);" class="links links2 icon" id="handshandle2" data-selector="handshandle_way">私信消息</a>
 		<!-- <a href="javascript:void(0);" class="links links2 icon" id="handshandles2" data-selector="handshandle_way">私信消息</a> -->
 	    </div>
+	    {/if}
 		<div class="tb_top_1">
 			<ul>
 				<li class="li_3"><em>{$ret.emotion|emotionCn}</em>感情</li>
@@ -124,7 +127,9 @@
 </div>
 </div>
 <div class="bottom clearfix">
-	<div class="bottoml"><img src="{$ret.headimg}"/><p><em>{$ret.nickname}</em><span>{$ret.sex} {$ret.yearsitem}</span></p><b></b></div>
+	<div class="bottoml"><img src="{$ret.headimg}"/><p><em>{$ret.nickname}</em><span>{$ret.sex} {$ret.yearsitem}</span></p><b></b>
+		<input type="hidden" name="userid" value="{$ret.userid}">
+	</div>
 	<div class="bottomr">
 		<a href="javascript:void(0);" class="contents" id="givecontact" data-selector="contact"><i class="icon"></i>联系</a>
 		<a href="javascript:void(0);" class="giveflower" id="giveflower" data-selector="flower"><i class="icon"></i>送花</a>
@@ -141,6 +146,7 @@ layer.photos({
 $(function(){
 	$('#handshandle2').click(function(){
 		var html='<textarea class="msg_cont" id="content" placeholder="请发送消息..."></textarea>';
+		var userid=$('input[name=userid]').val();
 		var index =layer.open({
 		 	type: 1,
 		 	title:'发送私信',
@@ -148,10 +154,13 @@ $(function(){
 		 	btn:['确定','取消'],
             content: html,
             yes:function(){
-            	console.log('123');
+            	var content=$('#content').val();
+            	$.post('{:url("/wap/index/message")}',{content:content,userid:userid},function(data){
+            		layer.msg(data.msg);
+            	})
             	layer.close(index);
             }
-		});
+		});     
 	})
 })
 </script>
