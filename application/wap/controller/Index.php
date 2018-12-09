@@ -105,7 +105,7 @@ class Index extends Controller
                         'message_type' => 1,
                         'message_content' =>$data['content'],
                         'send_time' =>time(),
-                        'status' => 1
+                        'status' => 2
                     ];
                     //非真实发送
                     $data2=[

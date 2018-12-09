@@ -30,6 +30,10 @@ class User extends Common
 		$user=new UserModel;
 		$userid=$this->userid;
 		$obj=$user::field('nickname,userid')->where('userid',$userid)->find();
+		$msg=db('message')->where(['user_id'=>$userid,'status'=> 1])->select();
+		if($msg){
+			$this->assign('msg',$msg);
+		}
 		if($obj){
 			$ret=$userinfo->where('userid',$userid)->find();
 			if($ret){
@@ -296,5 +300,13 @@ class User extends Common
 		}else{
 			$this->error('删除失败');
 		}
+    }
+    //私信消息
+    public function message(){
+    	$userid=$this->userid;
+    	$ret=db('message')->where(['user_id'=>$userid])->order('id desc')->select();
+    	$this->assign('title','私信列表');
+    	$this->assign('ret',$ret);
+    	return $this->fetch();
     }
 }
