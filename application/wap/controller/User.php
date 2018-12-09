@@ -303,10 +303,21 @@ class User extends Common
     }
     //私信消息
     public function message(){
+    	$userinfo=new UserInfo;
+		$user=new UserModel;
     	$userid=$this->userid;
     	$ret=db('message')->where(['user_id'=>$userid])->order('id desc')->select();
     	$this->assign('title','私信列表');
-    	$this->assign('ret',$ret);
+    	if($ret){
+    		foreach ($ret as $key => $value) {
+    			$friend_id=$value['friend_id'];
+    			$nickname=$user->where('userid',$friend_id)->value('nickname');
+    			$headimg=$userinfo->where('userid',$friend_id)->value('headimg');
+    			$ret[$key]['nickname']=$nickname;
+    			$ret[$key]['headimg']=$headimg;
+    		}
+    		$this->assign('ret',$ret);
+    	}
     	return $this->fetch();
     }
 }

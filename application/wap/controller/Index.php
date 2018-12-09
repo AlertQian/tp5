@@ -50,8 +50,10 @@ class Index extends Controller
             $showimgs=$ret['showimgs'];
             $sex=$ret['sex'];
             $yearsitem=$ret['yearsitem'];
-            $imgsarr=explode(',', $showimgs);
-            $this->assign('imgsarr', $imgsarr);
+            if($showimgs){
+                $imgsarr=explode(',', $showimgs);
+                $this->assign('imgsarr', $imgsarr);
+            }
             $this->assign('ret',$ret);
         }else{
             return "is not exit";

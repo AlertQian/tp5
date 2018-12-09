@@ -66,13 +66,13 @@
 		<div class="inner" id="layer-photos-demo">
 			<ul class="clearfix" id="picsaNodeInner">
 				{volist name='imgsarr' id='vo'}
-				<li data-id="310"><img src="{$vo}" layer-src="{$vo}"></li>	
-
+				<li data-id="310"><img src="{$vo}" layer-src="{$vo}"></li>
 				{/volist}
 			</ul>
 		</div>
 		{else/}
-		<div class="noisreal" data-num="1">对不起，需要成为<a href="https://www.mh163k.com/jiaoyou/connections.aspx?action=commend" style="color:#36c;">推荐</a>会员才能查看我的相册</div>
+		<!-- <div class="noisreal" data-num="1">对不起，需要成为<a href="" style="color:#36c;">推荐</a>会员才能查看我的相册</div> -->
+		<div class="noisreal" data-num="1">对不起，该会员还没有上传相片</div>
 		{/if}
 	</div> 
 	<div class="contain-middle">

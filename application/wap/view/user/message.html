@@ -5,7 +5,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 	<meta name="renderer" content="webkit">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-	<title>安全设置</title>
+	<title>南城交友网</title>
 	<link rel="stylesheet" href="/static/layui/css/layui.css">
 	<link rel="stylesheet" href="/wap/main/css/mb-common.css" />
     <script src="/static/layui/layui.js"></script>
@@ -20,27 +20,29 @@
 	.msglist .juli{color: #666}
 	.msglist .tip{position: absolute;right: 0px;color: #8cbb5a;}
 	.msglist .tip a{color: #8cbb5a;}
+	.nomsg{text-align: center;color: #666;padding: 10px;font-size: 14px;}
 </style>
 <body>
 {include file="public/header" /}
 <div class="wrapper">
 	<div class="friend">
+		{if condition="isset($ret)"}
 	    <ul class="msglist">
+	    	{volist name="ret" id="vo"}
 	    	<li class="item">
 	    		<div class="sh-img">
-	    			<img class="img" onerror="this.src='/wap/main/images/kuaison_nofind_product.gif';" src="\uploads\headimg\20181114\8c39577f5042c6681acf5a594c5bd036.png">
+	    			<a href="{:url('wap/index/homepage',['id'=>$vo.friend_id])}">
+	    			<img class="img" onerror="this.src='/wap/main/images/kuaison_nofind_product.gif';" src="{$vo.headimg}">
+	    		    </a>
 	    		</div>
-	    		<div class="wen"><h2><span class="name">梦想的世界</span></h2><p>我的宿命就是遇到了你，一瞬间凝固停止延续到永远</p><p class="juli">2018-12-05 08:40:51 <span class="tip"><a href="">共2条对话</a> | <a href="">回复</a> | <a href="">删除</a></span></p>
-	    		</div>
-	    	</li>
-	    	<li class="item">
-	    		<div class="sh-img">
-	    			<img class="img" onerror="this.src='/wap/main/images/kuaison_nofind_product.gif';" src="\uploads\headimg\20181114\8c39577f5042c6681acf5a594c5bd036.png">
-	    		</div>
-	    		<div class="wen"><h2><span class="name">梦想的世界</span></h2><p>我的宿命就是遇到了你，一瞬间凝固停止延续到永远</p><p class="juli">2018-12-05 08:40:51 <span class="tip"><a href="">共2条对话</a> | <a href="">回复</a> | <a href="">删除</a></span></p>
+	    		<div class="wen"><h2><span class="name">{$vo.nickname}</span></h2><p>{$vo.message_content}</p><p class="juli">{$vo.send_time|date='Y-m-d H:i:s',###}<span class="tip"><a href="">共2条对话</a> | <a href="">回复</a> | <a href="">删除</a></span></p>
 	    		</div>
 	    	</li>
+	    	{/volist}
 	    </ul>
+	    {else/}
+	    <div class="nomsg">暂无消息</div>
+	    {/if}
 	</div>
 	{include file="public/footer" /}
 </div>
