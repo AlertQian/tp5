@@ -113,8 +113,8 @@ class Index extends Controller
                     $data2=[
                         'user_id' => $data['userid'],
                         'friend_id' => $userid,
-                        'sender_id' => $data['userid'],
-                        'receiver_id' => $userid,
+                        'sender_id' => $userid,
+                        'receiver_id' => $data['userid'],
                         'message_type' => 1,
                         'message_content' => $data['content'],
                         'send_time' =>time(),

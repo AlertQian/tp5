@@ -5,6 +5,7 @@ use app\index\model\UserImprove;
 use app\index\model\Yaoqiu;
 use app\index\model\User as UserModel;
 use think\Validate;
+use think\Db;
 /**
  * 
  */
@@ -306,8 +307,11 @@ class User extends Common
     	$userinfo=new UserInfo;
 		$user=new UserModel;
     	$userid=$this->userid;
-    	$ret=db('message')->where(['user_id'=>$userid])->order('id desc')->select();
+    	//$ret=db('message')->where(['user_id'=>$userid])->field('*,count(id) count')->order('id desc')->group('friend_id')->select();
+    	//$ret=db::query("select *,count(id) count from lv_message where id in(select max(id) from lv_message group by friend_id)and user_id =".$userid." order by id;");
+    	$ret=db::query("SELECT *,MAX(id) AS id, COUNT(id) AS count FROM lv_message WHERE user_id =".$userid." group by friend_id order by id;");
     	$this->assign('title','私信列表');
+    	$this->assign('userid',$userid);
     	if($ret){
     		foreach ($ret as $key => $value) {
     			$friend_id=$value['friend_id'];

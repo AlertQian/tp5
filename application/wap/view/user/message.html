@@ -16,9 +16,10 @@
 	.msglist .sh-img{position: absolute;top: 16px;left: 0;}
 	.msglist img{display: block;width: 70px;height: 70px;border-radius: 3px;}
 	.msglist .name{color: #8cbb5a;font-size: 14px;}
+	.msglist .send{color: #333;font-size: 14px;padding-right: 5px;}
 	.msglist p{color: #333;font-size: 12px;line-height: 18px;padding: 5px 0px;}
 	.msglist .juli{color: #666}
-	.msglist .tip{position: absolute;right: 0px;color: #8cbb5a;}
+	.msglist .tip{position: absolute;right: 0px;color: #8cbb5a;top:65px;}
 	.msglist .tip a{color: #8cbb5a;}
 	.nomsg{text-align: center;color: #666;padding: 10px;font-size: 14px;}
 </style>
@@ -35,8 +36,11 @@
 	    			<img class="img" onerror="this.src='/wap/main/images/kuaison_nofind_product.gif';" src="{$vo.headimg}">
 	    		    </a>
 	    		</div>
-	    		<div class="wen"><h2><span class="name">{$vo.nickname}</span></h2><p>{$vo.message_content}</p><p class="juli">{$vo.send_time|date='Y-m-d H:i:s',###}<span class="tip"><a href="">共2条对话</a> | <a href="">回复</a> | <a href="">删除</a></span></p>
+	    		<a href="{:url('wap/user/msginfo',['user_id'=>$vo.user_id,'friend_id'=>$vo.friend_id])}">
+	    		<div class="wen"><h2>{if condition="$vo.sender_id eq $userid"}<span class="send">我发送给</span>{/if}<span class="name">{$vo.nickname}</span></h2><p>{$vo.message_content}</p><p class="juli">{$vo.send_time|date='Y-m-d H:i:s',###}</p>
 	    		</div>
+	    		</a>
+	    		<span class="tip"><a href="">共{$vo.count}条对话</a> | <a href="">回复</a> | <a href="">删除</a></span>
 	    	</li>
 	    	{/volist}
 	    </ul>
