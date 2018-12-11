@@ -31,7 +31,7 @@ class User extends Common
 		$user=new UserModel;
 		$userid=$this->userid;
 		$obj=$user::field('nickname,userid')->where('userid',$userid)->find();
-		$msg=db('message')->where(['user_id'=>$userid,'status'=> 1])->select();
+		$msg=db('message')->where(['user_id'=>$userid,'status'=> 1])->where('friend_id !='.$userid)->select();
 		if($msg){
 			$this->assign('msg',$msg);
 		}
@@ -307,12 +307,34 @@ class User extends Common
     	$userinfo=new UserInfo;
 		$user=new UserModel;
     	$userid=$this->userid;
-    	//$ret=db('message')->where(['user_id'=>$userid])->field('*,count(id) count')->order('id desc')->group('friend_id')->select();
-    	//$ret=db::query("select *,count(id) count from lv_message where id in(select max(id) from lv_message group by friend_id)and user_id =".$userid." order by id;");
-    	$ret=db::query("SELECT *,MAX(id) AS id, COUNT(id) AS count FROM lv_message WHERE user_id =".$userid." group by friend_id order by id;");
+    	$ret=db::query("select a.*,count(a.id) count from (select * from lv_message order by id desc) as a WHERE a.user_id =".$userid." group by friend_id order by id desc;");
     	$this->assign('title','私信列表');
     	$this->assign('userid',$userid);
     	if($ret){
+    		foreach ($ret as $key => $value) {
+    			$friend_id=$value['friend_id'];
+    			$msgnotice=db('message')->field('id')->where(['friend_id'=>$friend_id,'status'=>1])->count('id');
+    			$nickname=$user->where('userid',$friend_id)->value('nickname');
+    			$headimg=$userinfo->where('userid',$friend_id)->value('headimg');
+    			$ret[$key]['nickname']=$nickname;
+    			$ret[$key]['headimg']=$headimg;
+    			$ret[$key]['msgnotice']=$msgnotice;
+    		}
+    		$this->assign('ret',$ret);
+    	}
+    	return $this->fetch();
+    }
+    //消息内容
+    public function msginfo(){
+    	$userinfo=new UserInfo;
+		$user=new UserModel;
+    	$user_id=input('user_id');
+    	$friend_id=input('friend_id');
+    	$userid=$this->userid;
+    	$this->assign('userid',$userid);
+    	$ret=db('message')->where(['user_id'=>$user_id,'friend_id'=>$friend_id])->select();
+    	if($ret){
+    		db('message')->where(['user_id'=>$user_id,'friend_id'=>$friend_id])->update(['status'=>2]);
     		foreach ($ret as $key => $value) {
     			$friend_id=$value['friend_id'];
     			$nickname=$user->where('userid',$friend_id)->value('nickname');
@@ -322,6 +344,7 @@ class User extends Common
     		}
     		$this->assign('ret',$ret);
     	}
+    	$this->assign('title','消息内容');
     	return $this->fetch();
     }
 }
