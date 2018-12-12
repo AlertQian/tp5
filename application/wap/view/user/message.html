@@ -36,7 +36,7 @@
 	    			<a href="{:url('wap/index/homepage',['id'=>$vo.friend_id])}">
 	    			<img class="img" onerror="this.src='/wap/main/images/kuaison_nofind_product.gif';" src="{$vo.headimg}">
 	    		    </a>
-	    		    <span class="tips">{$vo.msgnotice}</span>
+	    		    {if condition="$vo.msgnotice"}<span class="tips">{$vo.msgnotice}</span>{/if}
 	    		</div>
 	    		<a href="{:url('wap/user/msginfo',['user_id'=>$vo.user_id,'friend_id'=>$vo.friend_id])}">
 	    		<div class="wen"><h2>{if condition="$vo.sender_id eq $userid"}<span class="send">我发送给</span>{/if}<span class="name">{$vo.nickname}</span></h2><p>{$vo.message_content}</p><p class="juli">{$vo.send_time|date='Y-m-d H:i:s',###}</p>

@@ -313,7 +313,7 @@ class User extends Common
     	if($ret){
     		foreach ($ret as $key => $value) {
     			$friend_id=$value['friend_id'];
-    			$msgnotice=db('message')->field('id')->where(['friend_id'=>$friend_id,'status'=>1])->count('id');
+    			$msgnotice=db('message')->where(['friend_id'=>$friend_id,'status'=>1,'user_id'=>$userid])->count('id');
     			$nickname=$user->where('userid',$friend_id)->value('nickname');
     			$headimg=$userinfo->where('userid',$friend_id)->value('headimg');
     			$ret[$key]['nickname']=$nickname;
