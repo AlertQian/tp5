@@ -307,7 +307,7 @@ class User extends Common
     	$userinfo=new UserInfo;
 		$user=new UserModel;
     	$userid=$this->userid;
-    	$ret=db::query("select a.*,count(a.id) count from (select * from lv_message order by id desc) as a WHERE a.user_id =".$userid." group by friend_id order by id desc;");
+    	$ret=db::query("select a.*,count(a.id) count from (select * from lv_message where user_id =".$userid." order by id desc) as a group by friend_id order by id desc;");
     	$this->assign('title','私信列表');
     	$this->assign('userid',$userid);
     	if($ret){
@@ -334,13 +334,16 @@ class User extends Common
     	$this->assign('userid',$userid);
     	$ret=db('message')->where(['user_id'=>$user_id,'friend_id'=>$friend_id])->select();
     	if($ret){
+    		//更新阅读状态
     		db('message')->where(['user_id'=>$user_id,'friend_id'=>$friend_id])->update(['status'=>2]);
     		foreach ($ret as $key => $value) {
     			$friend_id=$value['friend_id'];
     			$nickname=$user->where('userid',$friend_id)->value('nickname');
-    			$headimg=$userinfo->where('userid',$friend_id)->value('headimg');
+    			$friend_headimg=$userinfo->where('userid',$friend_id)->value('headimg');
+    			$my_headimg=$userinfo->where('userid',$userid)->value('headimg');
     			$ret[$key]['nickname']=$nickname;
-    			$ret[$key]['headimg']=$headimg;
+    			$ret[$key]['friend_headimg']=$friend_headimg;
+    			$ret[$key]['my_headimg']=$my_headimg;
     		}
     		$this->assign('ret',$ret);
     	}

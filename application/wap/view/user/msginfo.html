@@ -33,15 +33,21 @@
 	    	{volist name="ret" id="vo"}
 	    	<li class="item">
 	    		<div class="sh-img">
-	    			<a href="{:url('wap/index/homepage',['id'=>$vo.friend_id])}">
-	    			<img class="img" onerror="this.src='/wap/main/images/kuaison_nofind_product.gif';" src="{$vo.headimg}">
+	    			{if condition="$vo.sender_id eq $userid"}
+	    			<a href="{:url('wap/index/homepage',['id'=>$vo.user_id])}">
+	    			<img class="img" onerror="this.src='/wap/main/images/kuaison_nofind_product.gif';" src="{$vo.my_headimg}">
 	    		    </a>
+	    		    {else/}
+	    		    <a href="{:url('wap/index/homepage',['id'=>$vo.friend_id])}">
+	    			<img class="img" onerror="this.src='/wap/main/images/kuaison_nofind_product.gif';" src="{$vo.friend_headimg}">
+	    		    </a>
+	    		    {/if}
 	    		</div>
 	    		<a href="{:url('wap/user/msginfo',['user_id'=>$vo.user_id,'friend_id'=>$vo.friend_id])}">
 	    		<div class="wen"><h2>{if condition="$vo.sender_id eq $userid"}<span class="name">我</span>{else/}<span class="name">{$vo.nickname}</span>{/if}</h2><p>{$vo.message_content}</p><p class="juli">{$vo.send_time|date='Y-m-d H:i:s',###}</p>
 	    		</div>
 	    		</a>
-	    		<span class="tip"> <a href="">回复</a> | <a href="">删除</a></span>
+	    		<span class="tip"><a href="">删除</a></span>
 	    	</li>
 	    	{/volist}
 	    </ul>
