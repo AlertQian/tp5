@@ -8,10 +8,11 @@
 	<title>南城交友网</title>
 	<link rel="stylesheet" href="/static/layui/css/layui.css">
 	<link rel="stylesheet" href="/wap/main/css/mb-common.css" />
+	<script src="/fds/js/jquery-1.11.3.min.js"></script>
     <script src="/static/layui/layui.js"></script>
 </head>
 <style type="text/css">
-	.msglist{padding: 10px;}
+	.msglist{padding: 0px 10px;}
 	.msglist .item{padding: 10px 0px 10px 86px;position: relative;border-bottom: 1px solid #eee;}
 	.msglist .sh-img{position: absolute;top: 16px;left: 0;}
 	.msglist img{display: block;width: 70px;height: 70px;border-radius: 3px;}
@@ -23,13 +24,28 @@
 	.msglist .tip a{color: #8cbb5a;}
 	.nomsg{text-align: center;color: #666;padding: 10px;font-size: 14px;}
 	.tips{width: 15px;height: 15px;border-radius: 15px;background: red;display: inline-block;text-align: center;padding: 2px;color: #fff;position: absolute;top:-5px;left: 60px;}
+	.send_msg{margin: 10px;}
+	.toname{color: #333;}
+	.toname span{color: #8cbb5a}
 </style>
 <body>
 {include file="public/header" /}
 <div class="wrapper">
 	<div class="friend">
 		{if condition="isset($ret)"}
-	    <ul class="msglist">
+    	<div class="send_msg">
+    		<form class="layui-form">
+    		<div class="toname">发私信给 <span>{$nickname}</span>：</div>
+    		<input type="hidden" name="userid" value="{$friend_id}">
+			<div class="layui-input-block" style="margin: 10px 0px;">
+		      <textarea placeholder="请输入内容" class="layui-textarea" name="content"></textarea>
+		    </div>
+			<div class="layui-form-item" style="margin-bottom: 0px;">
+			    <button class="layui-btn" lay-submit lay-filter="subt">发送</button>
+			</div>
+			</form>
+    	</div>
+	    <ul class="msglist">	
 	    	{volist name="ret" id="vo"}
 	    	<li class="item">
 	    		<div class="sh-img">
@@ -57,6 +73,30 @@
 	</div>
 	{include file="public/footer" /}
 </div>
-
+<script>
+layui.use(['element','form'], function(){
+	var form    = layui.form
+	    ,layer = layui.layer
+	    ,jq = layui.jquery;  
+	form.on('submit(subt)',function(data){
+	  loading = layer.load(2, {
+	    shade: [0.2,'#000']
+	  });
+	  var param = data.field;
+	  jq.post('{:url("index/message")}',param,function(data){
+	    if(data.code==1){
+	      layer.close(loading);
+	      layer.msg(data.msg, {icon: 1, anim: 6, time: 1000},function(){
+	        location.href=data.url;
+	      });
+	    }else{
+	      layer.close(loading);
+	      layer.msg(data.msg, {icon: 2, anim: 6, time: 1000});
+	    }
+	  })
+	  return false;
+	})
+});
+</script>
 </body>
 </html>

@@ -345,6 +345,8 @@ class User extends Common
     			$ret[$key]['friend_headimg']=$friend_headimg;
     			$ret[$key]['my_headimg']=$my_headimg;
     		}
+    		$this->assign('nickname',$nickname);
+    		$this->assign('friend_id',$friend_id);
     		$this->assign('ret',$ret);
     	}
     	$this->assign('title','消息内容');

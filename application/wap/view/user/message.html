@@ -8,7 +8,8 @@
 	<title>南城交友网</title>
 	<link rel="stylesheet" href="/static/layui/css/layui.css">
 	<link rel="stylesheet" href="/wap/main/css/mb-common.css" />
-    <script src="/static/layui/layui.js"></script>
+	<script src="/fds/js/jquery-1.11.3.min.js"></script>
+    <script src="/static/layer/layer.js"></script>
 </head>
 <style type="text/css">
 	.msglist{padding: 10px;}
@@ -23,6 +24,8 @@
 	.msglist .tip a{color: #8cbb5a;}
 	.nomsg{text-align: center;color: #666;padding: 10px;font-size: 14px;}
 	.tips{width: 15px;height: 15px;border-radius: 15px;background: red;display: inline-block;text-align: center;padding: 2px;color: #fff;position: absolute;top:-5px;left: 60px;}
+	.layui-layer-content{text-align: center;}
+	.msg_cont{width: 84%;height: 75px;resize: none;padding: 10px;font-size: 13px;margin-top: 10px;-webkit-appearance: none;border:1px solid #eee;}
 </style>
 <body>
 {include file="public/header" /}
@@ -42,7 +45,7 @@
 	    		<div class="wen"><h2>{if condition="$vo.sender_id eq $userid"}<span class="send">我发送给</span>{/if}<span class="name">{$vo.nickname}</span></h2><p>{$vo.message_content}</p><p class="juli">{$vo.send_time|date='Y-m-d H:i:s',###}</p>
 	    		</div>
 	    		</a>
-	    		<span class="tip"><a href="{:url('wap/user/msginfo',['user_id'=>$vo.user_id,'friend_id'=>$vo.friend_id])}">共{$vo.count}条对话</a> | <a href="">回复</a> | <a href="">删除</a></span>
+	    		<span class="tip"><a href="{:url('wap/user/msginfo',['user_id'=>$vo.user_id,'friend_id'=>$vo.friend_id])}">共{$vo.count}条对话</a> | <a href="javascript:;" class="handshandle2" userid="{$vo.friend_id}" nickname="{$vo.nickname}">回复</a> | <a href="javascript:;" class="delt_msg_all" fid="{$vo.friend_id}">删除</a></span>
 	    	</li>
 	    	{/volist}
 	    </ul>
@@ -52,6 +55,34 @@
 	</div>
 	{include file="public/footer" /}
 </div>
+<script type="text/javascript">
+$(function(){
+	$('.handshandle2').click(function(){
+		var html='<textarea class="msg_cont" id="content" placeholder="请发送消息..."></textarea>';
+		var userid=$(this).attr('userid');
+		var name=$(this).attr('nickname');
+		var index =layer.open({
+		 	type: 1,
+		 	title:'发送私信给 -- '+name,
+		 	area:['90%','220px'],
+		 	btn:['确定','取消'],
+            content: html,
+            yes:function(){
+            	var content=$('#content').val();
+            	$.post('{:url("/wap/index/message")}',{content:content,userid:userid},function(data){
+            		layer.msg(data.msg, {icon: 1, anim: 6, time: 1000},function(){
+				        location.href=data.url;
+				    });
+            	})
+            	layer.close(index);
+            }
+		});     
+	});
+	//删除
+	$('.delt_msg_all').click(function(){
 
+	})
+})
+</script>
 </body>
 </html>
