@@ -352,4 +352,25 @@ class User extends Common
     	$this->assign('title','消息内容');
     	return $this->fetch();
     }
+    //消息删除
+    public function delmsgs(){
+    	$fid=input('fid');
+    	$userid=$this->userid;
+    	$ret=db('message')->where(['user_id'=>$userid,'friend_id'=>$fid])->delete();
+    	if($ret){
+			$this->success('已删除');
+		}else{
+			$this->error('删除失败');
+		}
+    }
+     //消息删除
+    public function delmsg(){
+    	$id=input('id');
+    	$ret=db('message')->where(['id'=>$id])->delete();
+    	if($ret){
+			$this->success('已删除');
+		}else{
+			$this->error('删除失败');
+		}
+    }
 }

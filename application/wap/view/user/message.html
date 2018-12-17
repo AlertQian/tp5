@@ -80,7 +80,22 @@ $(function(){
 	});
 	//删除
 	$('.delt_msg_all').click(function(){
-
+		var fid=$(this).attr('fid'),
+		    nickname=$(this).parent('.tip').find('.handshandle2').attr('nickname');
+		    namehtml="<span style='color:red;padding:0px 5px;'>"+nickname+"</span>";
+		layer.confirm('确定删除与'+namehtml+'对话？',{
+			btn:['确定','取消']
+		},function(){
+			$.post("{:url('user/delmsgs')}",{fid,fid},function(data){
+				if(data.code==1){
+					layer.msg(data.msg, {icon: 1, anim: 6, time: 1000},function(){
+				        location.href=data.url;
+				    });
+				}else{
+					layer.msg(data.msg);
+				}
+			})
+		})
 	})
 })
 </script>

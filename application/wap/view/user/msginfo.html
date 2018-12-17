@@ -27,6 +27,7 @@
 	.send_msg{margin: 10px;}
 	.toname{color: #333;}
 	.toname span{color: #8cbb5a}
+	.delmsg{padding: 10px;}
 </style>
 <body>
 {include file="public/header" /}
@@ -59,11 +60,9 @@
 	    		    </a>
 	    		    {/if}
 	    		</div>
-	    		<a href="{:url('wap/user/msginfo',['user_id'=>$vo.user_id,'friend_id'=>$vo.friend_id])}">
 	    		<div class="wen"><h2>{if condition="$vo.sender_id eq $userid"}<span class="name">我</span>{else/}<span class="name">{$vo.nickname}</span>{/if}</h2><p>{$vo.message_content}</p><p class="juli">{$vo.send_time|date='Y-m-d H:i:s',###}</p>
 	    		</div>
-	    		</a>
-	    		<span class="tip"><a href="">删除</a></span>
+	    		<span class="tip"><a href="javascript:;" class="delmsg" id={$vo.id}>删除</a></span>
 	    	</li>
 	    	{/volist}
 	    </ul>
@@ -95,6 +94,22 @@ layui.use(['element','form'], function(){
 	    }
 	  })
 	  return false;
+	});
+	jq('.delmsg').click(function(){
+		var id=$(this).attr('id');
+		layer.confirm('确定删除这条对话？',{
+			btn:['确定','取消']
+		},function(){
+			$.post("{:url('user/delmsg')}",{id,id},function(data){
+				if(data.code==1){
+					layer.msg(data.msg, {icon: 1, anim: 6, time: 1000},function(){
+				        location.href=data.url;
+				    });
+				}else{
+					layer.msg(data.msg);
+				}
+			})
+		})
 	})
 });
 </script>
