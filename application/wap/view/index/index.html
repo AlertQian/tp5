@@ -40,7 +40,7 @@
 	<div class="tb_top_1">
 		<ul>
 			<li class="li_1"><a href=""><em>会员活动</em>会员线下聚会活动</a></li>
-			<li class="li_2"><a href=""><em>会员社区</em>分享你我的情感之路</a></li>
+			<li class="li_2"><a href="{:url('forum/index')}"><em>会员社区</em>分享你我的情感之路</a></li>
 			<!-- <li class="li_3"><a href="https://www.mh163k.com/gift/"><em>积分商城</em>会员积分兑换</a></li> -->
 		</ul>
 	</div>
@@ -82,7 +82,7 @@ layui.use(['flow','layer'], function(){
         //假设你的列表返回在data集合中
         layui.each(res.data, function(index, item){
           $html='<li class="item clearfix" id="item81" data-x="116.417025" data-y="39.918348">'+
-                '<a href="/jiaoyou/'+item.userid+'.html" class="link" onclick="return setCookieID(\'81\');"><div class="sh-img">'+
+                '<a href="/jiaoyou/'+item.userid+'.html" class="link"><div class="sh-img">'+
                 '<img class="img" lay-src="'+item.headimg+'"  onerror="this.src=\'/wap/main/images/kuaison_nofind_product.gif\';"><p><i class="icon display1"></i></p></div>'+
                 '<div class="wen">'+
                 '<h1><span class="name"><span class="commend1">'+item.nickname+'</span><i class="icon man0"></i><i class="icon wsc1"></i><s class="s keepnum">6</s><s class="s flowernum">13</s></span></h1>'+
@@ -93,7 +93,7 @@ layui.use(['flow','layer'], function(){
         }); 
         //执行下一页渲染，第二参数为：满足“加载更多”的条件，即后面仍有分页
         //pages为Ajax返回的总页数，只有当前页小于总页数的情况下，才会继续出现加载更多
-        next(lis.join(''), page < res.pages);    
+        next(lis.join(''), page < res.pages);
       });
     }
   });
@@ -111,7 +111,7 @@ layui.use(['flow','layer'], function(){
         //假设你的列表返回在data集合中
         layui.each(res.data, function(index, item){
           $html='<li class="item clearfix" id="item81" data-x="116.417025" data-y="39.918348">'+
-                '<a href="/jiaoyou/'+item.userid+'.html" class="link" onclick="return setCookieID(\'81\');"><div class="sh-img">'+
+                '<a href="/jiaoyou/'+item.userid+'.html" class="link"><div class="sh-img">'+
                 '<img class="img" lay-src="'+item.headimg+'"  onerror="this.src=\'/wap/main/images/kuaison_nofind_product.gif\';"><p><i class="icon display1"></i></p></div>'+
                 '<div class="wen">'+
                 '<h1><span class="name"><span class="commend1">'+item.nickname+'</span><i class="icon man0"></i><i class="icon wsc1"></i><s class="s keepnum">6</s><s class="s flowernum">13</s></span></h1>'+
