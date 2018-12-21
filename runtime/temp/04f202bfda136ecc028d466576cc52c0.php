@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:3:{s:63:"D:\wamp\www\tp5\public/../application/wap\view\forum\index.html";i:1545203480;s:55:"D:\wamp\www\tp5\application\wap\view\public\header.html";i:1543374719;s:55:"D:\wamp\www\tp5\application\wap\view\public\footer.html";i:1543373634;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:3:{s:63:"D:\wamp\www\tp5\public/../application/wap\view\forum\index.html";i:1545359848;s:55:"D:\wamp\www\tp5\application\wap\view\public\header.html";i:1545358047;s:55:"D:\wamp\www\tp5\application\wap\view\public\footer.html";i:1543373634;}*/ ?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -39,19 +39,19 @@
 		<ul class="clearfix" id="nav_APP_data2">
 		<li><a href="<?php echo url('wap/index/index'); ?>">首页<s class="s" style="background-image:url(/wap/main/images/nav_icon/headIcon.png);"></s></a></li>
 		<li><a href="">活动<s class="s" style="background-image:url(/wap/main/images/nav_icon/201705251752370917548.png);"></s></a></li>
-		<li><a href="">社区<s class="s" style="background-image:url(/wap/main/images/nav_icon/201705251752556953922.png);"></s></a></li>
+		<li><a href="<?php echo url('forum/index'); ?>">社区<s class="s" style="background-image:url(/wap/main/images/nav_icon/201705251752556953922.png);"></s></a></li>
 		</ul><span class="arrow-up"></span>
 	</div>
 </div>
 	<div class="o_main" style="padding-bottom:50px;">
-	<div id="slide" class="clearfix" style="width: 414px;">
+	<!-- <div id="slide" class="clearfix" style="width: 414px;">
 		<div id="content" style="width: 1242px; transform: translate3d(-826.959px, 0px, 0px) scale(1);">
 			<div class="cell" style="width: 414px;"><a href="#3"><img src="/wap/main/images/201710011203108436508.jpg" alt=""></a></div>
 			<div class="cell" style="width: 414px;"><a href="#3"><img src="/wap/main/images/201710011203108436508.jpg" alt=""></a></div>
 			<div class="cell" style="width: 414px;"><a href="#3"><img src="/wap/main/images/201710011203108436508.jpg" alt=""></a></div>
 		</div>
 		<ul id="indicator"><li class="active">1</li><li class="">2</li><li class="">3</li></ul>
-	</div>
+	</div> -->
 	<span class="prev" id="slide_prev" style="display:none">上一张</span><span class="next" id="slide_next" style="display:none">下一张</span>
 	<div class="tb_top_1">
 		<ul>
@@ -86,7 +86,7 @@
  <div class="chrcontent">当下，手机拼功能的时代已一去不复返，用户体验是当前手机厂商们的聚焦点。坚持做好产品，努力提升用户体验是当前真正关注的事情</div>
  <div class="hashongbao_forbox" style="top:60px;right:10px;"></div>
  </a>
- <div class="con display_video_false_0"><div class="n_img" id="n_img_6" data-ischeck="1"><a href="" target="_blank" class="itemAlbum" original=""><img src="\uploads\headimg\20181211\63e02036d0aadd51104674ed39c2da0d.png" data-src="/UploadFile/tieba/image/20160820/636073022778892908474846301.png" original="\uploads\headimg\20181211\63e02036d0aadd51104674ed39c2da0d.png" data-ifshow="1" alt="" style="width: 120px; height: 90px;"><div class="feed_highlight" data-ischeck="0"></div></a><a href="" target="_blank" class="itemAlbum" original=""><img src="\uploads\headimg\20181211\63e02036d0aadd51104674ed39c2da0d.png" data-src="/UploadFile/tieba/image/20160820/636073022778892908474846301.png" original="\uploads\headimg\20181211\63e02036d0aadd51104674ed39c2da0d.png" data-ifshow="1" alt="" style="width: 120px; height: 90px;"><div class="feed_highlight" data-ischeck="0"></div></a><a href="" target="_blank" class="itemAlbum" original=""><img src="\uploads\headimg\20181211\63e02036d0aadd51104674ed39c2da0d.png" data-src="/UploadFile/tieba/image/20160820/636073022778892908474846301.png" original="\uploads\headimg\20181211\63e02036d0aadd51104674ed39c2da0d.png" data-ifshow="1" alt="" style="width: 120px; height: 90px;"><div class="feed_highlight" data-ischeck="0"></div></a><a href="" target="_blank" class="itemAlbum" original=""><img src="\uploads\headimg\20181211\63e02036d0aadd51104674ed39c2da0d.png" data-src="\uploads\headimg\20181211\63e02036d0aadd51104674ed39c2da0d.png" original="" data-ifshow="1" alt="" style="width: 120px; height: 90px;"><div class="feed_highlight" data-ischeck="0"></div></a></div></div>
+ <div class="con display_video_false_0"><div class="n_img" id="n_img_6" data-ischeck="1"><a href="" target="_blank" class="itemAlbum" original=""><img src="\uploads\headimg\20181211\63e02036d0aadd51104674ed39c2da0d.png" data-src="/UploadFile/tieba/image/20160820/636073022778892908474846301.png" original="\uploads\headimg\20181211\63e02036d0aadd51104674ed39c2da0d.png" data-ifshow="1" alt="" style="width: 115px; height: 90px;"><div class="feed_highlight" data-ischeck="0"></div></a><a href="" target="_blank" class="itemAlbum" original=""><img src="\uploads\headimg\20181211\63e02036d0aadd51104674ed39c2da0d.png" data-src="/UploadFile/tieba/image/20160820/636073022778892908474846301.png" original="\uploads\headimg\20181211\63e02036d0aadd51104674ed39c2da0d.png" data-ifshow="1" alt="" style="width: 115px; height: 90px;"><div class="feed_highlight" data-ischeck="0"></div></a><a href="" target="_blank" class="itemAlbum" original=""><img src="\uploads\headimg\20181211\63e02036d0aadd51104674ed39c2da0d.png" data-src="/UploadFile/tieba/image/20160820/636073022778892908474846301.png" original="\uploads\headimg\20181211\63e02036d0aadd51104674ed39c2da0d.png" data-ifshow="1" alt="" style="width: 115px; height: 90px;"><div class="feed_highlight" data-ischeck="0"></div></a><a href="" target="_blank" class="itemAlbum" original=""><img src="\uploads\headimg\20181211\63e02036d0aadd51104674ed39c2da0d.png" data-src="\uploads\headimg\20181211\63e02036d0aadd51104674ed39c2da0d.png" original="" data-ifshow="1" alt="" style="width: 100px; height: 90px;"><div class="feed_highlight" data-ischeck="0"></div></a></div></div>
  <ul class="item_ft">
   <li><span class="num num_1">5</span></li>
   <li><span class="num num_2" data-id="6" data-ischeck="0"><span class="zan">198</span></span></li>
@@ -94,15 +94,15 @@
  </ul>
 </div>
 </div>
-<!-- <div class="nav_index_bottom nav_tb_bottom">
+<div class="nav_index_bottom nav_tb_bottom">
   <ul>
     <li><a href="https://www.mh163k.com/"><span class="home"></span>首页</a></li>
-    <li id="nav_bankuai" class="current"><a href="javascript:void(0);" onclick="return showCatState(false);"><span class="bankuai"></span>版块</a></li>
-    <li><a href="javascript:void(0);" id="seniorSend" class="seniorSend"><span class="fatie"></span>发帖</a></li>
-    <li><a href="javascript:void(0);" id="refresh"><span class="refresh"></span>刷新</a></li>
-    <li><a href="https://www.mh163k.com/member/"><span class="mine"></span>我的</a></li>
+    <li id="nav_bankuai" class="current"><a href="javascript:void(0);" onclick="return showCatState(false);" style="color: #5cc55c"><span class="bankuai"></span>版块</a></li>
+    <li><a href="<?php echo url('forum/add'); ?>" class="seniorSend" style="background-color: #5cc55c"><span class="fatie"></span>发帖</a></li>
+    <li><a href="javascript:void(0);" onclick="location.reload()"><span class="refresh"></span>刷新</a></li>
+    <li><a href="<?php echo url('user/index'); ?>"><span class="mine"></span>我的</a></li>
   </ul>
-</div> -->
+</div>
 	<div class="foot_link" id="foot_link">
 	<ul class="link">
 	<li><a href="<?php echo url('wap/index/index'); ?>">首页</a></li><!--<li><a href="https://www.mh163k.com/request.ashx?action=iswap&iswap=0">电脑版</a></li>--><li><a href="https://www.mh163k.com/help/article_13.html">联系我们</a></li><!--<li><a href="http://app.163k.com/download.aspx?id=12299" data-img="../UploadFile/index/2015/9-7/201509071154513472674.png">客户端</a></li>--><li><a href="https://www.mh163k.com/service/">反馈留言</a></li>
@@ -119,6 +119,10 @@ $(function(){
 </script>
 	</div>
 </div>
-
+<script type="text/javascript">
+  function showCatState() {
+    //alert('2');
+  }
+</script>
 </body>
 </html>

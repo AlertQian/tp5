@@ -12,4 +12,13 @@ class Forum extends Common
    	$this->assign('title','会员社区');
    	return $this->fetch();
    }
+   public function add(){
+   	if (!session('validate')) {
+        return $this->redirect('login/index');
+    }else{
+    	
+    }
+   	$this->assign('title','发布新帖');
+   	return $this->fetch();
+   }
 }
