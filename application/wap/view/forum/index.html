@@ -12,7 +12,7 @@
 <link rel="stylesheet" type="text/css" href="/wap/main/css/mb-common.css" />
 <link rel="stylesheet" type="text/css" href="/wap/main/css/tieba-mb.css" />
 <script src="/fds/js/jquery-1.11.3.min.js"></script>
-<script src="/static/layui/layui.js"></script>
+<script src="/static/layer/layer.js"></script>
 <style type="text/css">
 .foot_link { margin-top:0!important;}
 #pageNavigation { display:none;}
@@ -72,7 +72,7 @@
  <ul class="item_ft">
   <li><span class="num num_1">5</span></li>
   <li><span class="num num_2" data-id="6" data-ischeck="0"><span class="zan">198</span></span></li>
-  <li><a href="https://www.mh163k.com/tieba_show_6.html" class="num num_3" onclick="return setCookieID('6');"></a></li>
+  <li><a href="https://www.mh163k.com/tieba_show_6.html" class="num num_3"></a></li>
  </ul>
 </div>
 </div>
@@ -80,7 +80,7 @@
   <ul>
     <li><a href="https://www.mh163k.com/"><span class="home"></span>首页</a></li>
     <li id="nav_bankuai" class="current"><a href="javascript:void(0);" onclick="return showCatState(false);" style="color: #5cc55c"><span class="bankuai"></span>版块</a></li>
-    <li><a href="{:url('forum/add')}" class="seniorSend" style="background-color: #5cc55c"><span class="fatie"></span>发帖</a></li>
+    <li><a href="javascript:;" class="seniorSend" style="background-color: #5cc55c"><span class="fatie"></span>发帖</a></li>
     <li><a href="javascript:void(0);" onclick="location.reload()"><span class="refresh"></span>刷新</a></li>
     <li><a href="{:url('user/index')}"><span class="mine"></span>我的</a></li>
   </ul>
@@ -89,9 +89,16 @@
 	</div>
 </div>
 <script type="text/javascript">
-  function showCatState() {
-    //alert('2');
-  }
+  $(".seniorSend").click(function(){
+    var nickname=$('input[name=nickname]').val();
+    if(nickname.length==0){
+      layer.msg('请先登入',function(){
+        location.href="{:url('login/index')}";
+      });
+    }else{
+        location.href="{:url('forum/add')}";
+    }
+  }) 
 </script>
 </body>
 </html>
