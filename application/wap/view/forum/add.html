@@ -136,13 +136,22 @@
 
     $('#submit').click(function(e){
         e.preventDefault();
-        var title=$("#fabu_title").val();
-        var content=$("#cmt_txt").text();
-        var imgs=$('input[name=imgs]').val();
-        console.log(title+"---"+content+"---"+imgs);
+        var title=$.trim($("#fabu_title").val());
+        var content=$.trim($("#cmt_txt").text());
+        var pic=$('input[name=imgs]').val();
+        if(title.length == 0){
+          layer.msg('请填写标题');
+          $("#fabu_title").focus();
+          return false;
+        }
+        if(content.length == 0){
+          layer.msg('请填写内容');
+          $("#cmt_txt").focus();
+          return false;
+        }
         $.ajax({
           url:"{:url('forum/add')}",
-          data:{imgs:imgs},
+          data:{title:title,content:content,pic:pic},
           type:'post',
           success:function(data){
             if(data.code ==1){
@@ -150,7 +159,7 @@
                 location.reload();
               });
             }else{
-              layer.msg(data.msg,{icon: 2,anim: 6, time: 2000});
+              layer.msg(data.msg);
             }
           },
           error:function(){

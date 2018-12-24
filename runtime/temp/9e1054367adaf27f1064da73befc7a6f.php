@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:3:{s:61:"D:\wamp\www\tp5\public/../application/wap\view\forum\add.html";i:1545549291;s:55:"D:\wamp\www\tp5\application\wap\view\public\header.html";i:1545358047;s:55:"D:\wamp\www\tp5\application\wap\view\public\footer.html";i:1545529423;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:3:{s:61:"D:\wamp\www\tp5\public/../application/wap\view\forum\add.html";i:1545641784;s:55:"D:\wamp\www\tp5\application\wap\view\public\header.html";i:1545358047;s:55:"D:\wamp\www\tp5\application\wap\view\public\footer.html";i:1545529423;}*/ ?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -168,13 +168,22 @@ $(function(){
 
     $('#submit').click(function(e){
         e.preventDefault();
-        var title=$("#fabu_title").val();
-        var content=$("#cmt_txt").text();
-        var imgs=$('input[name=imgs]').val();
-        console.log(title+"---"+content+"---"+imgs);
+        var title=$.trim($("#fabu_title").val());
+        var content=$.trim($("#cmt_txt").text());
+        var pic=$('input[name=imgs]').val();
+        if(title.length == 0){
+          layer.msg('请填写标题');
+          $("#fabu_title").focus();
+          return false;
+        }
+        if(content.length == 0){
+          layer.msg('请填写内容');
+          $("#cmt_txt").focus();
+          return false;
+        }
         $.ajax({
           url:"<?php echo url('forum/add'); ?>",
-          data:{imgs:imgs},
+          data:{title:title,content:content,pic:pic},
           type:'post',
           success:function(data){
             if(data.code ==1){
@@ -182,7 +191,7 @@ $(function(){
                 location.reload();
               });
             }else{
-              layer.msg(data.msg,{icon: 2,anim: 6, time: 2000});
+              layer.msg(data.msg);
             }
           },
           error:function(){

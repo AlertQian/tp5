@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:3:{s:63:"D:\wamp\www\tp5\public/../application/wap\view\forum\index.html";i:1545529423;s:55:"D:\wamp\www\tp5\application\wap\view\public\header.html";i:1545358047;s:55:"D:\wamp\www\tp5\application\wap\view\public\footer.html";i:1545529423;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:3:{s:63:"D:\wamp\www\tp5\public/../application/wap\view\forum\index.html";i:1545643372;s:55:"D:\wamp\www\tp5\application\wap\view\public\header.html";i:1545358047;s:55:"D:\wamp\www\tp5\application\wap\view\public\footer.html";i:1545529423;}*/ ?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -70,30 +70,34 @@
       </ul>
     </div>
    </div>
+   <?php if(is_array($ret) || $ret instanceof \think\Collection || $ret instanceof \think\Paginator): $i = 0; $__LIST__ = $ret;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($i % 2 );++$i;?>
   <div class="post_list">
 	<div class="item iszhiding0" id="item6">
  <div class="item_hd">
   <div class="pic"><img src="../UploadFile/tongxiang/2016/8-24/2016082409545714391791.jpg" onerror="this.src='https://www.mh163k.com/template/wap/main/default/images/user_small.gif';this.onerror='';"></div>
-  <p class="chrname">x4demo8　<span class="vipnum display0">无</span></p>
+  <p class="chrname"><?php echo $vo['author']; ?><span class="vipnum display0">无</span></p>
   <div class="clearfix">
-    <div class="right"><span class="num num_1">3740</span></div>
-    <span class="date">07-13 10:57</span>
+    <div class="right"><span class="num num_1"><?php echo $vo['view']; ?></span></div>
+    <span class="date"><?php echo date("m-d H:i",$vo['time']); ?></span>
   </div>
   <div class="jinghua display0">精</div>
  </div>
  <a href="<?php echo url('forum/detail'); ?>" style="color:" class="link bold0" onclick="return setCookieID('6');">
- <h2><span class="d display0">顶</span><span class="j display0">精</span>葫芦真机入手小测 ，专为情侣量身定制</h2>
- <div class="chrcontent">当下，手机拼功能的时代已一去不复返，用户体验是当前手机厂商们的聚焦点。坚持做好产品，努力提升用户体验是当前真正关注的事情</div>
+ <h2><span class="d display0">顶</span><span class="j display0">精</span><?php echo $vo['title']; ?></h2>
+ <div class="chrcontent"><?php echo $vo['content']; ?></div>
  <div class="hashongbao_forbox" style="top:60px;right:10px;"></div>
  </a>
+ <?php if($vo['pic']): ?>
  <div class="con display_video_false_0"><div class="n_img" id="n_img_6" data-ischeck="1"><a href="" target="_blank" class="itemAlbum" original=""><img src="\uploads\headimg\20181211\63e02036d0aadd51104674ed39c2da0d.png" data-src="/UploadFile/tieba/image/20160820/636073022778892908474846301.png" original="\uploads\headimg\20181211\63e02036d0aadd51104674ed39c2da0d.png" data-ifshow="1" alt="" style="width: 115px; height: 90px;"><div class="feed_highlight" data-ischeck="0"></div></a><a href="" target="_blank" class="itemAlbum" original=""><img src="\uploads\headimg\20181211\63e02036d0aadd51104674ed39c2da0d.png" data-src="/UploadFile/tieba/image/20160820/636073022778892908474846301.png" original="\uploads\headimg\20181211\63e02036d0aadd51104674ed39c2da0d.png" data-ifshow="1" alt="" style="width: 115px; height: 90px;"><div class="feed_highlight" data-ischeck="0"></div></a><a href="" target="_blank" class="itemAlbum" original=""><img src="\uploads\headimg\20181211\63e02036d0aadd51104674ed39c2da0d.png" data-src="/UploadFile/tieba/image/20160820/636073022778892908474846301.png" original="\uploads\headimg\20181211\63e02036d0aadd51104674ed39c2da0d.png" data-ifshow="1" alt="" style="width: 115px; height: 90px;"><div class="feed_highlight" data-ischeck="0"></div></a><a href="" target="_blank" class="itemAlbum" original=""><img src="\uploads\headimg\20181211\63e02036d0aadd51104674ed39c2da0d.png" data-src="\uploads\headimg\20181211\63e02036d0aadd51104674ed39c2da0d.png" original="" data-ifshow="1" alt="" style="width: 100px; height: 90px;"><div class="feed_highlight" data-ischeck="0"></div></a></div></div>
+ <?php endif; ?>
  <ul class="item_ft">
-  <li><span class="num num_1">5</span></li>
-  <li><span class="num num_2" data-id="6" data-ischeck="0"><span class="zan">198</span></span></li>
+  <li><span class="num num_1"><?php echo $vo['reply']; ?></span></li>
+  <li><span class="num num_2" data-id="6" data-ischeck="0"><span class="zan"><?php echo $vo['praise']; ?></span></span></li>
   <li><a href="https://www.mh163k.com/tieba_show_6.html" class="num num_3"></a></li>
  </ul>
 </div>
 </div>
+<?php endforeach; endif; else: echo "" ;endif; ?>
 <div class="nav_index_bottom nav_tb_bottom">
   <ul>
     <li><a href="https://www.mh163k.com/"><span class="home"></span>首页</a></li>
