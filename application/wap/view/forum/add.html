@@ -63,6 +63,7 @@
             <input type="hidden" name="isimgs" class="layui-input" value="">
           </div>
         </div>
+        {:token()}
         <div style="margin:10px 10px 20px;"><input class="comn-submit fabu_btn" type="submit" id="submit" value="发 布"><input type="hidden" id="onestatenum" name="onestatenum" value="115909126046068"></div>
       </div>
     </div>
@@ -138,7 +139,8 @@
         e.preventDefault();
         var title=$.trim($("#fabu_title").val());
         var content=$.trim($("#cmt_txt").text());
-        var pic=$('input[name=imgs]').val();
+        var pic=$('input[name=imgs]').val()
+          ,token=$("input[name=__token__]").val();
         if(title.length == 0){
           layer.msg('请填写标题');
           $("#fabu_title").focus();
@@ -151,7 +153,7 @@
         }
         $.ajax({
           url:"{:url('forum/add')}",
-          data:{title:title,content:content,pic:pic},
+          data:{title:title,content:content,pic:pic,__token__:token},
           type:'post',
           success:function(data){
             if(data.code ==1){
@@ -159,7 +161,9 @@
                 location.reload();
               });
             }else{
-              layer.msg(data.msg);
+              layer.msg(data.msg,function(){
+                location.reload();
+              });
             }
           },
           error:function(){

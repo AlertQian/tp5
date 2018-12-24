@@ -56,7 +56,7 @@
   <div class="post_list">
 	<div class="item iszhiding0" id="item6">
  <div class="item_hd">
-  <div class="pic"><img src="../UploadFile/tongxiang/2016/8-24/2016082409545714391791.jpg" onerror="this.src='https://www.mh163k.com/template/wap/main/default/images/user_small.gif';this.onerror='';"></div>
+  <div class="pic"><img src="{$vo.headimg}" onerror="this.src='/wap/main/images/user_small.gif';this.onerror='';"></div>
   <p class="chrname">{$vo.author}<span class="vipnum display0">无</span></p>
   <div class="clearfix">
     <div class="right"><span class="num num_1">{$vo.view}</span></div>
@@ -64,13 +64,17 @@
   </div>
   <div class="jinghua display0">精</div>
  </div>
- <a href="{:url('forum/detail')}" style="color:" class="link bold0" onclick="return setCookieID('6');">
+ <a href="{:url('forum/detail',['id'=>$vo.id])}" style="color:" class="link bold0">
  <h2><span class="d display0">顶</span><span class="j display0">精</span>{$vo.title}</h2>
  <div class="chrcontent">{$vo.content}</div>
  <div class="hashongbao_forbox" style="top:60px;right:10px;"></div>
  </a>
  {if condition="$vo.pic"}
- <div class="con display_video_false_0"><div class="n_img" id="n_img_6" data-ischeck="1"><a href="" target="_blank" class="itemAlbum" original=""><img src="\uploads\headimg\20181211\63e02036d0aadd51104674ed39c2da0d.png" data-src="/UploadFile/tieba/image/20160820/636073022778892908474846301.png" original="\uploads\headimg\20181211\63e02036d0aadd51104674ed39c2da0d.png" data-ifshow="1" alt="" style="width: 115px; height: 90px;"><div class="feed_highlight" data-ischeck="0"></div></a><a href="" target="_blank" class="itemAlbum" original=""><img src="\uploads\headimg\20181211\63e02036d0aadd51104674ed39c2da0d.png" data-src="/UploadFile/tieba/image/20160820/636073022778892908474846301.png" original="\uploads\headimg\20181211\63e02036d0aadd51104674ed39c2da0d.png" data-ifshow="1" alt="" style="width: 115px; height: 90px;"><div class="feed_highlight" data-ischeck="0"></div></a><a href="" target="_blank" class="itemAlbum" original=""><img src="\uploads\headimg\20181211\63e02036d0aadd51104674ed39c2da0d.png" data-src="/UploadFile/tieba/image/20160820/636073022778892908474846301.png" original="\uploads\headimg\20181211\63e02036d0aadd51104674ed39c2da0d.png" data-ifshow="1" alt="" style="width: 115px; height: 90px;"><div class="feed_highlight" data-ischeck="0"></div></a><a href="" target="_blank" class="itemAlbum" original=""><img src="\uploads\headimg\20181211\63e02036d0aadd51104674ed39c2da0d.png" data-src="\uploads\headimg\20181211\63e02036d0aadd51104674ed39c2da0d.png" original="" data-ifshow="1" alt="" style="width: 100px; height: 90px;"><div class="feed_highlight" data-ischeck="0"></div></a></div></div>
+ <div class="con display_video_false_0"><div class="n_img" id="n_img_6" data-ischeck="1">
+  {volist name="$vo.imgsarr" id="imglist"}
+  <a href="" target="_blank" class="itemAlbum" original=""><img src="{$imglist}" data-src="{$imglist}" original="{$imglist}" data-ifshow="1" alt="" style="width: 115px; height: 90px;"><div class="feed_highlight" data-ischeck="0"></div></a>
+  {/volist}
+  </div></div>
  {/if}
  <ul class="item_ft">
   <li><span class="num num_1">{$vo.reply}</span></li>

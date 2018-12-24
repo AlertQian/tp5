@@ -8,12 +8,30 @@ class Forum extends Common
 {
    public function index(){
    	$obj=new Content;
-   	$ret=$obj->order('id desc')->select();
+   	$ret=$obj->alias('a')->join('lv_user_info b','b.userid=a.uid')->field('a.*,b.headimg')->order('id desc')->select();
+    foreach ($ret as $key => $value) {
+      $showimgs=$value['pic'];
+      if($showimgs){
+        $imgsarr=explode(',', $showimgs);
+        $ret[$key]['imgsarr']=$imgsarr;
+      }
+    }
    	$this->assign('title','会员社区');
    	$this->assign('ret',$ret);
    	return $this->fetch();
    }
    public function detail(){
+    $id=input('id');
+    $ret=db('Content')->where(['id'=>$id,'shows'=>1])->find();
+    if($ret){
+      db('Content')->where(['id'=>$id,'shows'=>1])->setInc('view');
+      $showimgs=$ret['pic'];
+      if($showimgs){
+        $imgsarr=explode(',', $showimgs);
+        $this->assign('imgsarr',$imgsarr);
+      }
+      $this->assign('ret',$ret);
+    }
    	$this->assign('title','会员社区');
    	return $this->fetch();
    }
@@ -24,15 +42,12 @@ class Forum extends Common
     if(request()->isPost()){
     	$obj=new Content;
     	$data=input('post.');
-    	$title=$data['title'];
-    	$content=$data['content'];
-    	if(empty($title)) $this->error('请填写标题');
-    	if(empty($content)) $this->error('请填写内容');
+    	$this->check_form('Content',$data);
     	$userid=db('user')->where('pwd_hash',session('validate'))->value('userid');
     	$data['uid']=$userid;
     	$data['author']=session('nickname');
     	$data['time']=time();
-    	$ret=$obj->save($data);
+    	$ret=$obj->allowField(true)->save($data);
     	if($ret){
 			$this->success('已提交');
 		}else{

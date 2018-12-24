@@ -37,10 +37,10 @@
 	<div id="wrapper">
 		<div class="player_h5" id="player_h5" style="display: none; width: 394px; height: 222px;"><video controls="" webkit-playsinline="" playsinline="" autoplay=""></video></div>
 		<div class="title">
-			<span class="d display0">顶</span>葫芦真机入手小测 ，专为情侣量身定制
+			<span class="d display0">顶</span>{$ret.title}
 			<span class="jinghua display0">精</span>
 			<div class="info clearfix">
-				<div class="right">3746阅读<s class="line"></s>5回帖</div>
+				<div class="right">{$ret.view}阅读<s class="line"></s>{$ret.reply}回帖</div>
 				<div class="left"><a href="../tieba_a2276_b0_c0_d0_e0_f0_g0_h0_i0_p1.html" class="cat display2276">通讯数码</a></div>
 			</div>
 		</div>
@@ -49,18 +49,23 @@
 			<div class="user_head"><img src="\uploads\headimg\20181211\63e02036d0aadd51104674ed39c2da0d.png"></div>
 			<ul>
 			  <li>
-			   <span class="uName">x4demo8</span>
-			   <span class="grade i_1" title="初级">1</span>
+			   <span class="uName">{$ret.author}</span>
+			   <!-- <span class="grade i_1" title="初级">1</span> 
 			   <span class="vipnum display0">无</span>
-			   <span class="bazhu display0">版主</span>
+			   <span class="bazhu display0">版主</span>-->
 			  </li>
-			  <li>07-13 10:57</li>
+			  <li>{$ret.time|date="m-d H:i",###}</li>
 			</ul>
 			<div class="op">楼主</div>
 		   </div>
 		   <div class="con" id="louzhuCon">
-			
-			<p>当下，手机拼功能的时代已一去不复返，用户体验是当前手机厂商们的聚焦点。坚持做好产品，努力提升用户体验是当前真正关注的事情。作为后起之秀的葫芦手机，虽然定位在了小众的情侣市场，但为了给情侣用户们更好的体验，葫芦也是在庞大的粉丝群体中不断的征集手机体验官，为葫芦提意见和建议，旨为给到用户更好的使用体验。</p><p>今天小编本着公平公正的原则，为大家评测一下刚刚到手的葫芦手机，为大家揭露其真正的葫芦手机真面目。</p><p>葫芦手机的机身正面搭载了一块5.5英寸1080P分辨率的显示屏。航空级铝镁合金边框+双面玻璃材质机身。电源键在机身的右侧，音量的加减键则放在了机身的左侧，方便很多，左侧中下部是手机的SIM卡和SD卡的卡槽，底部为扬声器和数据线接口，耳机接口则放在了机身的顶部，机身的正面底部为3个虚拟按键，分别是功能键、HOME键和返回键。整体的细节处理还是挺到位的。</p><p><br></p><p><img src="/UploadFile/tieba/image/20160820/63607302200059173476046380.png" style="" title="14_3.png"></p><p><img src="/UploadFile/tieba/image/20160820/63607302200715440212055830.png" style="" title="14_1.png"></p><p><img src="/UploadFile/tieba/image/20160820/63607302277889290847484630.png" style="" title="14_2.png"></p><p><br></p>
+			{$ret.content}
+			<p><br></p>
+			{if condition="isset($imgsarr)"}
+			{volist name="imgsarr" id="vo"}
+			<p><img src="{$vo}" style="" title="14_3.png"></p>
+			{/volist}
+			{/if}
 			<p class="blod"></p>
 			<div class="p_btns">
 				<p class="manage">　<a href="javascript:void(0);" onclick="superManage('6');" class="blue">超级管理</a>　<a href="https://www.mh163k.com/tieba/addedit.aspx?action=edit&amp;id=6" class="blue">编辑</a>　<a href="javascript:void(0);" onclick="$.managerTBisdel('6','2276');" class="blue">删除</a></p>
@@ -75,9 +80,9 @@
 		<ul>
 			<li>
 			<span class="uName">energy</span>
-			<span class="grade i_1" title="初级">1</span>
+			<!-- <span class="grade i_1" title="初级">1</span>
 			<span class="vipnum display0">无</span>
-			<span class="bazhu display1">版主</span>
+			<span class="bazhu display1">版主</span> -->
 			</li>
 			<li><span class="shafa">沙发</span> 07-16 16:27</li>
 		</ul>
