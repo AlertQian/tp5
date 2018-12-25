@@ -1,3 +1,4 @@
+<?php if (!defined('THINK_PATH')) exit(); /*a:3:{s:64:"D:\wamp\www\tp5\public/../application/wap\view\forum\detail.html";i:1545702161;s:55:"D:\wamp\www\tp5\application\wap\view\public\header.html";i:1545358047;s:55:"D:\wamp\www\tp5\application\wap\view\public\footer.html";i:1545529423;}*/ ?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -24,7 +25,24 @@
 </head>
 <body>
 <div id="pageMain" class="page_srcoll page-current">
-	{include file="public/header" /}
+	<div class="header">
+	<a href="javascript:history.back(-1)" id="header_back" class="back">返回</a>
+	<div class="search" id="search_ico" onclick="showNewPage('搜索',searchHtml,newPageSearch);" style="display:none;">搜索</div>
+	<?php if(\think\Session::get('nickname') != null): ?>
+	<a href="<?php echo url('user/index'); ?>" class="my ico_ok" id="login_ico">我的</a>
+	<?php else: ?>
+	<a href="<?php echo url('login/index'); ?>" class="my" id="login_ico">我的</a>
+	<?php endif; ?>
+	<div class="type" id="nav_ico">导航</div>
+	<span id="ipageTitle" style=""><?php echo $title; ?></span>
+	<div class="nav_APP" id="nav_APP" style="display: none;">
+		<ul class="clearfix" id="nav_APP_data2">
+		<li><a href="<?php echo url('wap/index/index'); ?>">首页<s class="s" style="background-image:url(/wap/main/images/nav_icon/headIcon.png);"></s></a></li>
+		<li><a href="">活动<s class="s" style="background-image:url(/wap/main/images/nav_icon/201705251752370917548.png);"></s></a></li>
+		<li><a href="<?php echo url('forum/index'); ?>">社区<s class="s" style="background-image:url(/wap/main/images/nav_icon/201705251752556953922.png);"></s></a></li>
+		</ul><span class="arrow-up"></span>
+	</div>
+</div>
 	<div class="o_main" style="padding-bottom:50px;">
     <div class="posts" id="resizeIMG">
   <!--<div class="tabs">
@@ -37,35 +55,33 @@
 	<div id="wrapper">
 		<div class="player_h5" id="player_h5" style="display: none; width: 394px; height: 222px;"><video controls="" webkit-playsinline="" playsinline="" autoplay=""></video></div>
 		<div class="title">
-			<span class="d display0">顶</span>{$ret.title}
+			<span class="d display0">顶</span><?php echo $ret['title']; ?>
 			<span class="jinghua display0">精</span>
 			<div class="info clearfix">
-				<div class="right">{$ret.view}阅读<s class="line"></s>{$ret.reply}回帖</div>
+				<div class="right"><?php echo $ret['view']; ?>阅读<s class="line"></s><?php echo $ret['reply']; ?>回帖</div>
 				<div class="left"><a href="../tieba_a2276_b0_c0_d0_e0_f0_g0_h0_i0_p1.html" class="cat display2276">通讯数码</a></div>
 			</div>
 		</div>
 		  <div class="Oposter" id="louzhuNode">
 		   <div class="user_info">
-			<div class="user_head"><img src="{$ret.headimg}" onerror="this.src='/wap/main/images/user_small.gif';this.onerror='';"></div>
+			<div class="user_head"><img src="<?php echo $ret['headimg']; ?>" onerror="this.src='/wap/main/images/user_small.gif';this.onerror='';"></div>
 			<ul>
 			  <li>
-			   <span class="uName">{$ret.author}</span>
+			   <span class="uName"><?php echo $ret['author']; ?></span>
 			   <!-- <span class="grade i_1" title="初级">1</span> 
 			   <span class="vipnum display0">无</span>
 			   <span class="bazhu display0">版主</span>-->
 			  </li>
-			  <li>{$ret.time|date="m-d H:i",###}</li>
+			  <li><?php echo date("m-d H:i",$ret['time']); ?></li>
 			</ul>
 			<div class="op">楼主</div>
 		   </div>
 		   <div class="con" id="louzhuCon">
-			{$ret.content}
+			<?php echo $ret['content']; ?>
 			<p><br></p>
-			{if condition="isset($imgsarr)"}
-			{volist name="imgsarr" id="vo"}
-			<p><img src="{$vo}" style="" title="14_3.png"></p>
-			{/volist}
-			{/if}
+			<?php if(isset($imgsarr)): if(is_array($imgsarr) || $imgsarr instanceof \think\Collection || $imgsarr instanceof \think\Paginator): $i = 0; $__LIST__ = $imgsarr;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($i % 2 );++$i;?>
+			<p><img src="<?php echo $vo; ?>" style="" title="14_3.png"></p>
+			<?php endforeach; endif; else: echo "" ;endif; endif; ?>
 			<p class="blod"></p>
 			<div class="p_btns">
 				<p class="manage">　<a href="javascript:void(0);" onclick="superManage('6');" class="blue">超级管理</a>　<a href="https://www.mh163k.com/tieba/addedit.aspx?action=edit&amp;id=6" class="blue">编辑</a>　<a href="javascript:void(0);" onclick="$.managerTBisdel('6','2276');" class="blue">删除</a></p>
@@ -211,7 +227,21 @@
 			</ul>
 		</div>
 	</div>
-	{include file="public/footer" /}
+	<div class="foot_link" id="foot_link">
+	<ul class="link">
+	<li><a href="<?php echo url('wap/index/index'); ?>">首页</a></li><!--<li><a href="https://www.mh163k.com/request.ashx?action=iswap&iswap=0">电脑版</a></li>--><li><a href="https://www.mh163k.com/help/article_13.html">联系我们</a></li><!--<li><a href="http://app.163k.com/download.aspx?id=12299" data-img="../UploadFile/index/2015/9-7/201509071154513472674.png">客户端</a></li>--><li><a href="https://www.mh163k.com/service/">反馈留言</a></li>
+	</ul>
+	<!--163k地方门户网站系统：<a href="https://www.mh163k.com/">mh163k.com</a>　皖ICP备11020229号-->Copyright @ 2003-2018 mh163k.com
+	<input type="hidden" name="nickname" value="<?php echo \think\Session::get('nickname'); ?>">
+</div>
+<script>
+$(function(){
+	$('#nav_ico').click(function(e){
+		e.preventDefault();
+		$('#nav_APP').fadeToggle('fast');
+	});
+});
+</script>
 	</div>
 </div>
 

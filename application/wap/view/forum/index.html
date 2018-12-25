@@ -7,6 +7,7 @@
 <meta name="description" content="交友栏目描述" />
 <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0"/>
 <meta name="format-detection" content="telephone=no" />
+<link rel="stylesheet" href="/static/layui/css/layui.css">
 <link rel="stylesheet" type="text/css" href="/wap/main/css/mb-base.css" />
 <link rel="stylesheet" type="text/css" href="/wap/main/css/mb-index.css" />
 <link rel="stylesheet" type="text/css" href="/wap/main/css/mb-common.css" />
@@ -45,15 +46,27 @@
 	<div id="hideHead2">
     <div class="p_tabs clearfix">
       <ul>
-        <li id="s_e_0" class="cur"><span data-catid="0" >最新回复</span></li>
-        <li id="s_e_1"><span data-catid="1" >最新发布</span></li>
-        <li id="s_e_3"><span data-catid="3" >热帖排行</span></li>
-        <li id="s_h_1"><span data-catid="1" >精华热帖</span></li>
+        <li class='{eq name="act" value="nr"}cur{/eq}'><a href="{:url('forum/index',['act'=>'nr'])}"><span data-act="nr" >最新回复</span></a></li>
+        <li class='{eq name="act" value="nd"}cur{/eq}'><a href="{:url('forum/index',['act'=>'nd'])}"><span data-act="nd" >最新发布</span></a></li>
+        <li class='{eq name="act" value="ht"}cur{/eq}'><a href="{:url('forum/index',['act'=>'ht'])}"><span data-act="ht" >热帖排行</span></a></li>
+        <li class='{eq name="act" value="jh"}cur{/eq}'><a href="{:url('forum/index',['act'=>'jh'])}"><span data-act="jh" >精华热帖</span></a></li>
       </ul>
     </div>
    </div>
-   {volist name="$ret" id="vo"}
   <div class="post_list">
+  <div id="pagingList">
+    {if condition="isset($topret)"}
+    <div id="zhidingNode" class="zhidingNode">
+      {volist name="$topret" id="vo"}
+      <div class="item iszhiding1" id="item65">
+        <a href="{:url('forum/detail',['id'=>$vo.id])}" class="link bold1" onclick="return setCookieID('65');">
+        <h2><span class="d display1">顶</span><span class="j {$vo.choice?'':'display0'}">精</span>{$vo.title}</h2>
+        </a>
+      </div>
+      {/volist}
+    </div>
+    {/if}
+  {volist name="$ret" id="vo"} 
 	<div class="item iszhiding0" id="item6">
  <div class="item_hd">
   <div class="pic"><img src="{$vo.headimg}" onerror="this.src='/wap/main/images/user_small.gif';this.onerror='';"></div>
@@ -62,10 +75,10 @@
     <div class="right"><span class="num num_1">{$vo.view}</span></div>
     <span class="date">{$vo.time|date="m-d H:i",###}</span>
   </div>
-  <div class="jinghua display0">精</div>
+  <div class="jinghua {$vo.choice?'':'display0'}">精</div>
  </div>
  <a href="{:url('forum/detail',['id'=>$vo.id])}" style="color:" class="link bold0">
- <h2><span class="d display0">顶</span><span class="j display0">精</span>{$vo.title}</h2>
+ <h2><span class="d {$vo.settop?'':'display0'}">顶</span><span class="j display0">精</span>{$vo.title}</h2>
  <div class="chrcontent">{$vo.content}</div>
  <div class="hashongbao_forbox" style="top:60px;right:10px;"></div>
  </a>
@@ -79,19 +92,20 @@
  <ul class="item_ft">
   <li><span class="num num_1">{$vo.reply}</span></li>
   <li><span class="num num_2" data-id="6" data-ischeck="0"><span class="zan">{$vo.praise}</span></span></li>
-  <li><a href="https://www.mh163k.com/tieba_show_6.html" class="num num_3"></a></li>
+  <li><a href="{:url('forum/detail',['id'=>$vo.id])}" class="num num_3"></a></li>
  </ul>
 </div>
-</div>
 {/volist}
+{$ret->render()}
 <div class="nav_index_bottom nav_tb_bottom">
   <ul>
-    <li><a href="https://www.mh163k.com/"><span class="home"></span>首页</a></li>
+    <li><a href="/"><span class="home"></span>首页</a></li>
     <li id="nav_bankuai" class="current"><a href="javascript:void(0);" onclick="return showCatState(false);" style="color: #5cc55c"><span class="bankuai"></span>版块</a></li>
     <li><a href="javascript:;" class="seniorSend" style="background-color: #5cc55c"><span class="fatie"></span>发帖</a></li>
     <li><a href="javascript:void(0);" onclick="location.reload()"><span class="refresh"></span>刷新</a></li>
     <li><a href="{:url('user/index')}"><span class="mine"></span>我的</a></li>
   </ul>
+</div>
 </div>
 	{include file="public/footer" /}
 	</div>
@@ -106,7 +120,7 @@
     }else{
         location.href="{:url('forum/add')}";
     }
-  }) 
+  })
 </script>
 </body>
 </html>
