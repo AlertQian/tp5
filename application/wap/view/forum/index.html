@@ -72,7 +72,7 @@
   <div class="pic"><img src="{$vo.headimg}" onerror="this.src='/wap/main/images/user_small.gif';this.onerror='';"></div>
   <p class="chrname">{$vo.author}<span class="vipnum display0">无</span></p>
   <div class="clearfix">
-    <div class="right"><span class="num num_1">{$vo.view}</span></div>
+    <!-- <div class="right"><span class="num num_1">{$vo.view}</span></div> -->
     <span class="date">{$vo.time|date="m-d H:i",###}</span>
   </div>
   <div class="jinghua {$vo.choice?'':'display0'}">精</div>
@@ -91,7 +91,7 @@
  {/if}
  <ul class="item_ft">
   <li><span class="num num_1">{$vo.reply}</span></li>
-  <li><span class="num num_2" data-id="6" data-ischeck="0"><span class="zan">{$vo.praise}</span></span></li>
+  <li><span class="num num_2" data-id="6" data-ischeck="0"><span class="zan">{$vo.view}</span></span></li>
   <li><a href="{:url('forum/detail',['id'=>$vo.id])}" class="num num_3"></a></li>
  </ul>
 </div>

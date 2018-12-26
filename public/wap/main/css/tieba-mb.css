@@ -154,7 +154,7 @@
 .post_list .item_ft li:last-child { border-right:0 none;}
 .post_list .item_ft .num { text-align:center; display:block; font-size:13px; color:#aaa;}
 .post_list .item_ft .num:before { margin-right:3px; display:inline-block; content:''; width:18px; height:16px; background-size:145px auto; background-position:-25px -200px; vertical-align:-3px;}
-.post_list .item_ft .num_2:before { background-position:-22px -175px;}
+.post_list .item_ft .num_2:before { background-position:-1px -175px;}
 .post_list .item_ft .num_3 {}
 .post_list .item_ft .num_3:before { background-position: -42px -201px; width:28px; margin-right:0;}
 
