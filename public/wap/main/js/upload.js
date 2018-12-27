@@ -38,23 +38,25 @@ $(function(){
 layui.use('upload',function(){
 	var $ = layui.jquery
 	,arr =new Array()
-    ,upload = layui.upload;
-    upload.render({
+  ,upload = layui.upload;
+  var uploadListIns = upload.render({
     elem: '#upimgFileBtn'
     ,url: "/wap/upload/upimgs"
+    ,auto: false
     ,multiple: true
-    ,before: function(obj){
+    ,bindAction:"#fabiao"
+    ,choose: function(obj){
       //预读本地文件示例，不支持ie8
       var files = this.files = obj.pushFile();
       obj.preview(function(index, file, result){
-      	var html=$(['<div class="my_prop_imgitem"><div class="imgviewNode"><img src="'+ result +'" class="imgview" style="height: 81.75px;" alt="'+ file.name +'"></div><a href="javascript:;" class="del">删除</a></div>'].join(''));
+        var html=$(['<div class="my_prop_imgitem"><div class="imgviewNode"><img src="'+ result +'" class="imgview" style="height: 81.75px;" alt="'+ file.name +'"></div><a href="javascript:;" class="del">删除</a></div>'].join(''));
         //$('#xiangce').append('<div class="my_prop_imgitem"><div class="imgviewNode"><img src="'+ result +'" class="imgview" style="height: 81.75px;" alt="'+ file.name +'"></div><a href="javascript:;" class="del">删除</a></div>')
         $('#xiangce').append(html);
-        console.log(files);
-		html.find(".del").on('click',function(){
-			delete files[index];
-			console.log(files);
-		})
+  		  html.find(".del").on('click',function(){
+    			delete files[index];
+    			html.remove();
+          uploadListIns.config.elem.next()[0].value = '';
+  		  })
       });
     }
     ,done: function(res){
