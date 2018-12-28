@@ -1,12 +1,11 @@
 <div class="reply_box page_srcoll" id="pageOther" style="display:none;z-index: 1019;">
-	<form action="" id="myform" method="post" target="tijiao">
 	<div class="inner">
 		<span class="title">回复<span id="replyName"></span></span>
 		<div class="return_close" id="closeReply">返回</div>
 		<div class="cmt_txt2" id="cmt_txt" placeholder="想跟他说点什么~" style=" margin-bottom:10px; height:160px; overflow:auto; -webkit-overflow-scrolling:touch; -webkit-user-select:auto;" contenteditable="true"></div>
-		<input id="chrmarkForm" name="chrmark" type="hidden">
 		<input id="isrep" name="isrep" type="hidden">
 		<input id="perid" name="perid" type="hidden">
+		<input id="fid" name="fid" type="hidden" value="{$ret.id}">
 		<div class="reply_tabs" id="reply_tabs">
 			<ul class="clearfix tab-hd">
 				<li class="item" data-isvideo="0" data-isopen="0"><s class="s s_1"></s>表情</li>
@@ -26,6 +25,8 @@
 			</div>
 		</div>
 		<input type="submit" class="rsubmit" value="发表" id="fabiao"/>
+		<div style="margin:10px 10px 20px;">
+		<input class="comn-submit fabu_btn" type="submit" id="upimgs" value="确认所选图片" style="display: none;background: #5cc55c;">
+	    </div>
 	</div>
-	</form>
 </div>

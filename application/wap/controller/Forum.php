@@ -84,4 +84,11 @@ class Forum extends Common
    	$this->assign('title','发布新帖');
    	return $this->fetch();
    }
+   public function fatie(){
+   	if (!session('validate')) {
+        return $this->redirect('login/index');
+    }
+    $data=input('post.');
+    var_dump($data);
+   }
 }
