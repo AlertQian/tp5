@@ -1,6 +1,7 @@
 <?php
 namespace app\wap\controller;
 use app\index\model\Content;
+use app\index\model\Comment;
 use think\Db;
 use think\Request;
 
@@ -58,6 +59,10 @@ class Forum extends Common
       }
       $this->assign('ret',$ret);
     }
+    $comment=db('comment')->where('fid',$id)->order('id desc')->select();
+    if($comment){
+    	$this->assign('comment',$comment);
+    }
    	$this->assign('title','会员社区');
    	return $this->fetch();
    }
@@ -85,10 +90,25 @@ class Forum extends Common
    	return $this->fetch();
    }
    public function fatie(){
-   	if (!session('validate')) {
-        return $this->redirect('login/index');
+    if (!session('validate')) {
+        $this->error('请先登入','login/index');
     }
-    $data=input('post.');
-    var_dump($data);
+    if(request()->isPost()){
+	    $obj=new Comment;
+	    $data=input('post.');
+	    $userid=db('user')->where('pwd_hash',session('validate'))->value('userid');
+	    
+    	$data['uid']=$userid;
+    	$data['content']=$data['cont'];
+    	$data['time']=time();
+    	$ret=$obj->allowField(true)->save($data);
+    	if($ret){
+    		db('Content')->where('id',$data['fid'])->setInc('reply');
+			$this->success('已发表');
+    	}else{
+			$this->error('提交失败');
+		}
+	   
+	   }
    }
 }

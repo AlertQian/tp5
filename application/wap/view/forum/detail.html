@@ -74,18 +74,19 @@
 			</div>
 		   </div>
 		  </div>
-		  
+		{if condition="isset($comment)"}  
 		<div class="post_list">
 			<div id="pagingList" class="isrevert1">
+				{volist name="$comment" id="vo"}
 				<div class="gentie post_item">
 					<div class="user_info">
 						<div class="user_head"><img src="\uploads\headimg\20181211\63e02036d0aadd51104674ed39c2da0d.png"></div>
 						<ul>
 							<li>
 							<span class="uName">spirit</span>
-							<span class="grade i_1" title="初级">1</span>
+							<!-- <span class="grade i_1" title="初级">1</span>
 							<span class="vipnum display0">无</span>
-							<span class="bazhu display0">版主</span>
+							<span class="bazhu display0">版主</span> -->
 							</li>
 							<li><span class="bandeng">板凳</span> 08-23 13:15</li>
 						</ul>
@@ -97,18 +98,19 @@
 							<p class="comment_content">为基友而生的吧</p>
 						</div>
 						<div class="replaycontent1">
-							
-							<p><span style="color: rgb(51, 51, 51); font-family: 'Microsoft Yahei', arial, 宋体; font-size: 14px; line-height: 24px;">葫芦手机的机身正面搭载了一块5.5英寸1080P分辨率的显示屏</span><img src="http://img.baidu.com/hi/bobo/B_0055.gif"></p>
+							{$vo.content}
 						</div>
 					</div>
 					<p class="manage_replay display0" data-isrep="0">回复：<span class="replaycontent2"></span>　<span class="time"></span></p>
 					<p class="manage"><a href="#" onclick="return edit_replay(this,'487');" class="blue">编辑和回评</a><a href="#" onclick="return loadDelQuick(this,'487');" class="blue" style="padding:0 13px;">更多操作</a></p>
 				</div>
+				{/volist}
 				<div class="noMore" id="noMore">没有更多了</div>
 			</div>
 			<div id="pullUp" style="display:none;"><span class="loader">loadding</span></div>
 			<div class="pageNavigation" id="pageNavigation"><div class="FirstPage"><span class="kill">&lt;</span></div><div class="EndPage"><span class="kill">&gt;</span></div><span class="pageNo">1/1</span></div>
 		</div>
+		{/if}
 		<span class="loader" id="pageLoader" style="display:none;">loadding</span>
 	</div>
 	</div>
@@ -136,13 +138,20 @@
 			var data={};
 			    data.cont=$("#cmt_txt").text();
 			    data.isrep=$("#isrep").val();
-			    data.perid=$("#perid").val();
-			    data.imgs=$("#imgs").val();
+			    data.mid=$("#perid").val();
+			    data.pic=$("input[name=imgs]").val();
 			    data.fid=$("#fid").val();
-			console.log(data);
-			$.post("/wap/forum/fatie",data,function(){
-
-			})    
+			$.post("/wap/forum/fatie",data,function(data){
+				if(data.code==1){
+		          layer.msg(data.msg, {icon: 1, anim: 6, time: 1000},function(){
+		            location.reload();
+		          });
+		        }else{
+		          layer.msg(data.msg,function(){
+		            location.href=data.url;
+		          });
+		        }
+			});
 		})
 	})
 	function loadRevertReplay(o,perid,uname,isrep){
