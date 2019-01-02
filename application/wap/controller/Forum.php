@@ -48,7 +48,7 @@ class Forum extends Common
    	return $this->fetch();
    }
    public function detail(){
-    $id=input('id');
+   	$id=input('id');
     $ret=db('Content')->alias('a')->join('lv_user_info b','b.userid=a.uid')->field('a.*,b.headimg')->where(['id'=>$id,'shows'=>1])->find();
     if($ret){
       db('Content')->where(['id'=>$id,'shows'=>1])->setInc('view');
@@ -59,11 +59,31 @@ class Forum extends Common
       }
       $this->assign('ret',$ret);
     }
-    $comment=db('comment')->where('fid',$id)->order('id desc')->select();
+    $comment=db('comment')->where('fid',$id)->select();
     if($comment){
-    	$this->assign('comment',$comment);
+    	$comarr=getSubTree($comment,'mid','id');
+    	foreach ($comarr as $key => $value) {
+    		$uid=$value['uid'];
+	    	$headimg=db('user_info')->where('userid',$uid)->value('headimg');
+	    	$comarr[$key]['headimg']=$headimg;
+	    	switch ($key) {
+	    		case '0':
+	    			$comarr[$key]['louceng']='<span class="shafa" style="vertical-align: baseline;">沙发</span>';
+	    			break;
+	    		case '1':
+	    			$comarr[$key]['louceng']='<span class="bandeng" style="vertical-align: baseline;">板凳</span>';
+	    			break;
+	    		case '2':
+	    			$comarr[$key]['louceng']='<span class="diban" style="vertical-align: baseline;">地板</span>';
+	    			break;		
+	    		default:
+	    			$comarr[$key]['louceng']=($key+1).'楼';
+	    			break;
+	    	}
+    	}
+        $this->assign('comarr',$comarr);
     }
-   	$this->assign('title','会员社区');
+    $this->assign('title','会员社区');
    	return $this->fetch();
    }
    public function add(){
@@ -96,10 +116,11 @@ class Forum extends Common
     if(request()->isPost()){
 	    $obj=new Comment;
 	    $data=input('post.');
+	    $this->check_form('Comment',$data);
 	    $userid=db('user')->where('pwd_hash',session('validate'))->value('userid');
-	    
     	$data['uid']=$userid;
     	$data['content']=$data['cont'];
+    	$data['uname']=session('nickname');
     	$data['time']=time();
     	$ret=$obj->allowField(true)->save($data);
     	if($ret){

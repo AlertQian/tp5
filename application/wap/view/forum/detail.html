@@ -74,35 +74,39 @@
 			</div>
 		   </div>
 		  </div>
-		{if condition="isset($comment)"}  
+		{if condition="isset($comarr)"}  
 		<div class="post_list">
 			<div id="pagingList" class="isrevert1">
-				{volist name="$comment" id="vo"}
+				{volist name="$comarr" id="vo"}
 				<div class="gentie post_item">
 					<div class="user_info">
-						<div class="user_head"><img src="\uploads\headimg\20181211\63e02036d0aadd51104674ed39c2da0d.png"></div>
+						<div class="user_head"><img src="{$vo.headimg}" onerror="this.src='/wap/main/images/user_small.gif';this.onerror='';"></div>
 						<ul>
 							<li>
-							<span class="uName">spirit</span>
+							<span class="uName">{$vo.uname}</span>
 							<!-- <span class="grade i_1" title="初级">1</span>
 							<span class="vipnum display0">无</span>
 							<span class="bazhu display0">版主</span> -->
 							</li>
-							<li><span class="bandeng">板凳</span> 08-23 13:15</li>
+							<li>{$vo.louceng} {$vo.time|date="m-d H:i",###}</li>
 						</ul>
-							<div class="reply_btn" onclick="return loadRevertReplay(this,'487','spirit','1');"></div>
+						<div class="reply_btn" onclick="return loadRevertReplay(this,{$vo.id},'{$vo.uname}','0');"></div>
 					</div>
 					<div class="con">
-						<div class="comment_reply">
-							<div class="comment_user clearfix"><a href="#" onclick="return loadRevertReplay(this,'84','energy','1');" class="replay_btn replay_life">回复</a><span class="comment_floor right">1</span><span class="userName">energy</span><span class="dtappenddate">07-16 16:27</span></div>
-							<p class="comment_content">为基友而生的吧</p>
-						</div>
 						<div class="replaycontent1">
 							{$vo.content}
 						</div>
+						{if condition="$vo.child"}
+						{volist name="$vo.child" id="v"}
+						<div class="comment_reply">
+							<div class="comment_user clearfix"><a href="#" onclick="return loadRevertReplay(this,{$vo.id},'{$v.uname}','1');" class="replay_btn replay_life">回复</a><span class="comment_floor right">{$i}</span><span class="userName">{$v.uname}</span><span class="dtappenddate">{$v.time|date="m-d H:i",###}</span></div>
+							<p class="comment_content">{$v.content}</p>
+						</div>
+						{/volist}
+						{/if}
 					</div>
 					<p class="manage_replay display0" data-isrep="0">回复：<span class="replaycontent2"></span>　<span class="time"></span></p>
-					<p class="manage"><a href="#" onclick="return edit_replay(this,'487');" class="blue">编辑和回评</a><a href="#" onclick="return loadDelQuick(this,'487');" class="blue" style="padding:0 13px;">更多操作</a></p>
+					<p class="manage"><a href="#" onclick="return edit_replay(this,{$vo.id});" class="blue">编辑和回评</a><a href="#" onclick="return loadDelQuick(this,{$vo.id});" class="blue" style="padding:0 13px;">更多操作</a></p>
 				</div>
 				{/volist}
 				<div class="noMore" id="noMore">没有更多了</div>
@@ -140,7 +144,9 @@
 			    data.isrep=$("#isrep").val();
 			    data.mid=$("#perid").val();
 			    data.pic=$("input[name=imgs]").val();
+			    data.__token__=$("input[name=__token__]").val();
 			    data.fid=$("#fid").val();
+			var $this=$(this);    
 			$.post("/wap/forum/fatie",data,function(data){
 				if(data.code==1){
 		          layer.msg(data.msg, {icon: 1, anim: 6, time: 1000},function(){
@@ -159,6 +165,10 @@
 		$("#perid").val(perid);
 		$("#isrep").val(isrep);
 		$("#pageOther").show(500);
+		console.log(isrep);
+		if(isrep==1){
+            $("#cmt_txt").text("@"+uname+" : ");
+		}
 	}
 </script>
 </body>
