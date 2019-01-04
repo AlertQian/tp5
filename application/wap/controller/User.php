@@ -373,4 +373,14 @@ class User extends Common
 			$this->error('删除失败');
 		}
     }
+    //帖子管理
+    public function managetie(){
+        $userid=$this->userid;
+        $comment=db('comment')->where('uid',$userid)->select();
+        $content=db('content')->where('uid',$userid)->select();
+        if($comment) $this->assign('comment',$comment);
+        if($content) $this->assign('content',$content);
+    	$this->assign('title','帖子管理');
+    	return $this->fetch();
+    }
 }

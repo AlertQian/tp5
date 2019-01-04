@@ -85,7 +85,7 @@
  {if condition="$vo.pic"}
  <div class="con display_video_false_0"><div class="n_img" id="n_img_6" data-ischeck="1">
   {volist name="$vo.imgsarr" id="imglist"}
-  <a href="" target="_blank" class="itemAlbum" original=""><img src="{$imglist}" data-src="{$imglist}" original="{$imglist}" data-ifshow="1" alt="" style="width: 115px; height: 90px;"><div class="feed_highlight" data-ischeck="0"></div></a>
+  <a href="javascript:;" class="itemAlbum" original=""><img src="{$imglist}" data-src="{$imglist}" original="{$imglist}" data-ifshow="1" alt="" style="width: 115px; height: 90px;"></a>
   {/volist}
   </div></div>
  {/if}
@@ -99,7 +99,7 @@
 {$ret->render()}
 <div class="nav_index_bottom nav_tb_bottom">
   <ul>
-    <li><a href="/"><span class="home"></span>首页</a></li>
+    <li><a href="{:url('wap/index/index')}"><span class="home"></span>首页</a></li>
     <li id="nav_bankuai" class="current"><a href="javascript:void(0);" onclick="return showCatState(false);" style="color: #5cc55c"><span class="bankuai"></span>版块</a></li>
     <li><a href="javascript:;" class="seniorSend" style="background-color: #5cc55c"><span class="fatie"></span>发帖</a></li>
     <li><a href="javascript:void(0);" onclick="location.reload()"><span class="refresh"></span>刷新</a></li>

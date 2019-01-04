@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:3:{s:64:"D:\wamp\www\tp5\public/../application/wap\view\user\addinfo.html";i:1544320912;s:55:"D:\wamp\www\tp5\application\wap\view\public\header.html";i:1545358047;s:55:"D:\wamp\www\tp5\application\wap\view\public\footer.html";i:1545529423;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:3:{s:64:"D:\wamp\www\tp5\public/../application/wap\view\user\addinfo.html";i:1546584901;s:55:"D:\wamp\www\tp5\application\wap\view\public\header.html";i:1545358047;s:55:"D:\wamp\www\tp5\application\wap\view\public\footer.html";i:1545529423;}*/ ?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -267,7 +267,7 @@ width: 60%;text-align: left;color: #666;
           </div>
           <input name="userzm" value="" class="layui-input" type="hidden">
             <div class="base-img" style="margin-top: 20px;width: 100%;text-align: center;">
-            <img id="image" style="width: 80%;min-height: 150px;border: 1px solid #eee;border-radius: 5px;" src="<?php echo !empty($ret['headimg'])?$ret['headimg']:'/wap/main/images/jiaoyou_face_nofind.jpg'; ?>">
+            <img id="image" style="width: 80%;min-height: 150px;border: 1px solid #eee;border-radius: 5px;" src="<?php echo $ret['headimg']; ?>" onerror="this.src='/wap/main/images/jiaoyou_face_nofind.jpg';this.onerror='';">
             </div>
           </div>
           <div class="layui-form-item" style="border-bottom: none;margin-top: 10px;display: none;" id="gnitem">

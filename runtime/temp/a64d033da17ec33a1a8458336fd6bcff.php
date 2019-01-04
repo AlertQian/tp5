@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:3:{s:62:"D:\wamp\www\tp5\public/../application/wap\view\user\index.html";i:1545700307;s:55:"D:\wamp\www\tp5\application\wap\view\public\header.html";i:1545358047;s:55:"D:\wamp\www\tp5\application\wap\view\public\footer.html";i:1545529423;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:3:{s:62:"D:\wamp\www\tp5\public/../application/wap\view\user\index.html";i:1546585443;s:55:"D:\wamp\www\tp5\application\wap\view\public\header.html";i:1545358047;s:55:"D:\wamp\www\tp5\application\wap\view\public\footer.html";i:1545529423;}*/ ?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -34,7 +34,7 @@
 </div>
 	<div class="wrapper" style="background: #eee">
 		<div class="member_head member_head_2">
-		  <div class="user_head"><a href="<?php echo url('user/addinfo#info=headimg'); ?>" class="face"><img src="<?php echo $obj['headimg']; ?>" alt="" width="96" height="96"></a><s class="s"></s></div>
+		  <div class="user_head"><a href="<?php echo url('user/addinfo#info=headimg'); ?>" class="face"><img src="<?php echo $obj['headimg']; ?>" width="96" height="96" onerror="this.src='/wap/main/images/user_small.gif';this.onerror='';"></a><s class="s"></s></div>
 		  <div class="userName" id="userName"><?php echo $obj['nickname']; ?></div>
 		  <a href="<?php echo url('user/addinfo'); ?>" class="txt">修改资料</a><s class="s_bor"></s><a href="<?php echo url('user/safe'); ?>" class="txt">安全设置</a>
 		  <a href="javascript:void(0);" class="real real_0_0">未认证<s class="s"></s></a>
@@ -58,11 +58,19 @@
 		   <li class="jy_ico_06"><a href="<?php echo url('user/commend'); ?>">我要推荐</a></li>
 		   <!-- <li class="jy_ico_07"><a href="<?php echo url('user/slctfriend'); ?>">智能匹配</a></li> -->
 		   <li class="jy_ico_15"><a href="<?php echo url('user/hongniang'); ?>">红娘牵线</a></li>
-		   <li class="jy_ico_10"><a href="<?php echo url('user/message'); ?>">私信消息
+		   <!-- <li class="jy_ico_10"><a href="<?php echo url('user/message'); ?>">私信消息
+		   	<?php if(isset($msg)): ?>
+		   	<span class="tips"></span>
+		   	<?php endif; ?>
+		   </a></li> -->
+		   </ul>
+		   <ul class="memberNav">
+		   	<li class="jy_ico_10"><a href="<?php echo url('user/message'); ?>">私信消息
 		   	<?php if(isset($msg)): ?>
 		   	<span class="tips"></span>
 		   	<?php endif; ?>
 		   </a></li>
+		   <li class="jy_ico_08"><a href="<?php echo url('user/managetie'); ?>">帖子管理</a></li>
 		   </ul>
 		   <!-- <ul class="memberNav">
 		   <li class="jy_ico_08"><a href="connections.aspx?action=selectbrowselist&amp;type=0">我看过谁</a></li>

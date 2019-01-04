@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:3:{s:63:"D:\wamp\www\tp5\public/../application/wap\view\forum\index.html";i:1545874142;s:55:"D:\wamp\www\tp5\application\wap\view\public\header.html";i:1545358047;s:55:"D:\wamp\www\tp5\application\wap\view\public\footer.html";i:1545529423;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:3:{s:63:"D:\wamp\www\tp5\public/../application/wap\view\forum\index.html";i:1546570628;s:55:"D:\wamp\www\tp5\application\wap\view\public\header.html";i:1545358047;s:55:"D:\wamp\www\tp5\application\wap\view\public\footer.html";i:1545529423;}*/ ?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -102,7 +102,7 @@
  <?php if($vo['pic']): ?>
  <div class="con display_video_false_0"><div class="n_img" id="n_img_6" data-ischeck="1">
   <?php if(is_array($vo['imgsarr']) || $vo['imgsarr'] instanceof \think\Collection || $vo['imgsarr'] instanceof \think\Paginator): $i = 0; $__LIST__ = $vo['imgsarr'];if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$imglist): $mod = ($i % 2 );++$i;?>
-  <a href="" target="_blank" class="itemAlbum" original=""><img src="<?php echo $imglist; ?>" data-src="<?php echo $imglist; ?>" original="<?php echo $imglist; ?>" data-ifshow="1" alt="" style="width: 115px; height: 90px;"><div class="feed_highlight" data-ischeck="0"></div></a>
+  <a href="javascript:;" class="itemAlbum" original=""><img src="<?php echo $imglist; ?>" data-src="<?php echo $imglist; ?>" original="<?php echo $imglist; ?>" data-ifshow="1" alt="" style="width: 115px; height: 90px;"></a>
   <?php endforeach; endif; else: echo "" ;endif; ?>
   </div></div>
  <?php endif; ?>
@@ -116,7 +116,7 @@
 <?php echo $ret->render(); ?>
 <div class="nav_index_bottom nav_tb_bottom">
   <ul>
-    <li><a href="/"><span class="home"></span>首页</a></li>
+    <li><a href="<?php echo url('wap/index/index'); ?>"><span class="home"></span>首页</a></li>
     <li id="nav_bankuai" class="current"><a href="javascript:void(0);" onclick="return showCatState(false);" style="color: #5cc55c"><span class="bankuai"></span>版块</a></li>
     <li><a href="javascript:;" class="seniorSend" style="background-color: #5cc55c"><span class="fatie"></span>发帖</a></li>
     <li><a href="javascript:void(0);" onclick="location.reload()"><span class="refresh"></span>刷新</a></li>

@@ -62,10 +62,9 @@
 		   </div>
 		   <div class="con" id="louzhuCon">
 			{$ret.content}
-			<p><br></p>
 			{if condition="isset($imgsarr)"}
 			{volist name="imgsarr" id="vo"}
-			<p><img src="{$vo}" style="" title="14_3.png"></p>
+			<p><img src="{$vo}" style="width: 100%"></p>
 			{/volist}
 			{/if}
 			<p class="blod"></p>
@@ -96,11 +95,17 @@
 						<div class="replaycontent1">
 							{$vo.content}
 						</div>
+						{if condition="$vo.pic"}
+						<p class=""><img src="{$vo.pic}" style="width: 100%"></p>
+						{/if}
 						{if condition="$vo.child"}
 						{volist name="$vo.child" id="v"}
 						<div class="comment_reply">
 							<div class="comment_user clearfix"><a href="#" onclick="return loadRevertReplay(this,{$vo.id},'{$v.uname}','1');" class="replay_btn replay_life">回复</a><span class="comment_floor right">{$i}</span><span class="userName">{$v.uname}</span><span class="dtappenddate">{$v.time|date="m-d H:i",###}</span></div>
 							<p class="comment_content">{$v.content}</p>
+							{if condition="$v.pic"}
+							<p class=""><img src="{$v.pic}" style="width: 100%"></p>
+							{/if}
 						</div>
 						{/volist}
 						{/if}

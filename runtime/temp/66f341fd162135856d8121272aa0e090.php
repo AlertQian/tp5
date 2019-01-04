@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:4:{s:64:"D:\wamp\www\tp5\public/../application/wap\view\forum\detail.html";i:1546420868;s:55:"D:\wamp\www\tp5\application\wap\view\public\header.html";i:1545358047;s:55:"D:\wamp\www\tp5\application\wap\view\public\huitie.html";i:1546394791;s:55:"D:\wamp\www\tp5\application\wap\view\public\footer.html";i:1545529423;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:4:{s:64:"D:\wamp\www\tp5\public/../application/wap\view\forum\detail.html";i:1546569429;s:55:"D:\wamp\www\tp5\application\wap\view\public\header.html";i:1545358047;s:55:"D:\wamp\www\tp5\application\wap\view\public\huitie.html";i:1546394791;s:55:"D:\wamp\www\tp5\application\wap\view\public\footer.html";i:1545529423;}*/ ?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -79,10 +79,8 @@
 			<div class="op">楼主</div>
 		   </div>
 		   <div class="con" id="louzhuCon">
-			<?php echo $ret['content']; ?>
-			<p><br></p>
-			<?php if(isset($imgsarr)): if(is_array($imgsarr) || $imgsarr instanceof \think\Collection || $imgsarr instanceof \think\Paginator): $i = 0; $__LIST__ = $imgsarr;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($i % 2 );++$i;?>
-			<p><img src="<?php echo $vo; ?>" style="" title="14_3.png"></p>
+			<?php echo $ret['content']; if(isset($imgsarr)): if(is_array($imgsarr) || $imgsarr instanceof \think\Collection || $imgsarr instanceof \think\Paginator): $i = 0; $__LIST__ = $imgsarr;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($i % 2 );++$i;?>
+			<p><img src="<?php echo $vo; ?>" style="width: 100%"></p>
 			<?php endforeach; endif; else: echo "" ;endif; endif; ?>
 			<p class="blod"></p>
 			<div class="p_btns">
@@ -112,10 +110,15 @@
 						<div class="replaycontent1">
 							<?php echo $vo['content']; ?>
 						</div>
-						<?php if($vo['child']): if(is_array($vo['child']) || $vo['child'] instanceof \think\Collection || $vo['child'] instanceof \think\Paginator): $i = 0; $__LIST__ = $vo['child'];if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$v): $mod = ($i % 2 );++$i;?>
+						<?php if($vo['pic']): ?>
+						<p class=""><img src="<?php echo $vo['pic']; ?>" style="width: 100%"></p>
+						<?php endif; if($vo['child']): if(is_array($vo['child']) || $vo['child'] instanceof \think\Collection || $vo['child'] instanceof \think\Paginator): $i = 0; $__LIST__ = $vo['child'];if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$v): $mod = ($i % 2 );++$i;?>
 						<div class="comment_reply">
 							<div class="comment_user clearfix"><a href="#" onclick="return loadRevertReplay(this,<?php echo $vo['id']; ?>,'<?php echo $v['uname']; ?>','1');" class="replay_btn replay_life">回复</a><span class="comment_floor right"><?php echo $i; ?></span><span class="userName"><?php echo $v['uname']; ?></span><span class="dtappenddate"><?php echo date("m-d H:i",$v['time']); ?></span></div>
 							<p class="comment_content"><?php echo $v['content']; ?></p>
+							<?php if($v['pic']): ?>
+							<p class=""><img src="<?php echo $v['pic']; ?>" style="width: 100%"></p>
+							<?php endif; ?>
 						</div>
 						<?php endforeach; endif; else: echo "" ;endif; endif; ?>
 					</div>

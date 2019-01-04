@@ -115,7 +115,12 @@ class Forum extends Common
     }
     if(request()->isPost()){
 	    $obj=new Comment;
+	    $cot=new Content;
 	    $data=input('post.');
+	    $is_cot=$cot->where('id',$data['fid'])->find();
+	    if(!$is_cot) $this->error('该帖不存在');
+	    $is_obj=$obj->where('id',$data['mid'])->find();
+	    if(!$is_obj) $this->error('该回复不存在');
 	    $this->check_form('Comment',$data);
 	    $userid=db('user')->where('pwd_hash',session('validate'))->value('userid');
     	$data['uid']=$userid;
@@ -124,7 +129,7 @@ class Forum extends Common
     	$data['time']=time();
     	$ret=$obj->allowField(true)->save($data);
     	if($ret){
-    		db('Content')->where('id',$data['fid'])->setInc('reply');
+    		$cot->where('id',$data['fid'])->setInc('reply');
 			$this->success('已发表');
     	}else{
 			$this->error('提交失败');

@@ -16,7 +16,7 @@
 	{include file="public/header" /}
 	<div class="wrapper" style="background: #eee">
 		<div class="member_head member_head_2">
-		  <div class="user_head"><a href="{:url('user/addinfo#info=headimg')}" class="face"><img src="{$obj.headimg}" alt="" width="96" height="96"></a><s class="s"></s></div>
+		  <div class="user_head"><a href="{:url('user/addinfo#info=headimg')}" class="face"><img src="{$obj.headimg}" width="96" height="96" onerror="this.src='/wap/main/images/user_small.gif';this.onerror='';"></a><s class="s"></s></div>
 		  <div class="userName" id="userName">{$obj.nickname}</div>
 		  <a href="{:url('user/addinfo')}" class="txt">修改资料</a><s class="s_bor"></s><a href="{:url('user/safe')}" class="txt">安全设置</a>
 		  <a href="javascript:void(0);" class="real real_0_0">未认证<s class="s"></s></a>
@@ -40,11 +40,19 @@
 		   <li class="jy_ico_06"><a href="{:url('user/commend')}">我要推荐</a></li>
 		   <!-- <li class="jy_ico_07"><a href="{:url('user/slctfriend')}">智能匹配</a></li> -->
 		   <li class="jy_ico_15"><a href="{:url('user/hongniang')}">红娘牵线</a></li>
-		   <li class="jy_ico_10"><a href="{:url('user/message')}">私信消息
+		   <!-- <li class="jy_ico_10"><a href="{:url('user/message')}">私信消息
+		   	{if condition="isset($msg)"}
+		   	<span class="tips"></span>
+		   	{/if}
+		   </a></li> -->
+		   </ul>
+		   <ul class="memberNav">
+		   	<li class="jy_ico_10"><a href="{:url('user/message')}">私信消息
 		   	{if condition="isset($msg)"}
 		   	<span class="tips"></span>
 		   	{/if}
 		   </a></li>
+		   <li class="jy_ico_08"><a href="{:url('user/managetie')}">帖子管理</a></li>
 		   </ul>
 		   <!-- <ul class="memberNav">
 		   <li class="jy_ico_08"><a href="connections.aspx?action=selectbrowselist&amp;type=0">我看过谁</a></li>
