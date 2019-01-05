@@ -16,6 +16,7 @@
 <script src="/fds/js/jquery-1.11.3.min.js"></script>
 <script src="/static/layui/layui.js"></script>
 <script src="/wap/main/js/upload.js"></script>
+<script src="/public/js/emotData.js"></script>
 <style type="text/css">
 .foot_link { margin-top:0!important;}
 #pageNavigation { display:none;}
@@ -51,18 +52,7 @@
         </ul>
         <div class="tab-cont" style="display:none;">
           <div class="face" id="emot_inner">
-            <div class="clearfix">
-              <ul class="clearfix ul_0">
-                <li>
-                  <a href="#" class="itemEmot" onclick="return insertAtCaret(this,'cmt_txt','/wap/main/arclist/1.gif');" data-src="/wap/arclist/1.gif" data-alt="拥抱">
-                  <img src="/wap/main/arclist/1.gif" alt=""></a>
-                </li>
-                <li>
-                  <a href="#" class="itemEmot" onclick="return insertAtCaret(this,'cmt_txt','/template/wap/main/arclist/2.gif');" data-src="/wap/main/arclist/2.gif" data-alt="撇嘴">
-                  <img src="/wap/main/arclist/2.gif" alt=""></a>
-                </li>
-              </ul>
-            </div>
+            
           </div>
         </div>
         <div class="tab-cont">
@@ -89,7 +79,7 @@
     $('#submit').click(function(e){
         e.preventDefault();
         var title=$.trim($("#fabu_title").val());
-        var content=$.trim($("#cmt_txt").text());
+        var content=$.trim($("#cmt_txt").html());
         var pic=$('input[name=imgs]').val()
           ,token=$("input[name=__token__]").val();
         if(title.length == 0){
@@ -123,55 +113,6 @@
         })
     })
   })
-  var emotData = [
-  {'id':'1','alt':'拥抱','format':'gif'},
-  {'id':'2','alt':'撇嘴','format':'gif'},
-  {'id':'3','alt':'色','format':'gif'},
-  {'id':'4','alt':'发呆','format':'gif'},
-  {'id':'5','alt':'得意','format':'gif'},
-  {'id':'6','alt':'流泪','format':'gif'},
-  {'id':'7','alt':'害羞','format':'gif'},
-  {'id':'8','alt':'闭嘴','format':'gif'},
-  {'id':'9','alt':'睡','format':'gif'},
-  {'id':'10','alt':'大哭','format':'gif'},
-  {'id':'11','alt':'尴尬','format':'gif'},
-  {'id':'12','alt':'发怒','format':'gif'},
-  {'id':'13','alt':'调皮','format':'gif'},
-  {'id':'14','alt':'呲牙','format':'gif'},
-  {'id':'15','alt':'惊讶','format':'gif'},
-  {'id':'16','alt':'难过','format':'gif'},
-  {'id':'17','alt':'酷','format':'gif'},
-  {'id':'18','alt':'冷汗','format':'gif'},
-  {'id':'19','alt':'抓狂','format':'gif'},
-  {'id':'20','alt':'吐','format':'gif'},
-  {'id':'21','alt':'偷笑','format':'gif'},
-  {'id':'22','alt':'发怒','format':'gif'},
-  {'id':'23','alt':'调皮','format':'gif'},
-  {'id':'24','alt':'呲牙','format':'gif'},
-  {'id':'25','alt':'惊讶','format':'gif'},
-  {'id':'26','alt':'难过','format':'gif'},
-  {'id':'27','alt':'酷','format':'gif'},
-  {'id':'28','alt':'冷汗','format':'gif'},
-  {'id':'29','alt':'抓狂','format':'gif'},
-  {'id':'30','alt':'吐','format':'gif'}
-];
-  function loadEmot(forid){
-  var iNode = document.createElement('div');
-  iNode.className = 'clearfix';
-  var strFace = '<ul class="clearfix ul_0">';
-  var i=0,k=0,len=emotData.length,path='/wap/main/arclist/',sourceImgsrc='',imgsrc=path+'24x24tranparent.gif';
-  for( ;i<len;i++){
-    sourceImgsrc = path+'e_'+emotData[i].id+'.png';
-    strFace += '<li><a href="#" class="itemEmot" onclick="return insertAtCaret(this,\''+forid+'\',\''+sourceImgsrc+'\');" data-src="'+sourceImgsrc+'" data-alt="'+emotData[i].alt+'"><img src="'+imgsrc+'" alt="" /></a></li>';
-  }
-  strFace += '</ul>';
-  setTimeout(function(){
-    iNode.innerHTML = strFace;
-    $('#emot_inner').append(iNode);
-  },100);
-  
-}
-loadEmot('cmt_txt');
 </script>
 </body>
 </html>

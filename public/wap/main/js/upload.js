@@ -3,7 +3,7 @@ layui.use('upload',function(){
   ,arr =new Array()
   ,upload = layui.upload;
   //切换图标
-  $('#reply_tabs ul li').each(function(i){
+  $('#reply_tabs .tab-hd li').each(function(i){
       $(this).click(function(){
         var isopen= $(this).attr('data-isopen');
         var conts=$(this).parents('.reply_tabs').find('.tab-cont');

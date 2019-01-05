@@ -96,6 +96,7 @@ class Forum extends Common
     	$this->check_form('Content',$data);
     	$userid=db('user')->where('pwd_hash',session('validate'))->value('userid');
     	$data['uid']=$userid;
+      $data['content']=strip_tags($data['content'],"<img>");
     	$data['author']=session('nickname');
     	$data['time']=time();
     	$ret=$obj->allowField(true)->save($data);
@@ -119,12 +120,11 @@ class Forum extends Common
 	    $data=input('post.');
 	    $is_cot=$cot->where('id',$data['fid'])->find();
 	    if(!$is_cot) $this->error('该帖不存在');
-	    $is_obj=$obj->where('id',$data['mid'])->find();
-	    if(!$is_obj) $this->error('该回复不存在');
 	    $this->check_form('Comment',$data);
 	    $userid=db('user')->where('pwd_hash',session('validate'))->value('userid');
     	$data['uid']=$userid;
-    	$data['content']=$data['cont'];
+    	//$data['content']=$data['cont'];
+      $data['content']=strip_tags($data['cont'],"<img>");
     	$data['uname']=session('nickname');
     	$data['time']=time();
     	$ret=$obj->allowField(true)->save($data);

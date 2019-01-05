@@ -16,6 +16,7 @@
 <script src="/fds/js/jquery-1.11.3.min.js"></script>
 <script src="/static/layui/layui.js"></script>
 <script src="/wap/main/js/upload.js"></script>
+<script src="/public/js/emotData.js"></script>
 <style type="text/css">
 .foot_link { display:none!important;}
 #pageNavigation { display:none;}
@@ -145,13 +146,13 @@
 		})
 		$("#fabiao").click(function(data){
 			var data={};
-			    data.cont=$("#cmt_txt").text();
+			    data.cont=$.trim($("#cmt_txt").html());
 			    data.isrep=$("#isrep").val();
 			    data.mid=$("#perid").val();
 			    data.pic=$("input[name=imgs]").val();
 			    data.__token__=$("input[name=__token__]").val();
 			    data.fid=$("#fid").val();
-			var $this=$(this);    
+			var $this=$(this);
 			$.post("/wap/forum/fatie",data,function(data){
 				if(data.code==1){
 		          layer.msg(data.msg, {icon: 1, anim: 6, time: 1000},function(){

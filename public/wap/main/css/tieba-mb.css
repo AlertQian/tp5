@@ -290,8 +290,8 @@
 
 .reply_tabs .face { overflow-y: scroll; -webkit-overflow-scrolling:touch; height:200px; background-color:#fff; border-top:1px solid #eee; border-bottom:1px solid #eee; margin:10px 0 0 0;}
 .reply_tabs .face .ul_0 { background:url(../images/emotion/1.png) no-repeat 0 0; background-size:100% auto;}
-.reply_tabs .face li { float:left; width:20%; text-align:center;}
-.reply_tabs .face li img { vertical-align:top; width:100%;}
+.reply_tabs .face li { float:left; width:10%; text-align:center;}
+.reply_tabs .face li img { vertical-align:top;}
 .reply_tabs .reply_tips { text-align:center; font-size:12px; color:#aaa; margin-top:6px;}
 .reply_tabs .cmt_txt2 { background-color:#fff; outline:0; border:0 none; margin:10px 0 0 0; width:100%; box-sizing:border-box; display:block; padding:10px; min-height:100px; border-top:1px solid #eee; border-bottom:1px solid #eee;}
 .reply_tabs .imgcon { border-top:1px solid #eee; border-bottom:1px solid #eee;}
