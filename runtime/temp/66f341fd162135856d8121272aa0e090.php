@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:4:{s:64:"D:\wamp\www\tp5\public/../application/wap\view\forum\detail.html";i:1546739716;s:55:"D:\wamp\www\tp5\application\wap\view\public\header.html";i:1545358047;s:55:"D:\wamp\www\tp5\application\wap\view\public\huitie.html";i:1546394791;s:55:"D:\wamp\www\tp5\application\wap\view\public\footer.html";i:1545529423;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:4:{s:64:"D:\wamp\www\tp5\public/../application/wap\view\forum\detail.html";i:1546701114;s:55:"D:\wamp\www\tp5\application\wap\view\public\header.html";i:1545395791;s:55:"D:\wamp\www\tp5\application\wap\view\public\huitie.html";i:1546441826;s:55:"D:\wamp\www\tp5\application\wap\view\public\footer.html";i:1545472561;}*/ ?>
 <!DOCTYPE html>
 <html>
 <head>

@@ -391,6 +391,10 @@ class User extends Common
     }
     //修改帖子
     public function editcon(){
+    	$id=input('id');
+    	$ret=db('content')->where('id',$id)->find();
+    	if(!$ret) $this->error('该贴不存在！');
+    	$this->assign('ret',$ret);
         $this->assign('title','修改帖子');
         return $this->fetch();
     }
