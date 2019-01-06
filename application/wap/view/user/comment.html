@@ -34,22 +34,28 @@
 <div class="wrapper">
 	<div class="layui-tab layui-tab-brief" lay-filter="info">
 	  <ul class="layui-tab-title">
-	    <li class="layui-this"><a href="{:url('user/managetie')}">我的发帖</a></li>
-	    <li><a href="{:url('user/comment')}">我的回复</a></li>
+	    <li><a href="{:url('user/managetie')}">我的发帖</a></li>
+	    <li class="layui-this"><a href="{:url('user/comment')}">我的回复</a></li>
 	  </ul>
 	  <div class="layui-tab-content">
-    	{if condition="isset($content)"}
-    	<ul class="jie-row">
-    	{volist name="content" id="vo"}
+    	{if condition="isset($comment)"}
+    	<ul class="home-jieda">
+    	{volist name="comment" id="vo"}
 		<li>
-		<a href="{:url('forum/detail',['id'=>$vo.id])}" target="_blank" class="jie-title">{$vo.title}</a>
-		<i>{$vo.time|date="Y-m-d",###}</i>
-		<a class="mine-edit" href="{:url('user/editcon',['id'=>$vo.id])}">编辑</a>
-		<em>{$vo.view}阅/{$vo.reply}答</em>
+		<p>
+		<span>{$vo.time|date="Y-m-d",###}</span>
+		在 
+		<a href="{:url('forum/detail',['id'=>$vo.fid])}" target="_blank">{$vo.title}</a>
+		中回答 
+		<a class="mine-edit" href="{:url('user/editcom',['id'=>$vo.id])}">编辑</a>
+		</p>
+		<div class="home-dacontent">
+		{$vo.content}
+		</div>
 		</li>
 		{/volist}
 		</ul>
-		{$content->render()}
+		{$comment->render()}
     	{else/}
     	<p style="text-align: center;color: #666;padding: 10px;">暂无内容</p>
     	{/if}

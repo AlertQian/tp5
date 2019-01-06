@@ -376,11 +376,27 @@ class User extends Common
     //帖子管理
     public function managetie(){
         $userid=$this->userid;
-        $comment=db('comment')->where('uid',$userid)->select();
-        $content=db('content')->where('uid',$userid)->select();
-        if($comment) $this->assign('comment',$comment);
+        $content=db('content')->where('uid',$userid)->order('id desc')->paginate(15);
         if($content) $this->assign('content',$content);
     	$this->assign('title','帖子管理');
     	return $this->fetch();
+    }
+    //帖子管理
+    public function comment(){
+        $userid=$this->userid;
+        $comment=db('comment')->alias('a')->join('content b','b.id=a.fid')->field('a.*,b.title')->where('a.uid',$userid)->order('a.id desc')->paginate(15);
+        if($comment) $this->assign('comment',$comment);
+        $this->assign('title','帖子管理');
+        return $this->fetch();
+    }
+    //修改帖子
+    public function editcon(){
+        $this->assign('title','修改帖子');
+        return $this->fetch();
+    }
+    //修改回复
+    public function editcom(){
+        $this->assign('title','修改回复');
+        return $this->fetch();
     }
 }
