@@ -102,10 +102,10 @@ class Forum extends Common
     	$ret=$obj->allowField(true)->save($data);
     	if($ret){
     		$id=$obj->id;
-			$this->success('已提交','forum/detail?id='.$id);
-		}else{
-			$this->error('提交失败');
-		}
+  			$this->success('已提交','forum/detail?id='.$id);
+  		}else{
+  			$this->error('提交失败');
+  		}
     }
    	$this->assign('title','发布新帖');
    	return $this->fetch();

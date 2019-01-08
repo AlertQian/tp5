@@ -3,6 +3,8 @@ namespace app\wap\controller;
 use app\index\model\UserInfo;
 use app\index\model\UserImprove;
 use app\index\model\Yaoqiu;
+use app\index\model\Content;
+use app\index\model\Comment;
 use app\index\model\User as UserModel;
 use think\Validate;
 use think\Db;
@@ -391,12 +393,26 @@ class User extends Common
     }
     //修改帖子
     public function editcon(){
-    	$id=input('id');
-    	$ret=db('content')->where('id',$id)->find();
-    	if(!$ret) $this->error('该贴不存在！');
-    	$this->assign('ret',$ret);
-        $this->assign('title','修改帖子');
-        return $this->fetch();
+    	$cot=new Content;
+    	if(request()->isPost()){
+    		$data=input('post.');
+    	    $this->check_form('Content',$data);
+    	    $obj=$cot->allowField(true)->save($data,['id'=>$data['id']]);
+	    	if($obj){
+	  			$this->success('已提交');
+	  		}else{
+	  			$this->error('提交失败');
+	  		}
+    	}else{
+    		$id=input('id');
+	    	$userid=$this->userid;
+	    	$ret=$cot->where(['id'=>$id,'uid'=>$userid])->find();
+	    	if(!$ret) $this->error('该贴不存在！');
+	    	$this->assign('ret',$ret);
+	        $this->assign('title','修改帖子');
+	        return $this->fetch();
+    	}
+    	
     }
     //修改回复
     public function editcom(){

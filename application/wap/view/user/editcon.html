@@ -63,6 +63,11 @@
             <input type="hidden" name="imgs" class="layui-input" value="{$ret.pic}">
             <input type="hidden" name="isimgs" class="layui-input" value="">
           </div>
+          {if condition="isset($ret.pic)"}
+          {volist name="ret.pic" id="vo"}
+          <div class="my_prop_imgitem"><div class="imgviewNode"><img src="{$vo}" class="imgview" style="height: 89px;"></div><a href="javascript:;" class="del">删除</a></div>
+          {/volist}
+          {/if}
         </div>
         {:token()}
         <div style="margin:10px 10px 20px;">
@@ -81,7 +86,9 @@
         var title=$.trim($("#fabu_title").val());
         var content=$.trim($("#cmt_txt").html());
         var pic=$('input[name=imgs]').val()
-          ,token=$("input[name=__token__]").val();
+            ,id={$ret.id}
+            ,token=$("input[name=__token__]").val();
+        
         if(title.length == 0){
           layer.msg('请填写标题');
           $("#fabu_title").focus();
@@ -93,8 +100,8 @@
           return false;
         }
         $.ajax({
-          url:"{:url('forum/add')}",
-          data:{title:title,content:content,pic:pic,__token__:token},
+          url:"{:url('user/editcon')}",
+          data:{title:title,content:content,pic:pic,__token__:token,id:id},
           type:'post',
           success:function(data){
             if(data.code ==1){
@@ -102,7 +109,7 @@
                 location.href=data.url;
               });
             }else{
-              layer.msg(data.msg,function(){
+              layer.msg(data.msg,function(){ 
                 location.reload();
               });
             }
