@@ -378,7 +378,7 @@ class User extends Common
     //帖子管理
     public function managetie(){
         $userid=$this->userid;
-        $content=db('content')->where('uid',$userid)->order('id desc')->paginate(15);
+        $content=db('content')->where(['uid'=>$userid,'shows'=>1])->order('id desc')->paginate(15);
         if($content) $this->assign('content',$content);
     	$this->assign('title','帖子管理');
     	return $this->fetch();
@@ -386,7 +386,7 @@ class User extends Common
     //帖子管理
     public function comment(){
         $userid=$this->userid;
-        $comment=db('comment')->alias('a')->join('content b','b.id=a.fid')->field('a.*,b.title')->where('a.uid',$userid)->order('a.id desc')->paginate(15);
+        $comment=db('comment')->alias('a')->join('content b','b.id=a.fid')->field('a.*,b.title')->where(['a.uid'=>$userid,'a.shows'=>1])->order('a.id desc')->paginate(15);
         if($comment) $this->assign('comment',$comment);
         $this->assign('title','帖子管理');
         return $this->fetch();
@@ -399,15 +399,21 @@ class User extends Common
     	    $this->check_form('Content',$data);
     	    $obj=$cot->allowField(true)->save($data,['id'=>$data['id']]);
 	    	if($obj){
-	  			$this->success('已提交');
+	  			$this->success('已保存');
 	  		}else{
-	  			$this->error('提交失败');
+	  			$this->error('已保存');
 	  		}
     	}else{
     		$id=input('id');
 	    	$userid=$this->userid;
 	    	$ret=$cot->where(['id'=>$id,'uid'=>$userid])->find();
 	    	if(!$ret) $this->error('该贴不存在！');
+            $showimgs=$ret['pic'];
+            if($showimgs){
+                $imgsarr=explode(',', $showimgs);
+                $this->assign('imgsarr', $imgsarr);
+                $this->assign('showimgs',$showimgs);
+            }
 	    	$this->assign('ret',$ret);
 	        $this->assign('title','修改帖子');
 	        return $this->fetch();

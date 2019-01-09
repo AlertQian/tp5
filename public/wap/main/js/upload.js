@@ -39,7 +39,7 @@ layui.use('upload',function(){
 			uploadListIns.config.elem.next()[0].value = '';
 			if($.isEmptyObject(files)){
 				$('#submit').show();
-                $('#upimgs').hide();
+        $('#upimgs').hide();
 			}
 		})
       });
@@ -61,5 +61,23 @@ layui.use('upload',function(){
     }
     });
 })
-
-    
+$(document).on('click',".del",function(e){
+    e.preventDefault();
+    var index = $(".del").index(this)
+    ,tag=","
+    ,imgs=$('input[name=imgs]').val();
+    arrList = imgs.split(",");
+    $url=arrList[index];
+    arrList.splice(index,1);
+    var delimg=arrList.join(',');
+    $.post("/wap/user/unsetimg",{urls:$url},function(data){
+      if(data.code ==1){
+          //subt();
+        layer.msg(data.msg,{icon: 1,anim: 6, time: 2000});  
+      }else{
+        layer.msg(data.msg,{icon: 2,anim: 6, time: 2000});
+      }
+    });
+      $("input[name=imgs]").val(delimg);
+    $(this).parent('.my_prop_imgitem').remove();
+  })

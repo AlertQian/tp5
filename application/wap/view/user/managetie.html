@@ -45,6 +45,7 @@
 		<a href="{:url('forum/detail',['id'=>$vo.id])}" target="_blank" class="jie-title">{$vo.title}</a>
 		<i>{$vo.time|date="Y-m-d",###}</i>
 		<a class="mine-edit" href="{:url('user/editcon',['id'=>$vo.id])}">编辑</a>
+		<a class="mine-edit cont-del" href="javascript:;" style="background-color: #FF5722" id="{$vo.id}">删除</a>
 		<em>{$vo.view}阅/{$vo.reply}答</em>
 		</li>
 		{/volist}
@@ -59,8 +60,17 @@
 {include file="public/footer" /}
 </div>
 <script type="text/javascript">
-	layui.use('element', function(){
-          var element = layui.element;
+	layui.use(['element','layer'], function(){
+        var $ = layui.jquery
+            ,layer=layui.layer
+            ,element = layui.element;
+        $(".cont-del").click(function(){
+        	$id=$(this).attr('id');
+        	layer.confirm('确定删除?',{icon: 3, title:'删除'},function(index){
+        		console.log($id);
+        		layer.close(index);
+        	});
+        })
     })
 </script>
 </body>
