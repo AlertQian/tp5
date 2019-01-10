@@ -76,7 +76,6 @@ function insertAtCaret(o,sid,src){
   if (document.selection) {
     target_node.focus();
     var cr = document.selection.createRange();
-    //cr.text = text;
     cr.pasteHTML(text);
     cr.collapse();
     cr.select();

@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:3:{s:63:"D:\wamp\www\tp5\public/../application/wap\view\forum\index.html";i:1546570628;s:55:"D:\wamp\www\tp5\application\wap\view\public\header.html";i:1545358047;s:55:"D:\wamp\www\tp5\application\wap\view\public\footer.html";i:1545529423;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:3:{s:63:"D:\wamp\www\tp5\public/../application/wap\view\forum\index.html";i:1547109733;s:55:"D:\wamp\www\tp5\application\wap\view\public\header.html";i:1545358047;s:55:"D:\wamp\www\tp5\application\wap\view\public\footer.html";i:1545529423;}*/ ?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -96,7 +96,7 @@
  </div>
  <a href="<?php echo url('forum/detail',['id'=>$vo['id']]); ?>" style="color:" class="link bold0">
  <h2><span class="d <?php echo !empty($vo['settop'])?'':'display0'; ?>">顶</span><span class="j display0">精</span><?php echo $vo['title']; ?></h2>
- <div class="chrcontent"><?php echo $vo['content']; ?></div>
+ <div class="chrcontent"><?php echo htmlspecialchars_decode($vo['content']); ?></div>
  <div class="hashongbao_forbox" style="top:60px;right:10px;"></div>
  </a>
  <?php if($vo['pic']): ?>

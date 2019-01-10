@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:3:{s:66:"D:\wamp\www\tp5\public/../application/wap\view\user\managetie.html";i:1547017698;s:55:"D:\wamp\www\tp5\application\wap\view\public\header.html";i:1545358047;s:55:"D:\wamp\www\tp5\application\wap\view\public\footer.html";i:1545529423;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:3:{s:66:"D:\wamp\www\tp5\public/../application/wap\view\user\managetie.html";i:1547090881;s:55:"D:\wamp\www\tp5\application\wap\view\public\header.html";i:1545358047;s:55:"D:\wamp\www\tp5\application\wap\view\public\footer.html";i:1545529423;}*/ ?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -96,9 +96,21 @@ $(function(){
             ,layer=layui.layer
             ,element = layui.element;
         $(".cont-del").click(function(){
+        	var title=$(this).parent('li').find('.jie-title').text();
+        	console.log(title);  
         	$id=$(this).attr('id');
-        	layer.confirm('确定删除?',{icon: 3, title:'删除'},function(index){
-        		console.log($id);
+        	layer.confirm('确定删除 “'+title+'” ?',{icon: 3, title:'提示'},function(index){
+        		$.post("<?php echo url('user/delcont'); ?>",{id:$id},function(data){
+        			if(data.code ==1){
+		              layer.msg(data.msg,{icon: 1,anim: 6, time: 2000},function(){
+		                location.href=data.url;
+		              });
+		            }else{
+		              layer.msg(data.msg,function(){
+		                location.reload();
+		              });
+		            }
+        		});
         		layer.close(index);
         	});
         })

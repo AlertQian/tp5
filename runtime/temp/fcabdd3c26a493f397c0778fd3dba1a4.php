@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:3:{s:64:"D:\wamp\www\tp5\public/../application/wap\view\user\editcon.html";i:1547015338;s:55:"D:\wamp\www\tp5\application\wap\view\public\header.html";i:1545358047;s:55:"D:\wamp\www\tp5\application\wap\view\public\footer.html";i:1545529423;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:3:{s:64:"D:\wamp\www\tp5\public/../application/wap\view\user\editcon.html";i:1547109798;s:55:"D:\wamp\www\tp5\application\wap\view\public\header.html";i:1545358047;s:55:"D:\wamp\www\tp5\application\wap\view\public\footer.html";i:1545529423;}*/ ?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -56,7 +56,7 @@
         <dl class="clearfix" style="padding-left:0;">
           <dd style="padding-left:0;">
             <p class="reply_tips" style="color:#aaa;">内容(必填)</p>
-            <div class="qita" id="cmt_txt" placeholder="内容(必填)" style="height:160px; overflow:auto; -webkit-overflow-scrolling:touch;-webkit-user-select:auto;" contenteditable="true"><?php echo $ret['content']; ?></div>
+            <div class="qita" id="cmt_txt" placeholder="内容(必填)" style="height:160px; overflow:auto; -webkit-overflow-scrolling:touch;-webkit-user-select:auto;" contenteditable="true"><?php echo htmlspecialchars_decode($ret['content']); ?></div>
             <input id="chrmarkForm" name="chrcontent" type="hidden">
           </dd>
         </dl>
@@ -69,9 +69,7 @@
           <li class="item current" data-isopen="1"><s class="s s_2"></s>图片</li>
         </ul>
         <div class="tab-cont" style="display:none;">
-          <div class="face" id="emot_inner">
-            
-          </div>
+          <div class="face" id="emot_inner"></div>
         </div>
         <div class="tab-cont">
           <div class="imgcon">
@@ -119,7 +117,7 @@ $(function(){
             ,id=<?php echo $ret['id']; ?>
             ,token=$("input[name=__token__]").val();
         if(title.length == 0){
-          layer.msg('请填写标题132');
+          layer.msg('请填写标题');
           $("#fabu_title").focus();
           return false;
         }
@@ -138,7 +136,7 @@ $(function(){
                 location.href=data.url;
               });
             }else{
-              layer.msg(data.msg,function(){ 
+              layer.msg(data.msg,{icon: 1,anim: 6, time: 2000},function(){
                 location.reload();
               });
             }

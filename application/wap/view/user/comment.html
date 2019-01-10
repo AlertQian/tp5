@@ -48,9 +48,10 @@
 		<a href="{:url('forum/detail',['id'=>$vo.fid])}" target="_blank">{$vo.title}</a>
 		中回答 
 		<a class="mine-edit" href="{:url('user/editcom',['id'=>$vo.id])}">编辑</a>
+		<a class="mine-edit comt-del" href="javascript:;" style="background-color: #FF5722" id="{$vo.id}">删除</a>
 		</p>
 		<div class="home-dacontent">
-		{$vo.content}
+		{$vo.content|htmlspecialchars_decode}
 		</div>
 		</li>
 		{/volist}
@@ -65,8 +66,27 @@
 {include file="public/footer" /}
 </div>
 <script type="text/javascript">
-	layui.use('element', function(){
-          var element = layui.element;
+	layui.use(['element','layer'], function(){
+        var $ = layui.jquery
+            ,layer=layui.layer
+            ,element = layui.element;
+        $(".comt-del").click(function(){
+        	$id=$(this).attr('id');
+        	layer.confirm('确定删除?',{icon: 3, title:'提示'},function(index){
+        		$.post("{:url('user/delcomt')}",{id:$id},function(data){
+        			if(data.code ==1){
+		              layer.msg(data.msg,{icon: 1,anim: 6, time: 2000},function(){
+		                location.href=data.url;
+		              });
+		            }else{
+		              layer.msg(data.msg,function(){
+		                location.reload();
+		              });
+		            }
+        		});
+        		layer.close(index);
+        	});
+        })
     })
 </script>
 </body>

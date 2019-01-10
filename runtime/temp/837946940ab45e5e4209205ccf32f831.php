@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:3:{s:64:"D:\wamp\www\tp5\public/../application/wap\view\user\comment.html";i:1546758958;s:55:"D:\wamp\www\tp5\application\wap\view\public\header.html";i:1545358047;s:55:"D:\wamp\www\tp5\application\wap\view\public\footer.html";i:1545529423;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:3:{s:64:"D:\wamp\www\tp5\public/../application/wap\view\user\comment.html";i:1547109689;s:55:"D:\wamp\www\tp5\application\wap\view\public\header.html";i:1545358047;s:55:"D:\wamp\www\tp5\application\wap\view\public\footer.html";i:1545529423;}*/ ?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -66,9 +66,10 @@
 		<a href="<?php echo url('forum/detail',['id'=>$vo['fid']]); ?>" target="_blank"><?php echo $vo['title']; ?></a>
 		中回答 
 		<a class="mine-edit" href="<?php echo url('user/editcom',['id'=>$vo['id']]); ?>">编辑</a>
+		<a class="mine-edit comt-del" href="javascript:;" style="background-color: #FF5722" id="<?php echo $vo['id']; ?>">删除</a>
 		</p>
 		<div class="home-dacontent">
-		<?php echo $vo['content']; ?>
+		<?php echo htmlspecialchars_decode($vo['content']); ?>
 		</div>
 		</li>
 		<?php endforeach; endif; else: echo "" ;endif; ?>
@@ -96,8 +97,27 @@ $(function(){
 </script>
 </div>
 <script type="text/javascript">
-	layui.use('element', function(){
-          var element = layui.element;
+	layui.use(['element','layer'], function(){
+        var $ = layui.jquery
+            ,layer=layui.layer
+            ,element = layui.element;
+        $(".comt-del").click(function(){
+        	$id=$(this).attr('id');
+        	layer.confirm('确定删除?',{icon: 3, title:'提示'},function(index){
+        		$.post("<?php echo url('user/delcomt'); ?>",{id:$id},function(data){
+        			if(data.code ==1){
+		              layer.msg(data.msg,{icon: 1,anim: 6, time: 2000},function(){
+		                location.href=data.url;
+		              });
+		            }else{
+		              layer.msg(data.msg,function(){
+		                location.reload();
+		              });
+		            }
+        		});
+        		layer.close(index);
+        	});
+        })
     })
 </script>
 </body>

@@ -406,7 +406,7 @@ class User extends Common
     	}else{
     		$id=input('id');
 	    	$userid=$this->userid;
-	    	$ret=$cot->where(['id'=>$id,'uid'=>$userid])->find();
+	    	$ret=$cot->where(['id'=>$id,'uid'=>$userid,'shows'=>1])->find();
 	    	if(!$ret) $this->error('该贴不存在！');
             $showimgs=$ret['pic'];
             if($showimgs){
@@ -420,9 +420,60 @@ class User extends Common
     	}
     	
     }
+    //删出帖子
+    public function delcont(){
+        $id=input('id');
+        $userid=$this->userid;
+        $obj=db('content')->where(['id'=>$id,'uid'=>$userid])->delete();
+        if($obj){
+            $this->success('已删除');
+        }else{
+            $this->error('删除失败');
+        }
+    }
     //修改回复
     public function editcom(){
-        $this->assign('title','修改回复');
+        $cot=new Comment;
+        if(request()->isPost()){
+            $data=input('post.');
+            $this->check_form('Comment',$data);
+            $data['content']=$data['cont'];
+            $obj=$cot->allowField(true)->save($data,['id'=>$data['id']]);
+            if($obj){
+                $this->success('已保存');
+            }else{
+                $this->error('保存失败');
+            }
+        }else{
+            $id=input('id');
+            $userid=$this->userid;
+            $ret=$cot->where(['id'=>$id,'uid'=>$userid,'shows'=>1])->find();
+            if(!$ret) $this->error('该回复不存在！');
+            $showimgs=$ret['pic'];
+            if($showimgs){
+                $imgsarr=explode(',', $showimgs);
+                $this->assign('imgsarr', $imgsarr);
+                $this->assign('showimgs',$showimgs);
+            }
+            $this->assign('ret',$ret);
+            $this->assign('title','修改回复');
+            return $this->fetch();
+        }
+    }
+    //删除回复
+    public function delcomt(){
+        $id=input('id');
+        $userid=$this->userid;
+        $obj=db('comment')->where(['id'=>$id,'uid'=>$userid])->delete();
+        if($obj){
+            $this->success('已删除');
+        }else{
+            $this->error('删除失败');
+        }
+    }
+    //回复我的
+    public function myhuifu(){
+        $this->assign('title','回复我的');
         return $this->fetch();
     }
 }

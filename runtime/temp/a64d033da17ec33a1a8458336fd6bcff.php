@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:3:{s:62:"D:\wamp\www\tp5\public/../application/wap\view\user\index.html";i:1546585443;s:55:"D:\wamp\www\tp5\application\wap\view\public\header.html";i:1545358047;s:55:"D:\wamp\www\tp5\application\wap\view\public\footer.html";i:1545529423;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:3:{s:62:"D:\wamp\www\tp5\public/../application/wap\view\user\index.html";i:1547092818;s:55:"D:\wamp\www\tp5\application\wap\view\public\header.html";i:1545358047;s:55:"D:\wamp\www\tp5\application\wap\view\public\footer.html";i:1545529423;}*/ ?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -55,10 +55,10 @@
 		   <li class="jy_ico_03"><a href="<?php echo url('user/addinfo?#info=yaoqiu'); ?>">交友要求</a></li>
 		   <li class="jy_ico_04"><a href="<?php echo url('user/imglist'); ?>">我的相册</a></li>
 		   <li class="jy_ico_05"><a href="<?php echo url('user/real'); ?>">实名认证</a></li>
-		   <li class="jy_ico_06"><a href="<?php echo url('user/commend'); ?>">我要推荐</a></li>
-		   <!-- <li class="jy_ico_07"><a href="<?php echo url('user/slctfriend'); ?>">智能匹配</a></li> -->
-		   <li class="jy_ico_15"><a href="<?php echo url('user/hongniang'); ?>">红娘牵线</a></li>
-		   <!-- <li class="jy_ico_10"><a href="<?php echo url('user/message'); ?>">私信消息
+		   <!--<li class="jy_ico_06"><a href="<?php echo url('user/commend'); ?>">我要推荐</a></li>
+		    <li class="jy_ico_07"><a href="<?php echo url('user/slctfriend'); ?>">智能匹配</a></li> -->
+		   <!-- <li class="jy_ico_15"><a href="<?php echo url('user/hongniang'); ?>">红娘牵线</a></li>
+		   <li class="jy_ico_10"><a href="<?php echo url('user/message'); ?>">私信消息
 		   	<?php if(isset($msg)): ?>
 		   	<span class="tips"></span>
 		   	<?php endif; ?>
@@ -71,6 +71,7 @@
 		   	<?php endif; ?>
 		   </a></li>
 		   <li class="jy_ico_08"><a href="<?php echo url('user/managetie'); ?>">帖子管理</a></li>
+		   <li class="jy_ico_13"><a href="<?php echo url('user/myhuifu'); ?>">回复我的</a></li>
 		   </ul>
 		   <!-- <ul class="memberNav">
 		   <li class="jy_ico_08"><a href="connections.aspx?action=selectbrowselist&amp;type=0">我看过谁</a></li>

@@ -79,7 +79,7 @@
  </div>
  <a href="{:url('forum/detail',['id'=>$vo.id])}" style="color:" class="link bold0">
  <h2><span class="d {$vo.settop?'':'display0'}">顶</span><span class="j display0">精</span>{$vo.title}</h2>
- <div class="chrcontent">{$vo.content}</div>
+ <div class="chrcontent">{$vo.content|htmlspecialchars_decode}</div>
  <div class="hashongbao_forbox" style="top:60px;right:10px;"></div>
  </a>
  {if condition="$vo.pic"}

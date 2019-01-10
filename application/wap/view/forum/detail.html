@@ -62,7 +62,7 @@
 			<div class="op">楼主</div>
 		   </div>
 		   <div class="con" id="louzhuCon">
-			{$ret.content}
+			{$ret.content|htmlspecialchars_decode}
 			{if condition="isset($imgsarr)"}
 			{volist name="imgsarr" id="vo"}
 			<p><img src="{$vo}" style="width: 100%"></p>
@@ -94,7 +94,7 @@
 					</div>
 					<div class="con">
 						<div class="replaycontent1">
-							{$vo.content}
+							{$vo.content|htmlspecialchars_decode}
 						</div>
 						{if condition="$vo.pic"}
 						<p class=""><img src="{$vo.pic}" style="width: 100%"></p>
@@ -103,7 +103,7 @@
 						{volist name="$vo.child" id="v"}
 						<div class="comment_reply">
 							<div class="comment_user clearfix"><a href="#" onclick="return loadRevertReplay(this,{$vo.id},'{$v.uname}','1');" class="replay_btn replay_life">回复</a><span class="comment_floor right">{$i}</span><span class="userName">{$v.uname}</span><span class="dtappenddate">{$v.time|date="m-d H:i",###}</span></div>
-							<p class="comment_content">{$v.content}</p>
+							<p class="comment_content">{$v.content|htmlspecialchars_decode}</p>
 							{if condition="$v.pic"}
 							<p class=""><img src="{$v.pic}" style="width: 100%"></p>
 							{/if}
