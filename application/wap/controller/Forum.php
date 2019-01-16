@@ -123,18 +123,17 @@ class Forum extends Common
 	    $this->check_form('Comment',$data);
 	    $userid=db('user')->where('pwd_hash',session('validate'))->value('userid');
     	$data['uid']=$userid;
-    	//$data['content']=$data['cont'];
       $data['content']=strip_tags($data['cont'],"<img>");
     	$data['uname']=session('nickname');
     	$data['time']=time();
     	$ret=$obj->allowField(true)->save($data);
     	if($ret){
-    		$cot->where('id',$data['fid'])->setInc('reply');
-			$this->success('已发表');
+      	$cot->where('id',$data['fid'])->setInc('reply');
+        db('user')->where('userid',$data['mid'])->setInc('reply', 1);
+  			$this->success('已发表');
     	}else{
-			$this->error('提交失败');
-		}
-	   
+  			$this->error('提交失败');
+  		}
 	   }
    }
 }

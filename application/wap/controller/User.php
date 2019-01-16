@@ -418,7 +418,6 @@ class User extends Common
 	        $this->assign('title','修改帖子');
 	        return $this->fetch();
     	}
-    	
     }
     //删出帖子
     public function delcont(){
@@ -464,7 +463,10 @@ class User extends Common
     public function delcomt(){
         $id=input('id');
         $userid=$this->userid;
-        $obj=db('comment')->where(['id'=>$id,'uid'=>$userid])->delete();
+        $cot=new Comment;
+        $fid=$cot->where(['id'=>$id,'uid'=>$userid])->value('fid');
+        db('content')->where('id',$fid)->setDec('reply', 1);
+        $obj=$cot->where(['id'=>$id,'uid'=>$userid])->delete();
         if($obj){
             $this->success('已删除');
         }else{
