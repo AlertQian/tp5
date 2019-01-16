@@ -53,7 +53,11 @@
 		   	{/if}
 		   </a></li>
 		   <li class="jy_ico_08"><a href="{:url('user/managetie')}">帖子管理</a></li>
-		   <li class="jy_ico_13"><a href="{:url('user/myhuifu')}">回复我的</a></li>
+		   <li class="jy_ico_13"><a href="{:url('user/myhuifu')}">回复我的
+		   	{if condition="$obj.reply neq 0"}
+		   	<span class="tips"></span>
+		   	{/if}
+		   </a></li>
 		   </ul>
 		   <!-- <ul class="memberNav">
 		   <li class="jy_ico_08"><a href="connections.aspx?action=selectbrowselist&amp;type=0">我看过谁</a></li>

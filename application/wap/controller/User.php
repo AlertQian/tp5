@@ -32,7 +32,7 @@ class User extends Common
 		$userinfo=new UserInfo;
 		$user=new UserModel;
 		$userid=$this->userid;
-		$obj=$user::field('nickname,userid')->where('userid',$userid)->find();
+		$obj=$user::field('nickname,userid,reply')->where('userid',$userid)->find();
 		$msg=db('message')->where(['user_id'=>$userid,'status'=> 1])->where('friend_id !='.$userid)->select();
 		if($msg){
 			$this->assign('msg',$msg);
@@ -475,6 +475,8 @@ class User extends Common
     }
     //回复我的
     public function myhuifu(){
+    	$userid=$this->userid;
+    	db('user')->where('userid',$userid)->update(['reply'=>0]);
         $this->assign('title','回复我的');
         return $this->fetch();
     }

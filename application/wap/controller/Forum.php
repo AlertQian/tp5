@@ -59,7 +59,7 @@ class Forum extends Common
       }
       $this->assign('ret',$ret);
     }
-    $comment=db('comment')->where('fid',$id)->select();
+    $comment=db('comment')->where('fid',$id)->order('id asc')->select();
     if($comment){
     	$comarr=getSubTree($comment,'mid','id');
     	foreach ($comarr as $key => $value) {
@@ -127,9 +127,16 @@ class Forum extends Common
     	$data['uname']=session('nickname');
     	$data['time']=time();
     	$ret=$obj->allowField(true)->save($data);
+      //楼主的uid
+      $lz_uid=$cot->where('id',$data['fid'])->value('uid');
+      //楼层接收消息提醒
+      if($data['mid'] != 0){
+        $lc_uid=$obj->where('id',$data['mid'])->value('uid');
+        db('user')->where('userid',$lc_uid)->setInc('reply', 1);
+      }
     	if($ret){
       	$cot->where('id',$data['fid'])->setInc('reply');
-        db('user')->where('userid',$data['mid'])->setInc('reply', 1);
+        db('user')->where('userid',$lz_uid)->setInc('reply', 1);
   			$this->success('已发表');
     	}else{
   			$this->error('提交失败');
