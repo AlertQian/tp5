@@ -10,20 +10,12 @@
   <link rel="stylesheet" href="/wap/main/css/mb-common.css" />
 </head>
 <style type="text/css">
-.jie-row li{position:relative;margin-bottom:10px;padding-bottom:10px;border-bottom:1px dotted #E9E9E9;font-size:0}
-.jie-row li .jie-title{max-width:330px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.jie-row li a{padding-right:15px;font-size:14px}
-.jie-row li *{display:inline-block;vertical-align:top;line-height:24px;font-size:12px}
-.jie-row li cite,.jie-row li em,.jie-row li i{font-size:12px;color:#999;font-style:normal}
-.jie-row li em{position:absolute;right:0;top:0}
-.jie-row li .mine-edit{margin-left:15px;padding:0 6px;background-color:#8FCDA0;color:#fff;font-size:12px}
-.home-dacontent{margin-top:10px;padding:10px 15px;background-color:#F2F2F5;border-radius:5px;word-wrap:break-word}
-.home-jieda li p{color:#999}
-.home-jieda li p span{padding-right:5px}
-.home-jieda li a{padding:0 5px;color:#4F99CF}
-.home-jieda li .mine-edit{margin-left:15px;padding:4px 6px;background-color:#8FCDA0;color:#fff;font-size:12px}
-.layui-elem-quote .mine-edit{margin-left:15px;padding:4px 6px;background-color:#8FCDA0;color:#fff;font-size:12px}
-.home-jieda li{margin-bottom:20px;line-height:24px}
+.mine-msg{min-height: 300px;}
+.mine-msg li{position:relative;margin-bottom:15px;padding:10px 0 5px;line-height:24px;border-bottom:1px dotted #E9E9E9}
+.mine-msg li cite{padding:0 5px;color:#4F99CF}
+.mine-msg li .fly-delete{position:relative;top:-3px;}
+.mine-msg li>p{position:relative;margin: 8px 0 5px 0;line-height:26px;text-align:right;}
+.mine-msg li>p span{position:absolute;left:0;top:0;color:#999}
 </style>
 <body>
 <!-- 你的HTML代码 --> 
@@ -35,7 +27,8 @@
 	<div class="layui-tab layui-tab-brief" lay-filter="info">
 	  <ul class="layui-tab-title">
 	    <li><a href="{:url('user/managetie')}">我的发帖</a></li>
-	    <li class="layui-this"><a href="{:url('user/comment')}">我的回复</a></li>
+	    <li><a href="{:url('user/comment')}">我的回复</a></li>
+	    <li class="layui-this"><a href="{:url('user/myhuifu')}">评论我的</a></li>
 	  </ul>
 	  <div class="layui-tab-content">
 		<button class="del_btns tpts-btn layui-btn layui-btn-danger">清空全部消息</button>
@@ -51,7 +44,7 @@
 		<div style="color:#999;font-size: 13px;" class="cl">
 		回复 @huadie123 :&nbsp;&nbsp;&nbsp; ...
 		</div>
-		<p><span>2019-01-16</span><a member-id="22" title="清空" class="del_btn layui-btn layui-btn-small layui-btn-danger fly-delete">清空</a></p>
+		<p><span>2019-01-16</span><a id="22" title="清空" class="del_btn layui-btn layui-btn-sm layui-btn-danger fly-delete">清空</a></p>
 		</li>
 		</ul>
 		<div class="pages cl"></div>
@@ -65,9 +58,26 @@
         var $ = layui.jquery
             ,layer=layui.layer
             ,element = layui.element;
-        $(".comt-del").click(function(){
+        $(".del_btn").click(function(){
         	$id=$(this).attr('id');
-        	layer.confirm('确定删除?',{icon: 3, title:'提示'},function(index){
+        	layer.confirm('确定清空此消息么?',{icon: 3, title:'提示'},function(index){
+        		$.post("{:url('user/delcomt')}",{id:$id},function(data){
+        			if(data.code ==1){
+		              layer.msg(data.msg,{icon: 1,anim: 6, time: 2000},function(){
+		                location.href=data.url;
+		              });
+		            }else{
+		              layer.msg(data.msg,function(){
+		                location.reload();
+		              });
+		            }
+        		});
+        		layer.close(index);
+        	});
+        })
+        $(".del_btns").click(function(){
+        	$id=$(this).attr('id');
+        	layer.confirm('确定清空全部消息么?',{icon: 3, title:'提示'},function(index){
         		$.post("{:url('user/delcomt')}",{id:$id},function(data){
         			if(data.code ==1){
 		              layer.msg(data.msg,{icon: 1,anim: 6, time: 2000},function(){

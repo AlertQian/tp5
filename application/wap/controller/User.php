@@ -477,7 +477,8 @@ class User extends Common
     public function myhuifu(){
     	$userid=$this->userid;
     	db('user')->where('userid',$userid)->update(['reply'=>0]);
-        $this->assign('title','回复我的');
+        
+        $this->assign('title','评论我的');
         return $this->fetch();
     }
 }

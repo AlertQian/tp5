@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:3:{s:64:"D:\wamp\www\tp5\public/../application/wap\view\user\myhuifu.html";i:1548041937;s:55:"D:\wamp\www\tp5\application\wap\view\public\header.html";i:1545358047;s:55:"D:\wamp\www\tp5\application\wap\view\public\footer.html";i:1545529423;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:3:{s:64:"D:\wamp\www\tp5\public/../application/wap\view\user\comment.html";i:1548041181;s:55:"D:\wamp\www\tp5\application\wap\view\public\header.html";i:1545358047;s:55:"D:\wamp\www\tp5\application\wap\view\public\footer.html";i:1545529423;}*/ ?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,12 +11,20 @@
   <link rel="stylesheet" href="/wap/main/css/mb-common.css" />
 </head>
 <style type="text/css">
-.mine-msg{min-height: 300px;}
-.mine-msg li{position:relative;margin-bottom:15px;padding:10px 0 5px;line-height:24px;border-bottom:1px dotted #E9E9E9}
-.mine-msg li cite{padding:0 5px;color:#4F99CF}
-.mine-msg li .fly-delete{position:relative;top:-3px;}
-.mine-msg li>p{position:relative;margin: 8px 0 5px 0;line-height:26px;text-align:right;}
-.mine-msg li>p span{position:absolute;left:0;top:0;color:#999}
+.jie-row li{position:relative;margin-bottom:10px;padding-bottom:10px;border-bottom:1px dotted #E9E9E9;font-size:0}
+.jie-row li .jie-title{max-width:330px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.jie-row li a{padding-right:15px;font-size:14px}
+.jie-row li *{display:inline-block;vertical-align:top;line-height:24px;font-size:12px}
+.jie-row li cite,.jie-row li em,.jie-row li i{font-size:12px;color:#999;font-style:normal}
+.jie-row li em{position:absolute;right:0;top:0}
+.jie-row li .mine-edit{margin-left:15px;padding:0 6px;background-color:#8FCDA0;color:#fff;font-size:12px}
+.home-dacontent{margin-top:10px;padding:10px 15px;background-color:#F2F2F5;border-radius:5px;word-wrap:break-word}
+.home-jieda li p{color:#999}
+.home-jieda li p span{padding-right:5px}
+.home-jieda li a{padding:0 5px;color:#4F99CF}
+.home-jieda li .mine-edit{margin-left:15px;padding:4px 6px;background-color:#8FCDA0;color:#fff;font-size:12px}
+.layui-elem-quote .mine-edit{margin-left:15px;padding:4px 6px;background-color:#8FCDA0;color:#fff;font-size:12px}
+.home-jieda li{margin-bottom:20px;line-height:24px}
 </style>
 <body>
 <!-- 你的HTML代码 --> 
@@ -45,27 +53,31 @@
 	<div class="layui-tab layui-tab-brief" lay-filter="info">
 	  <ul class="layui-tab-title">
 	    <li><a href="<?php echo url('user/managetie'); ?>">我的发帖</a></li>
-	    <li><a href="<?php echo url('user/comment'); ?>">我的回复</a></li>
-	    <li class="layui-this"><a href="<?php echo url('user/myhuifu'); ?>">评论我的</a></li>
+	    <li class="layui-this"><a href="<?php echo url('user/comment'); ?>">我的回复</a></li>
+	    <li><a href="<?php echo url('user/myhuifu'); ?>">评论我的</a></li>
 	  </ul>
 	  <div class="layui-tab-content">
-		<button class="del_btns tpts-btn layui-btn layui-btn-danger">清空全部消息</button>
-		<ul class="mine-msg">
-		<li class="messagelist">
-		<blockquote class="layui-elem-quote">
-		<a href="/home/13.html" target="_blank">
-		<cite>huadie123</cite>
-		</a>
-		回复了您的内容
-		<a href="/thread/12.html" target="_blank"><cite>xcvbgdsafgdsafg</cite></a>
-		</blockquote>
-		<div style="color:#999;font-size: 13px;" class="cl">
-		回复 @huadie123 :&nbsp;&nbsp;&nbsp; ...
+    	<?php if(isset($comment)): ?>
+    	<ul class="home-jieda">
+    	<?php if(is_array($comment) || $comment instanceof \think\Collection || $comment instanceof \think\Paginator): $i = 0; $__LIST__ = $comment;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($i % 2 );++$i;?>
+		<li>
+		<p>
+		<span><?php echo date("Y-m-d",$vo['time']); ?></span>
+		在 
+		<a href="<?php echo url('forum/detail',['id'=>$vo['fid']]); ?>" target="_blank"><?php echo $vo['title']; ?></a>
+		中回答 
+		<a class="mine-edit" href="<?php echo url('user/editcom',['id'=>$vo['id']]); ?>">编辑</a>
+		<a class="mine-edit comt-del" href="javascript:;" style="background-color: #FF5722" id="<?php echo $vo['id']; ?>">删除</a>
+		</p>
+		<div class="home-dacontent">
+		<?php echo htmlspecialchars_decode($vo['content']); ?>
 		</div>
-		<p><span>2019-01-16</span><a id="22" title="清空" class="del_btn layui-btn layui-btn-sm layui-btn-danger fly-delete">清空</a></p>
 		</li>
+		<?php endforeach; endif; else: echo "" ;endif; ?>
 		</ul>
-		<div class="pages cl"></div>
+		<?php echo $comment->render(); else: ?>
+    	<p style="text-align: center;color: #666;padding: 10px;">暂无内容</p>
+    	<?php endif; ?>
 	  </div>
 	</div>
 </div>
@@ -90,26 +102,9 @@ $(function(){
         var $ = layui.jquery
             ,layer=layui.layer
             ,element = layui.element;
-        $(".del_btn").click(function(){
+        $(".comt-del").click(function(){
         	$id=$(this).attr('id');
-        	layer.confirm('确定清空此消息么?',{icon: 3, title:'提示'},function(index){
-        		$.post("<?php echo url('user/delcomt'); ?>",{id:$id},function(data){
-        			if(data.code ==1){
-		              layer.msg(data.msg,{icon: 1,anim: 6, time: 2000},function(){
-		                location.href=data.url;
-		              });
-		            }else{
-		              layer.msg(data.msg,function(){
-		                location.reload();
-		              });
-		            }
-        		});
-        		layer.close(index);
-        	});
-        })
-        $(".del_btns").click(function(){
-        	$id=$(this).attr('id');
-        	layer.confirm('确定清空全部消息么?',{icon: 3, title:'提示'},function(index){
+        	layer.confirm('确定删除?',{icon: 3, title:'提示'},function(index){
         		$.post("<?php echo url('user/delcomt'); ?>",{id:$id},function(data){
         			if(data.code ==1){
 		              layer.msg(data.msg,{icon: 1,anim: 6, time: 2000},function(){
