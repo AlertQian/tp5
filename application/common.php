@@ -251,3 +251,11 @@ function getSubTree($data , $parent , $son , $pid = 0) {
     }
     return $tmp;
 }
+
+function content_zh($str,$strs=0,$strss)
+{
+  $str = htmlspecialchars_decode($str);
+  $str = strip_tags($str);
+  $str = mb_substr($str,$strs,$strss,'utf-8');
+  return $str;
+}

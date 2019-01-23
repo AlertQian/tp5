@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:4:{s:64:"D:\wamp\www\tp5\public/../application/wap\view\forum\detail.html";i:1547801002;s:55:"D:\wamp\www\tp5\application\wap\view\public\header.html";i:1545358047;s:55:"D:\wamp\www\tp5\application\wap\view\public\huitie.html";i:1546394791;s:55:"D:\wamp\www\tp5\application\wap\view\public\footer.html";i:1545529423;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:4:{s:64:"D:\wamp\www\tp5\public/../application/wap\view\forum\detail.html";i:1548209020;s:55:"D:\wamp\www\tp5\application\wap\view\public\header.html";i:1545358047;s:55:"D:\wamp\www\tp5\application\wap\view\public\huitie.html";i:1548208887;s:55:"D:\wamp\www\tp5\application\wap\view\public\footer.html";i:1545529423;}*/ ?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -84,9 +84,9 @@
 			<p><img src="<?php echo $vo; ?>" style="width: 100%"></p>
 			<?php endforeach; endif; else: echo "" ;endif; endif; ?>
 			<p class="blod"></p>
-			<div class="p_btns">
-				<p class="manage">　<a href="javascript:void(0);" onclick="superManage('6');" class="blue">超级管理</a>　<a href="https://www.mh163k.com/tieba/addedit.aspx?action=edit&amp;id=6" class="blue">编辑</a>　<a href="javascript:void(0);" onclick="$.managerTBisdel('6','2276');" class="blue">删除</a></p>
-			</div>
+			<!-- <div class="p_btns">
+				<p class="manage">　<a href="javascript:void(0);" onclick="superManage('6');" class="blue">超级管理</a>　<a href="javascript:;" class="blue">编辑</a>　<a href="javascript:void(0);" onclick="$.managerTBisdel('6','2276');" class="blue">删除</a></p>
+			</div> -->
 		   </div>
 		  </div>
 		<?php if(isset($comarr)): ?>  
@@ -105,7 +105,7 @@
 							</li>
 							<li><?php echo $vo['louceng']; ?> <?php echo date("m-d H:i",$vo['time']); ?></li>
 						</ul>
-						<div class="reply_btn" onclick="return loadRevertReplay(this,<?php echo $vo['id']; ?>,'<?php echo $vo['uname']; ?>','0');"></div>
+						<div class="reply_btn" onclick="return loadRevertReplay(this,<?php echo $vo['id']; ?>,'<?php echo $vo['uname']; ?>','0',<?php echo $vo['uid']; ?>);"></div>
 					</div>
 					<div class="con">
 						<div class="replaycontent1">
@@ -115,7 +115,7 @@
 						<p class=""><img src="<?php echo $vo['pic']; ?>" style="width: 100%"></p>
 						<?php endif; if($vo['child']): if(is_array($vo['child']) || $vo['child'] instanceof \think\Collection || $vo['child'] instanceof \think\Paginator): $i = 0; $__LIST__ = $vo['child'];if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$v): $mod = ($i % 2 );++$i;?>
 						<div class="comment_reply">
-							<div class="comment_user clearfix"><a href="#" onclick="return loadRevertReplay(this,<?php echo $vo['id']; ?>,'<?php echo $v['uname']; ?>','1');" class="replay_btn replay_life">回复</a><span class="comment_floor right"><?php echo $i; ?></span><span class="userName"><?php echo $v['uname']; ?></span><span class="dtappenddate"><?php echo date("m-d H:i",$v['time']); ?></span></div>
+							<div class="comment_user clearfix"><a href="#" onclick="return loadRevertReplay(this,<?php echo $vo['id']; ?>,'<?php echo $v['uname']; ?>','1',<?php echo $v['uid']; ?>);" class="replay_btn replay_life">回复</a><span class="comment_floor right"><?php echo $i; ?></span><span class="userName"><?php echo $v['uname']; ?></span><span class="dtappenddate"><?php echo date("m-d H:i",$v['time']); ?></span></div>
 							<p class="comment_content"><?php echo htmlspecialchars_decode($v['content']); ?></p>
 							<?php if($v['pic']): ?>
 							<p class=""><img src="<?php echo $v['pic']; ?>" style="width: 100%"></p>
@@ -143,6 +143,7 @@
 		<div class="cmt_txt2" id="cmt_txt" placeholder="想跟他说点什么~" style=" margin-bottom:10px; height:160px; overflow:auto; -webkit-overflow-scrolling:touch; -webkit-user-select:auto;" contenteditable="true"></div>
 		<input id="isrep" name="isrep" type="hidden">
 		<input id="perid" name="perid" type="hidden">
+		<input id="repid" name="repid" type="hidden">
 		<input id="fid" name="fid" type="hidden" value="<?php echo $ret['id']; ?>">
 		<div class="reply_tabs" id="reply_tabs">
 			<ul class="clearfix tab-hd">
@@ -176,7 +177,7 @@
 				<!-- <li id="share2015"><span class="share">分享</span></li> -->
 				<li id="openReply2"><span class="num" id="show_total_revert1"><?php echo $ret['reply']; ?></span></li>
 				<!-- <li id="reply_zan"><span class="zan"><?php echo $ret['view']; ?></span></li> -->
-				<li><a href="javascript:;" class="btn replay_louzhu" onclick="return loadRevertReplay(this,'0','楼主','0');">回楼主</a></li>
+				<li><a href="javascript:;" class="btn replay_louzhu" onclick="return loadRevertReplay(this,'0','楼主','0',<?php echo $ret['uid']; ?>);">回楼主</a></li>
 			</ul>
 		</div>
 	</div>
@@ -207,6 +208,7 @@ $(function(){
 			    data.cont=$.trim($("#cmt_txt").html());
 			    data.isrep=$("#isrep").val();
 			    data.mid=$("#perid").val();
+			    data.tid=$("#repid").val();
 			    data.pic=$("input[name=imgs]").val();
 			    data.__token__=$("input[name=__token__]").val();
 			    data.fid=$("#fid").val();
@@ -224,10 +226,11 @@ $(function(){
 			});
 		})
 	})
-	function loadRevertReplay(o,perid,uname,isrep){
+	function loadRevertReplay(o,perid,uname,isrep,repid){
 		$("#replyName").text(uname);
 		$("#perid").val(perid);
 		$("#isrep").val(isrep);
+		$("#repid").val(repid);
 		$("#pageOther").show(500);
 		if(isrep==1){
             $("#cmt_txt").text("@"+uname+" : ");

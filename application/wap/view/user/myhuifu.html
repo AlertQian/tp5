@@ -33,19 +33,21 @@
 	  <div class="layui-tab-content">
 		<button class="del_btns tpts-btn layui-btn layui-btn-danger">清空全部消息</button>
 		<ul class="mine-msg">
+		{volist name="ret" id="vo"}
 		<li class="messagelist">
 		<blockquote class="layui-elem-quote">
-		<a href="/home/13.html" target="_blank">
-		<cite>huadie123</cite>
+		<a href="/jiaoyou/{$vo.uid}.html" target="_blank">
+		<cite>{$vo.uname}</cite>
 		</a>
 		回复了您的内容
-		<a href="/thread/12.html" target="_blank"><cite>xcvbgdsafgdsafg</cite></a>
+		<a href="{:url('forum/detail',['id'=>$vo.fid])}" target="_blank"><cite>{$vo.title}</cite></a>
 		</blockquote>
 		<div style="color:#999;font-size: 13px;" class="cl">
-		回复 @huadie123 :&nbsp;&nbsp;&nbsp; ...
+		{$vo.content|content_zh=0,120}...
 		</div>
-		<p><span>2019-01-16</span><a id="22" title="清空" class="del_btn layui-btn layui-btn-sm layui-btn-danger fly-delete">清空</a></p>
+		<p><span>{$vo.time|date="m-d H:i",###}</span><a id="{$vo.id}" title="清空" class="del_btn layui-btn layui-btn-sm layui-btn-danger fly-delete">清空</a></p>
 		</li>
+		{/volist}
 		</ul>
 		<div class="pages cl"></div>
 	  </div>
@@ -61,7 +63,7 @@
         $(".del_btn").click(function(){
         	$id=$(this).attr('id');
         	layer.confirm('确定清空此消息么?',{icon: 3, title:'提示'},function(index){
-        		$.post("{:url('user/delcomt')}",{id:$id},function(data){
+        		$.post("{:url('user/messagedels')}",{id:$id},function(data){
         			if(data.code ==1){
 		              layer.msg(data.msg,{icon: 1,anim: 6, time: 2000},function(){
 		                location.href=data.url;
@@ -76,9 +78,8 @@
         	});
         })
         $(".del_btns").click(function(){
-        	$id=$(this).attr('id');
         	layer.confirm('确定清空全部消息么?',{icon: 3, title:'提示'},function(index){
-        		$.post("{:url('user/delcomt')}",{id:$id},function(data){
+        		$.post("{:url('user/messagedelss')}",function(data){
         			if(data.code ==1){
 		              layer.msg(data.msg,{icon: 1,anim: 6, time: 2000},function(){
 		                location.href=data.url;

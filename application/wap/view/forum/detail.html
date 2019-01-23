@@ -69,9 +69,9 @@
 			{/volist}
 			{/if}
 			<p class="blod"></p>
-			<div class="p_btns">
-				<p class="manage">　<a href="javascript:void(0);" onclick="superManage('6');" class="blue">超级管理</a>　<a href="https://www.mh163k.com/tieba/addedit.aspx?action=edit&amp;id=6" class="blue">编辑</a>　<a href="javascript:void(0);" onclick="$.managerTBisdel('6','2276');" class="blue">删除</a></p>
-			</div>
+			<!-- <div class="p_btns">
+				<p class="manage">　<a href="javascript:void(0);" onclick="superManage('6');" class="blue">超级管理</a>　<a href="javascript:;" class="blue">编辑</a>　<a href="javascript:void(0);" onclick="$.managerTBisdel('6','2276');" class="blue">删除</a></p>
+			</div> -->
 		   </div>
 		  </div>
 		{if condition="isset($comarr)"}  
@@ -90,7 +90,7 @@
 							</li>
 							<li>{$vo.louceng} {$vo.time|date="m-d H:i",###}</li>
 						</ul>
-						<div class="reply_btn" onclick="return loadRevertReplay(this,{$vo.id},'{$vo.uname}','0');"></div>
+						<div class="reply_btn" onclick="return loadRevertReplay(this,{$vo.id},'{$vo.uname}','0',{$vo.uid});"></div>
 					</div>
 					<div class="con">
 						<div class="replaycontent1">
@@ -102,7 +102,7 @@
 						{if condition="$vo.child"}
 						{volist name="$vo.child" id="v"}
 						<div class="comment_reply">
-							<div class="comment_user clearfix"><a href="#" onclick="return loadRevertReplay(this,{$vo.id},'{$v.uname}','1');" class="replay_btn replay_life">回复</a><span class="comment_floor right">{$i}</span><span class="userName">{$v.uname}</span><span class="dtappenddate">{$v.time|date="m-d H:i",###}</span></div>
+							<div class="comment_user clearfix"><a href="#" onclick="return loadRevertReplay(this,{$vo.id},'{$v.uname}','1',{$v.uid});" class="replay_btn replay_life">回复</a><span class="comment_floor right">{$i}</span><span class="userName">{$v.uname}</span><span class="dtappenddate">{$v.time|date="m-d H:i",###}</span></div>
 							<p class="comment_content">{$v.content|htmlspecialchars_decode}</p>
 							{if condition="$v.pic"}
 							<p class=""><img src="{$v.pic}" style="width: 100%"></p>
@@ -132,7 +132,7 @@
 				<!-- <li id="share2015"><span class="share">分享</span></li> -->
 				<li id="openReply2"><span class="num" id="show_total_revert1">{$ret.reply}</span></li>
 				<!-- <li id="reply_zan"><span class="zan">{$ret.view}</span></li> -->
-				<li><a href="javascript:;" class="btn replay_louzhu" onclick="return loadRevertReplay(this,'0','楼主','0');">回楼主</a></li>
+				<li><a href="javascript:;" class="btn replay_louzhu" onclick="return loadRevertReplay(this,'0','楼主','0',{$ret.uid});">回楼主</a></li>
 			</ul>
 		</div>
 	</div>
@@ -149,6 +149,7 @@
 			    data.cont=$.trim($("#cmt_txt").html());
 			    data.isrep=$("#isrep").val();
 			    data.mid=$("#perid").val();
+			    data.tid=$("#repid").val();
 			    data.pic=$("input[name=imgs]").val();
 			    data.__token__=$("input[name=__token__]").val();
 			    data.fid=$("#fid").val();
@@ -166,10 +167,11 @@
 			});
 		})
 	})
-	function loadRevertReplay(o,perid,uname,isrep){
+	function loadRevertReplay(o,perid,uname,isrep,repid){
 		$("#replyName").text(uname);
 		$("#perid").val(perid);
 		$("#isrep").val(isrep);
+		$("#repid").val(repid);
 		$("#pageOther").show(500);
 		if(isrep==1){
             $("#cmt_txt").text("@"+uname+" : ");

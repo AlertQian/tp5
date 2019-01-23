@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:3:{s:64:"D:\wamp\www\tp5\public/../application/wap\view\user\myhuifu.html";i:1548041937;s:55:"D:\wamp\www\tp5\application\wap\view\public\header.html";i:1545358047;s:55:"D:\wamp\www\tp5\application\wap\view\public\footer.html";i:1545529423;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:3:{s:64:"D:\wamp\www\tp5\public/../application/wap\view\user\myhuifu.html";i:1548213273;s:55:"D:\wamp\www\tp5\application\wap\view\public\header.html";i:1545358047;s:55:"D:\wamp\www\tp5\application\wap\view\public\footer.html";i:1545529423;}*/ ?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -51,19 +51,21 @@
 	  <div class="layui-tab-content">
 		<button class="del_btns tpts-btn layui-btn layui-btn-danger">清空全部消息</button>
 		<ul class="mine-msg">
+		<?php if(is_array($ret) || $ret instanceof \think\Collection || $ret instanceof \think\Paginator): $i = 0; $__LIST__ = $ret;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($i % 2 );++$i;?>
 		<li class="messagelist">
 		<blockquote class="layui-elem-quote">
-		<a href="/home/13.html" target="_blank">
-		<cite>huadie123</cite>
+		<a href="/jiaoyou/<?php echo $vo['uid']; ?>.html" target="_blank">
+		<cite><?php echo $vo['uname']; ?></cite>
 		</a>
 		回复了您的内容
-		<a href="/thread/12.html" target="_blank"><cite>xcvbgdsafgdsafg</cite></a>
+		<a href="<?php echo url('forum/detail',['id'=>$vo['fid']]); ?>" target="_blank"><cite><?php echo $vo['title']; ?></cite></a>
 		</blockquote>
 		<div style="color:#999;font-size: 13px;" class="cl">
-		回复 @huadie123 :&nbsp;&nbsp;&nbsp; ...
+		<?php echo content_zh($vo['content'],0,120); ?>...
 		</div>
-		<p><span>2019-01-16</span><a id="22" title="清空" class="del_btn layui-btn layui-btn-sm layui-btn-danger fly-delete">清空</a></p>
+		<p><span><?php echo date("m-d H:i",$vo['time']); ?></span><a id="<?php echo $vo['id']; ?>" title="清空" class="del_btn layui-btn layui-btn-sm layui-btn-danger fly-delete">清空</a></p>
 		</li>
+		<?php endforeach; endif; else: echo "" ;endif; ?>
 		</ul>
 		<div class="pages cl"></div>
 	  </div>
@@ -93,7 +95,7 @@ $(function(){
         $(".del_btn").click(function(){
         	$id=$(this).attr('id');
         	layer.confirm('确定清空此消息么?',{icon: 3, title:'提示'},function(index){
-        		$.post("<?php echo url('user/delcomt'); ?>",{id:$id},function(data){
+        		$.post("<?php echo url('user/messagedels'); ?>",{id:$id},function(data){
         			if(data.code ==1){
 		              layer.msg(data.msg,{icon: 1,anim: 6, time: 2000},function(){
 		                location.href=data.url;
@@ -108,9 +110,8 @@ $(function(){
         	});
         })
         $(".del_btns").click(function(){
-        	$id=$(this).attr('id');
         	layer.confirm('确定清空全部消息么?',{icon: 3, title:'提示'},function(index){
-        		$.post("<?php echo url('user/delcomt'); ?>",{id:$id},function(data){
+        		$.post("<?php echo url('user/messagedelss'); ?>",function(data){
         			if(data.code ==1){
 		              layer.msg(data.msg,{icon: 1,anim: 6, time: 2000},function(){
 		                location.href=data.url;

@@ -477,8 +477,36 @@ class User extends Common
     public function myhuifu(){
     	$userid=$this->userid;
     	db('user')->where('userid',$userid)->update(['reply'=>0]);
-        
+        $ret=db('comment')->alias('a')->join('content b','a.fid=b.id')->field('a.id,a.uid,a.fid,a.uname,a.content,a.time,b.title')->where(['a.mes'=>1,'a.shows'=>1,'a.tid'=>$userid])->select();
+        $this->assign('ret',$ret);
         $this->assign('title','评论我的');
         return $this->fetch();
+    }
+    public function messagedels()
+    {
+        if (!session('validate')) {
+            $this->error('亲！请登录');
+        } else {
+            $comment = db('comment');
+            if($comment->where('id',input('id'))->update(['mes'=>0])){
+                $this->success('清空成功');
+            }else{
+                $this->error('清空失败');
+            }
+        }
+    }
+    public function messagedelss()
+    {
+        if (!session('validate')) {
+            $this->error('亲！请登录');
+        } else {
+            $comment = db('comment');
+            $userid=$this->userid;
+            if($comment->where("tid = $userid")->update(['mes'=>0])){
+                $this->success('清空成功');
+            }else{
+                $this->error('清空失败');
+            }
+        }
     }
 }

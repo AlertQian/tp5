@@ -1,0 +1,94 @@
+<?php if (!defined('THINK_PATH')) exit(); /*a:2:{s:61:"D:\wamp\www\tp5\public/../application/wap\view\login\reg.html";i:1545700307;s:55:"D:\wamp\www\tp5\application\wap\view\public\footer.html";i:1545529423;}*/ ?>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>用户注册-163k地方门户网站系统</title>
+<meta name="keywords" content="北京地方门户,百姓生活门户,北京地区分类信息" />
+<meta name="description" content="本站是163k地方门户网站系统的官方演示站点" />
+<meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0"/>
+<meta name="format-detection" content="telephone=no" />
+<link href="/wap/main/css/member-mb.css" rel="stylesheet" type="text/css">
+<link href="/wap/main/css/mb-base.css" rel="stylesheet" type="text/css">
+<link href="/wap/main/css/mb-common.css?1" rel="stylesheet" rev="stylesheet" />
+<script src="/fds/js/jquery-1.11.3.min.js"></script>
+<script src="/static/layer/layer.js"></script>
+<script type="text/javascript" src="/wap/main/js/reg.js?021"></script>
+<style type="text/css">
+.nofixed { padding-top:0;}
+body { background-color:#fff!important;}
+#i_tips { padding:0 10px; font-size:14px; color:#aaa; text-align:center;}
+#i_tips .yellow { color:#f93;}
+.foot_link { display:none!important;}
+</style>
+</head>
+<body>
+<div id="pageMain" class="page_srcoll page-current">
+<div class="header">
+	<a href="javascript:void(0);" onClick="return window.history.go(-1);" class="back">返回</a>
+	<div class="search" id="search_ico" onClick="showNewPage('搜索',searchHtml,newPageSearch);" style="display:none;">搜索</div>
+	<a href="" class="my" id="login_ico">我的</a>
+	<div class="type" id="nav_ico">导航</div>
+	<div class="nav_APP" id="nav_APP" style="display: none;">
+		<ul class="clearfix" id="nav_APP_data2">
+		<li><a href="<?php echo url('wap/index/index'); ?>">首页<s class="s" style="background-image:url(/wap/main/images/nav_icon/headIcon.png);"></s></a></li>
+		<li><a href="">活动<s class="s" style="background-image:url(/wap/main/images/nav_icon/201705251752370917548.png);"></s></a></li>
+		<li><a href="">社区<s class="s" style="background-image:url(/wap/main/images/nav_icon/201705251752556953922.png);"></s></a></li>
+		</ul><span class="arrow-up"></span>
+	</div>
+</div>
+<div class="login_inner" id="login_inner"></div>
+<div class="o_main">
+<form name="form1" id="form1" class="layui-form">
+<div class="user_reg">
+ <ul>
+ 	<li class="mobile item2" id="loginNamechr"><input type="text" placeholder="设置手机号码作为您的登录名" name="chrphone" id="chrphone" maxlength="30" onblur="" autocomplete="off"></li>
+ 	<!-- <li class="item2 vcode" id="i_code2" style=""><input type="text" name="regcode" id="regcode" maxlength="10" autocomplete="off" placeholder="输入验证码"><input type="hidden" name="codeid" id="codeid" value=""><span class="getIcode" id="requestYZM_node"><span class="btn_1">获取验证码</span><span class="btn_2" style="display:none;"><span id="daojishi">60</span>秒后重新发送</span></span></li> -->
+    <li class="item2 userName" id="loginNamechr"><input type="text" placeholder="昵称" name="nickname" id="nickname" maxlength="30" onBlur="" autocomplete="off" /></li>
+    
+ <!--  <div style="display:none;" id="i_tips">验证码已成功发送至您的<span id="i_tips_inner"></span>。</div> -->
+  <li class="item2 pw"><input type="password" name="chrpwd" id="chrpwd" maxlength="16" placeholder="密码长度6-16" autocomplete="off" /><div class="open" id="showpwd"></div></li>
+  <input type="hidden" name="typeid" value="1">
+  <?php echo token(); ?>
+ </ul>
+ <div class="reg_type clearfix" id="sel_styleid">
+  <div class="personal item current" data-val="1">
+   <i></i>
+   个人
+  </div>
+  <div class="business item" data-val="2">
+   <i></i>
+   商家/企业
+  </div>
+ </div>
+</div> 
+ <button type="submit" class="reg_btn" id="reg_submit">注 册</button>
+</form>
+ <div class="reg_tips">点击"注册"按钮就表示我已同意<a href="javascript:void(0);" onclick="showNewPage('会员注册协议',searchHtml,newPageSearch1);">会员注册协议</a></div>
+</div>
+<div class="login_nav" style="padding-bottom:15px;">
+	<div class="title"><span>快捷登录/注册</span></div>
+	<ul>
+		<li class="qq" style="display:;"><a href="">QQ登录</a></li>
+		<li class="wx display1"><a href="">微信登录</a></li>
+		<li class="reg"><a href="<?php echo url('login/index'); ?>">账号登录</a></li>
+	</ul>
+</div>
+<div class="foot_link" id="foot_link">
+	<ul class="link">
+	<li><a href="<?php echo url('wap/index/index'); ?>">首页</a></li><!--<li><a href="https://www.mh163k.com/request.ashx?action=iswap&iswap=0">电脑版</a></li>--><li><a href="https://www.mh163k.com/help/article_13.html">联系我们</a></li><!--<li><a href="http://app.163k.com/download.aspx?id=12299" data-img="../UploadFile/index/2015/9-7/201509071154513472674.png">客户端</a></li>--><li><a href="https://www.mh163k.com/service/">反馈留言</a></li>
+	</ul>
+	<!--163k地方门户网站系统：<a href="https://www.mh163k.com/">mh163k.com</a>　皖ICP备11020229号-->Copyright @ 2003-2018 mh163k.com
+	<input type="hidden" name="nickname" value="<?php echo \think\Session::get('nickname'); ?>">
+</div>
+<script>
+$(function(){
+	$('#nav_ico').click(function(e){
+		e.preventDefault();
+		$('#nav_APP').fadeToggle('fast');
+	});
+});
+</script>
+</div>
+</body>
+</html>
