@@ -154,7 +154,7 @@
 			    data.__token__=$("input[name=__token__]").val();
 			    data.fid=$("#fid").val();
 			var $this=$(this);
-			$.post("/wap/forum/fatie",data,function(data){
+			$.post("/forum/fatie",data,function(data){
 				if(data.code==1){
 		          layer.msg(data.msg, {icon: 1, anim: 6, time: 1000},function(){
 		            location.reload();

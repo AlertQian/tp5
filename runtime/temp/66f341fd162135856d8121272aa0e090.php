@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:4:{s:64:"D:\wamp\www\tp5\public/../application/wap\view\forum\detail.html";i:1548209020;s:55:"D:\wamp\www\tp5\application\wap\view\public\header.html";i:1545358047;s:55:"D:\wamp\www\tp5\application\wap\view\public\huitie.html";i:1548208887;s:55:"D:\wamp\www\tp5\application\wap\view\public\footer.html";i:1545529423;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:4:{s:64:"D:\wamp\www\tp5\public/../application/wap\view\forum\detail.html";i:1550476106;s:55:"D:\wamp\www\tp5\application\wap\view\public\header.html";i:1545358047;s:55:"D:\wamp\www\tp5\application\wap\view\public\huitie.html";i:1548208887;s:55:"D:\wamp\www\tp5\application\wap\view\public\footer.html";i:1545529423;}*/ ?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -213,7 +213,7 @@ $(function(){
 			    data.__token__=$("input[name=__token__]").val();
 			    data.fid=$("#fid").val();
 			var $this=$(this);
-			$.post("/wap/forum/fatie",data,function(data){
+			$.post("/forum/fatie",data,function(data){
 				if(data.code==1){
 		          layer.msg(data.msg, {icon: 1, anim: 6, time: 1000},function(){
 		            location.reload();

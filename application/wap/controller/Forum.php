@@ -136,6 +136,7 @@ class Forum extends Common
       }
     	if($ret){
       	$cot->where('id',$data['fid'])->setInc('reply');
+        $cot->where('id',$data['fid'])->update(['replytime'=>time()]);
         db('user')->where('userid',$lz_uid)->setInc('reply', 1);
   			$this->success('已发表');
     	}else{

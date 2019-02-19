@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:3:{s:63:"D:\wamp\www\tp5\public/../application/wap\view\index\index.html";i:1547104232;s:55:"D:\wamp\www\tp5\application\wap\view\public\header.html";i:1545358047;s:55:"D:\wamp\www\tp5\application\wap\view\public\footer.html";i:1545529423;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:3:{s:63:"D:\wamp\www\tp5\public/../application/wap\view\index\index.html";i:1550461830;s:55:"D:\wamp\www\tp5\application\wap\view\public\header.html";i:1545358047;s:55:"D:\wamp\www\tp5\application\wap\view\public\footer.html";i:1545529423;}*/ ?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -110,7 +110,7 @@ layui.use(['flow','layer'], function(){
       var lis = [];
       
       //以jQuery的Ajax请求为例，请求下一页数据（注意：page是从2开始返回）
-      $.get('/wap/index/data?page='+page+'&orderby='+$orderby, function(res){
+      $.get('/index/data?page='+page+'&orderby='+$orderby, function(res){
         //假设你的列表返回在data集合中
         layui.each(res.data, function(index, item){
           $html='<li class="item clearfix" id="item81" data-x="116.417025" data-y="39.918348">'+
@@ -131,6 +131,7 @@ layui.use(['flow','layer'], function(){
   });
   $('.item').click(function(data){
   	$orderby=$(this).data('orderby');
+    $(this).parent('li').addClass('select').siblings().removeClass('select');
   	$('#pagingList').remove();
   	$('#mapPoint').append('<ul class="sh-list friend-list" id="pagingList"></ul>');
   	flow.load({
@@ -139,7 +140,7 @@ layui.use(['flow','layer'], function(){
     ,done: function(page, next){ //到达临界点（默认滚动触发），触发下一页
       var lis = [];
       //以jQuery的Ajax请求为例，请求下一页数据（注意：page是从2开始返回）
-      $.get('/wap/index/data?page='+page+'&orderby='+$orderby, function(res){
+      $.get('/index/data?page='+page+'&orderby='+$orderby, function(res){
         //假设你的列表返回在data集合中
         layui.each(res.data, function(index, item){
           $html='<li class="item clearfix" id="item81" data-x="116.417025" data-y="39.918348">'+

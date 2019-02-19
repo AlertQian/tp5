@@ -20,7 +20,7 @@ layui.use('upload',function(){
   //上传图片
   var uploadListIns = upload.render({
     elem: '#upimgFileBtn'
-    ,url: "/wap/upload/upimgs"
+    ,url: "/upload/upimgs"
     ,auto: false
     ,multiple: true
     ,bindAction:"#upimgs"
@@ -70,7 +70,7 @@ $(document).on('click',".del",function(e){
   $url=arrList[index];
   arrList.splice(index,1);
   var delimg=arrList.join(',');
-  $.post("/wap/user/unsetimg",{urls:$url},function(data){
+  $.post("/user/unsetimg",{urls:$url},function(data){
     if(data.code ==1){
         //subt();
       layer.msg(data.msg,{icon: 1,anim: 6, time: 2000});  
