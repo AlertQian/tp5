@@ -21,6 +21,7 @@ return [
         ':id'   => ['wap/index/homepage',['ext' => 'html'],['id' => '\d+']],
     ],
     '__domain__'=>[
-        'wap.tp51.com'      => 'wap'
+        'wap'      => 'wap',
+        'fzjy'      => 'fzjy'
     ],
 ];
