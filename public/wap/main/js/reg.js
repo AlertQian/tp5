@@ -67,7 +67,7 @@ $(document).ready(function(){
 		}
 		
 		$.ajax({
-			url:"/wap/login/reg",
+			url:"/login/reg",
 			type:"post",
 			data:{chrphone:chrphone,nickname:nickname,chrpwd:chrpwd,typeid:typeid,__token__:token},
 			success:function(data){

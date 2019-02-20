@@ -6,7 +6,7 @@
 .nav_bottom a:before,.guess_local,.filter li:after,.searchbar_geo .city .s {background:url(/wap/main/images/shop_icons.png) no-repeat;background-size:180px auto;}
 
 .header,.nav_bottom {height:45px;line-height:45px;background:#5cc55c;color:#ffffff;font-size:20px;text-align:center; position:relative; z-index:9;}
-body{ padding-top:45px; -webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;}
+body{ padding-top:45px; -webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;background: #fff;}
 .nav_bottom,.header{width:100%;position:fixed;top:0;left:0;z-index:1004;}
 .windowIframe .header,.addeditNode .header { position:relative; z-index:9;}
 .header .back,.header .search,.header .type,.header .my{position:absolute;width:36px;height:45px;top:0;left:8px;font-size:16px;overflow:hidden;}
